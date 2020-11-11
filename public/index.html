@@ -47,7 +47,7 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Log Ind</h5>
+                  <h5 class="modal-title" id="logIndmodalContent">Log Ind</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -74,13 +74,13 @@
           </div>
 
           <!-- Modal for tilmelding-->
-          <div id="tilmedModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+          <div id="tilmeldModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
           
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Log Ind</h5>
+                  <h5 class="modal-title" id="tilmeldModalContent">Tilmelding</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -90,6 +90,17 @@
                     <div class="form-group">
                         <label for="fuldenavn" class="col-form-label">Fulde Navn:</label>
                         <input type="text" class="form-control" id="fuldenavn"></textarea>
+                      </div>
+                      <label for="studieId" class="col-form-label">Studie ID:</label>
+                        <input type="text" class="form-control" id="studieId" maxlength="7"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="email"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="fodselsdag" class="col-form-label">Fødselsdag:</label>
+                        <input type="date" class="form-control" id="fodselsdag"></textarea>
                       </div>
                     <div class="form-group">
                       <label for="username" class="col-form-label">BrugerNavn:</label>
@@ -103,12 +114,11 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
-                  <button type="button" class="btn btn-primary">Log Ind</button>
+                  <button type="button" class="btn btn-primary">Tilmeld</button>
                 </div>
+                </header>
               </div>
-          
             </div>
           </div>
-        </header>
     </body>
 </html> 
