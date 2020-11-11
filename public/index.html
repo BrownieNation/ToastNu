@@ -1,4 +1,114 @@
-//brugeroverflade
 <!DOCTYPE html>
 <html lang="en">
+    <head> 
+        <link rel = "stylesheet" href = "css.css";>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">ToastNu.dk</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Produkter
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="md.html">Mad, Snacks & Drikkevare</a></li>
+                    <li><a href="abonKort.html">Klippekort & Abonnement</a></li>
+                  </ul>
+                </li>
+                <li><a href="kontakt.html">Om Os</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>Konto 
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"data-toggle="modal" data-target="#tilmeldModal"><span class="glyphicon glyphicon-user"></span> Tilmeld</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Log Ind</a></li>
+                        <!-- Modal -->
+                    </ul> 
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kurv</a></li>
+              </ul>
+            </div>
+          </nav>
+          <!-- Modal for log ind-->
+          <div id="loginModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Log Ind</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="username" class="col-form-label">BrugerNavn:</label>
+                      <input type="text" class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-form-label">Password:</label>
+                      <input type="password" class="form-control" id="password"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                  <button type="button" class="btn btn-primary">Log Ind</button>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+
+          <!-- Modal for tilmelding-->
+          <div id="tilmedModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Log Ind</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                        <label for="fuldenavn" class="col-form-label">Fulde Navn:</label>
+                        <input type="text" class="form-control" id="fuldenavn"></textarea>
+                      </div>
+                    <div class="form-group">
+                      <label for="username" class="col-form-label">BrugerNavn:</label>
+                      <input type="text" class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-form-label">Password:</label>
+                      <input type="password" class="form-control" id="password"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                  <button type="button" class="btn btn-primary">Log Ind</button>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+        </header>
+    </body>
 </html> 
