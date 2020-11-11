@@ -1,0 +1,18 @@
+const express = require('express');
+const app = express();
+const config = require('./config');
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
+
+//app.use(require('./Routes/joke'));
+//app.use(require('./Routes/othersites'));
+//app.use(require('./Routes/otherjokes'));
+
+const port = process.env.PORT || config.localPort; // Heroku
+app.listen(port);
+console.log('Listening on port ' + port + ' ...');
+
+module.exports = app; // test
+
+
