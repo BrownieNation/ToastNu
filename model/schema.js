@@ -1,11 +1,11 @@
-//user.js
+//schema.js
 
 const mongoose = require('mongoose')
 , Schema = mongoose.Schema
 
 
 var userSchema = Schema({
-    _id         : Number,
+    _userID     : String,
     name        : String,
     password    : String,
     phoneNumber : Number
@@ -14,9 +14,8 @@ var userSchema = Schema({
 
 var orderSchema = Schema({
     _userOrderID: Number,
-    orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
+//  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
     userID      : { type: Number, ref: 'User' },
-    amount      : Number
 
 })
 
@@ -30,7 +29,9 @@ var productSchema = Schema({
 
 var orderItemsSchema = Schema({
     _orderItemID    : Number,
-    productID       : { type: Number, ref: 'Product'},
+    productID       : [{ type: Schema.Types.ObjectId, ref: 'Product'}],
+    userOrderID     : [{ type: Schema.Types.ObjectId, ref: 'Order' }],
+    amount          : Number
 
 });
 
