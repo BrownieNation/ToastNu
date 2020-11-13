@@ -1,7 +1,7 @@
 //schema.js
 
 const mongoose = require('mongoose');
-Schema = mongoose.Schema
+Schema = new mongoose.Schema
 
 var userSchema = Schema({
     _userID     : String,
@@ -16,7 +16,7 @@ var orderSchema = Schema({
 //  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
     userID      : { type: Number, ref: 'User' },
 
-})
+});
 
 var productSchema = Schema({
     _productID         : Number,
@@ -24,7 +24,7 @@ var productSchema = Schema({
     productDescription : String,
     productPrice       : Number
 
-})
+});
 
 var orderItemsSchema = Schema({
     _orderItemID    : Number,
@@ -33,10 +33,6 @@ var orderItemsSchema = Schema({
     amount          : Number
 
 });
-
-
-
-
 
 module.exports = mongoose.model('User', userSchema);
 module.exports = mongoose.model('Product', productSchema);
