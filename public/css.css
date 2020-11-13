@@ -38,3 +38,20 @@
 #icon{
     font-size: large;
 }
+
+#panel {
+    width: 60%;
+    height: 10cm;
+    background: url(https://s3-eu-west-1.amazonaws.com/video.gallereplay.com/artistarea/Pouring+Hot+Tea+by+Book_91296432-f21f-4c45-9c07-4052e3246d8e/Cinemagraph_watermark/576x324/cinemagraph.gif) no-repeat !important;
+    
+  }
+  #panel2 {
+    width: 60%;
+    height: 10cm;
+    background: url(https://media1.tenor.com/images/c5d73d68e8e47d356dd02e0bd00e24ea/tenor.gif?itemid=15999945) no-repeat !important;
+    
+  }
+
+  #valgteProdukt{
+    vertical-align: top;
+  }
