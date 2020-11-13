@@ -14,7 +14,6 @@ var userSchema = Schema({
 
 var orderSchema = Schema({
     _userOrderID: Number,
-//  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
     userID      : { type: Number, ref: 'User' },
 
 })
@@ -34,9 +33,6 @@ var orderItemsSchema = Schema({
     amount          : Number
 
 });
-
-
-
 
 
 module.exports = mongoose.model('User', userSchema);
