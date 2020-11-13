@@ -1,8 +1,7 @@
 //schema.js
 
-const mongoose = require('mongoose')
-, Schema = mongoose.Schema
-
+const mongoose = require('mongoose');
+Schema = mongoose.Schema
 
 var userSchema = Schema({
     _userID     : String,
