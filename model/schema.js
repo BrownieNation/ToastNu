@@ -13,11 +13,14 @@ var userSchema = Schema({
 });
 
 var orderSchema = Schema({
+
     _orderID: Number,
 //  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
     date : Date,
     userID      : { type: String, ref: 'User' },
-    orderItems: [{type: Number, ref: 'OrderItem'}]
+    orderItems: [{type: Number, ref: 'OrderItem'}],
+    userID      : { type: Number, ref: 'User' },
+
 
 });
 
@@ -47,3 +50,9 @@ module.exports = User;
 module.exports = Product;
 module.exports = Order;
 module.exports = OrderItem;
+
+module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('OrderItems', orderItemsSchema);
+
