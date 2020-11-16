@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const User = import('../model/user');
-const config = import('../config');
-const Product = import('../model/product');
-const Order = import('../model/order');
-const OrderItem = import('../model/orderItems');
+const User = require('../model/schema');
+const config = require('../config');
+const Product = require('../model/schema');
+const Order = require('../model/schema');
+const OrderItem = require('../model/schema');
+const preProducts = require('./product');
 
 mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -27,12 +28,12 @@ exports.getUsers = function () {
 };
 
 async function createProduct() {
-    for (p of Product.products) {
+    for (p of preProducts.Produkter) {
         await Product.create({
+            productID: p.productID,
             productName: p.productName,
             productDescription: p.productDescription,
-            productPrice: p.productPrice,
-            catogory: p.catogory
+            productPrice: p.productPrice
         });
     }
 }
