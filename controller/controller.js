@@ -5,7 +5,7 @@ const User = require('../model/schema');
 const Product = require('../model/schema');
 const Order = require('../model/schema');
 const OrderItem = require('../model/schema');
-const preProducts = require('./product');
+const preProducts = require('../product');
 
 
 mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
