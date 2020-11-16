@@ -5,7 +5,7 @@ const User = require('../model/schema');
 const Product = require('../model/schema');
 const Order = require('../model/schema');
 const OrderItem = require('../model/schema');
-const preProducts = require('./product');
+const preProducts = require('../product.json');
 
 
 mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -55,18 +55,18 @@ exports.createOrder = function (userID) {
     });
 };
 
-exports.getOrder = function (_userOrderID) {
-    return Product.findById(_userOrderID).exec();
+exports.getOrder = function (_orderID) {
+    return Product.findById(_orderID).exec();
 };
 
 exports.getOrders = function () {
     return Product.find().populate('Order').exec();
 };
 
-exports.createOrderItem = function (productID, userOrderID, amount) {
+exports.createOrderItem = function (productID, orderID, amount) {
     return OrderItem.create({
         productID,
-        userOrderID,
+        orderID,
         amount
     });
 };
