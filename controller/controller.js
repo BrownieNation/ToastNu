@@ -8,7 +8,6 @@ const OrderItem = require('../model/schema');
 const preProducts = require('../product');
 
 
-
 mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
@@ -22,8 +21,10 @@ async function createUser() {
     }
 }
 
-exports.getUser = function (userId) {
-    return User.findById(userId).exec();
+
+
+exports.getUser = function (_userId) {
+    return User.findById(_userId).exec();
 };
 
 exports.getUsers = function () {
@@ -40,14 +41,21 @@ async function createProduct() {
             productPrice: p.productPrice,
         });
     }
-}
+};
+exports.createProduct = function (productName, productDescription, productPrice){
+    return Product.create({
+        productName,
+        productDescription ,
+        productPrice
+    });
+};
 
-exports.getProduct = function (productID) {
-    return Product.findById(productID).exec();
+exports.getProduct = function (_productID) {
+    return Product.findById(_productID).exec();
 };
 
 exports.getProducts = function () {
-    return Product.find().populate('product').exec();
+    return Product.find().populate('Product').exec();
 };
 
 exports.createOrder = function (userID) {
@@ -84,7 +92,7 @@ exports.getOrderItem = function () {
 async function main() {
     try {
       
-        createProduct();
+        // createProduct();
         
     } catch (e) {
         console.log(e.name + ": " + e.message);
