@@ -41,14 +41,14 @@ var orderItemsSchema = new mongoose.Schema({
 
 });
 
-const  User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 const Product = mongoose.model('Product', productSchema);
 const Order = mongoose.model('Order', orderSchema);
 const OrderItem = mongoose.model('OrderItems', orderItemsSchema);
 
-module.exports = User;
-module.exports = Product;
-module.exports = Order;
-module.exports = OrderItem;
+module.exports.User = User;
+module.exports.Product = Product;
+module.exports.Order = Order;
+module.exports.OrderItem = OrderItem;
 
 
