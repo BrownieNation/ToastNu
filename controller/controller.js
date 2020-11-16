@@ -40,6 +40,15 @@ async function createProduct() {
     }
 }
 
+exports.createProduct = function (productID, productName, productDescription, productPrice) {
+    return Product.create({
+        productID,
+        productName,
+        productDescription,
+        productPrice
+    });
+};
+
 exports.getProduct = function (productID) {
     return Product.findById(productID).exec();
 };
@@ -79,12 +88,12 @@ exports.getOrderItem = function () {
     return OrderItem.find().populate('orderItem').exec();
 };
 
-async function main() {
-    try {
-        createProduct();
+// async function main() {
+//     try {
+//         createProduct();
 
-    } catch (e) {
-        console.log(e.name + ": " + e.message);
-    }
-}
-main();
+//     } catch (e) {
+//         console.log(e.name + ": " + e.message);
+//     }
+// }
+// main();
