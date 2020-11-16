@@ -17,7 +17,9 @@ var orderSchema = Schema({
 //  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
     date : Date,
     userID      : { type: String, ref: 'User' },
-    orderItems: [{type: Number, ref: 'OrderItem'}]
+    orderItems: [{type: Number, ref: 'OrderItem'}],
+    userID      : { type: Number, ref: 'User' },
+
 
 });
 
@@ -26,7 +28,8 @@ var productSchema = Schema({
     productName        : String,
     productDescription : String,
     productPrice       : Number,
-    orderItems         : [{type: Number, ref: 'OrderItem'}]
+    catogory : String,
+    orderItems: [{type: Number, ref: 'OrderItem'}]
 });
 
 var orderItemsSchema = Schema({
@@ -46,3 +49,5 @@ module.exports = User;
 module.exports = Product;
 module.exports = Order;
 module.exports = OrderItem;
+
+

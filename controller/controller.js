@@ -1,20 +1,22 @@
 const mongoose = require('mongoose');
 const User = import('../model/user');
-const config = import('../config');
+const config = require('../config');
 const Product = import('../model/product');
 const Order = import('../model/order');
 const OrderItem = import('../model/orderItems');
 
-mongoose.connect(config.databaseURI,
-    { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-exports.createUser = function (name, password) {
-    return User.create({
-        name,
-        password
-    });
-};
+async function createUser() {
+    for (u of User.users) {
+        await User.create({
+            name: u.name,
+            password: u.password,
+            phoneNumber: u.phoneNumber
+        });
+    }
+}
 
 exports.getUser = function (userId) {
     return User.findById(userId).exec();
@@ -24,16 +26,19 @@ exports.getUsers = function () {
     return User.find().populate('user').exec();
 };
 
-exports.createProduct = function (productName, productDescription,  productPrice) {
-    return Product.create({
-        productName,
-        productDescription,
-        productPrice
-    });
-};
+async function createProduct() {
+    for (p of Product.products) {
+        await Product.create({
+            productName: p.productName,
+            productDescription: p.productDescription,
+            productPrice: p.productPrice,
+            catogory: p.catogory
+        });
+    }
+}
 
-exports.getProduct = function (productID ) {
-    return Product.findById(productID ).exec();
+exports.getProduct = function (productID) {
+    return Product.findById(productID).exec();
 };
 
 exports.getProducts = function () {
@@ -42,12 +47,13 @@ exports.getProducts = function () {
 
 exports.createOrder = function (userID) {
     return Order.create({
-            userID
+        userID,
+        date
     });
 };
 
-exports.getOrder = function (_userOrderID ) {
-    return Product.findById(_userOrderID ).exec();
+exports.getOrder = function (_userOrderID) {
+    return Product.findById(_userOrderID).exec();
 };
 
 exports.getOrders = function () {
@@ -62,8 +68,8 @@ exports.createOrderItem = function (productID, userOrderID, amount) {
     });
 };
 
-exports.getOrderItem = function (orderItemID  ) {
-    return OrderItem.findById(orderItemID ).exec();
+exports.getOrderItem = function (orderItemID) {
+    return OrderItem.findById(orderItemID).exec();
 };
 
 exports.getOrderItem = function () {
@@ -72,8 +78,8 @@ exports.getOrderItem = function () {
 
 async function main() {
     try {
-       Product.createProduct(productName, productDescription,  productPrice);
-        
+        createProduct();
+
     } catch (e) {
         console.log(e.name + ": " + e.message);
     }
