@@ -7,14 +7,17 @@ var userSchema = Schema({
     _userID     : String,
     name        : String,
     password    : String,
-    phoneNumber : Number
+    phoneNumber : Number,
+    orders: [{type: Number, ref: 'Order'}]
 
 });
 
 var orderSchema = Schema({
-    _userOrderID: Number,
+    _orderID: Number,
 //  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
-    userID      : { type: Number, ref: 'User' },
+    date : Date,
+    userID      : { type: String, ref: 'User' },
+    orderItems: [{type: Number, ref: 'OrderItem'}]
 
 });
 
@@ -22,19 +25,24 @@ var productSchema = Schema({
     _productID         : Number,
     productName        : String,
     productDescription : String,
-    productPrice       : Number
-
+    productPrice       : Number,
+    orderItems: [{type: Number, ref: 'OrderItem'}]
 });
 
 var orderItemsSchema = Schema({
     _orderItemID    : Number,
-    productID       : [{ type: Schema.Types.ObjectId, ref: 'Product'}],
-    userOrderID     : [{ type: Schema.Types.ObjectId, ref: 'Order' }],
+    productID       : { type: Schema.Types.ObjectId, ref: 'Product'},
+    orderID     : { type: Schema.Types.ObjectId, ref: 'Order' },
     amount          : Number
 
 });
 
-module.exports = mongoose.model('User', userSchema);
-module.exports = mongoose.model('Product', productSchema);
-module.exports = mongoose.model('Order', orderSchema);
-module.exports = mongoose.model('OrderItems', orderItemsSchema);
+const  User = mongoose.model('User', userSchema);
+const Product = mongoose.model('Product', productSchema);
+const Order = mongoose.model('Order', orderSchema);
+const OrderItem = mongoose.model('OrderItems', orderItemsSchema);
+
+module.exports = User;
+module.exports = Product;
+module.exports = Order;
+module.exports = OrderItem;

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-const User = require('../model/user');
-const config = require('../config');
-const Product = require('../model/product');
-const Order = require('../model/order');
-const OrderItem = require('../model/orderItems');
+const User = import('../model/user');
+const config = import('../config');
+const Product = import('../model/product');
+const Order = import('../model/order');
+const OrderItem = import('../model/orderItems');
 
 mongoose.connect(config.databaseURI,
     { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 exports.createUser = function (name, password) {
     return User.create({
@@ -71,7 +72,7 @@ exports.getOrderItem = function () {
 
 async function main() {
     try {
-        Product.create(productName, productDescription,  productPrice);
+       Product.createProduct(productName, productDescription,  productPrice);
         
     } catch (e) {
         console.log(e.name + ": " + e.message);
