@@ -51,8 +51,4 @@ module.exports = Product;
 module.exports = Order;
 module.exports = OrderItem;
 
-module.exports = mongoose.model('User', userSchema);
-module.exports = mongoose.model('Product', productSchema);
-module.exports = mongoose.model('Order', orderSchema);
-module.exports = mongoose.model('OrderItems', orderItemsSchema);
 
