@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = import('../model/user');
-const config = import('../config');
+const config = require('../config');
 const Product = import('../model/product');
 const Order = import('../model/order');
 const OrderItem = import('../model/orderItems');
