@@ -26,6 +26,7 @@ var productSchema = Schema({
     productName        : String,
     productDescription : String,
     productPrice       : Number,
+    catogory : String,
     orderItems: [{type: Number, ref: 'OrderItem'}]
 });
 
