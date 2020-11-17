@@ -41,7 +41,7 @@ var orderItemsSchema = new mongoose.Schema({
 
 });
 
-const  User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 const Product = mongoose.model('Product', productSchema);
 const Order = mongoose.model('Order', orderSchema);
 const OrderItem = mongoose.model('OrderItems', orderItemsSchema);
