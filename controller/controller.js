@@ -49,14 +49,14 @@ exports.createProduct = function (productName, productDescription, productPrice)
     });
 };
 
-// exports.createProduct = function (_productID, productName, productDescription, productPrice) {
-//     return Product.create({
-//         _productID,
-//         productName,
-//         productDescription,
-//         productPrice
-//     });
-// };
+exports.createProduct = function (_productID, productName, productDescription, productPrice) {
+    return Product.create({
+        _productID,
+        productName,
+        productDescription,
+        productPrice
+    });
+};
 
 exports.getProduct = function (productID) {
     return Product.findById(productID).exec();
@@ -93,8 +93,12 @@ exports.getOrderItem = function (orderItemID) {
     return OrderItem.findById(orderItemID).exec();
 };
 
-exports.getOrderItem = function () {
-    return OrderItem.find().populate('orderItems').exec();
+exports.getOrderItems = function () {
+    return OrderItem.find().populate('OrderItems').exec();
+};
+
+exports.deleteOrder = async function (orderID) {
+    return await Order.deleteOne().where('_id').eq(order._id).exec()
 };
 
 async function main() {

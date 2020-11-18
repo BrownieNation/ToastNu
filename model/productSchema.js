@@ -8,5 +8,5 @@ const productSchema = new mongoose.Schema({
     orderItems: [{type: Number, ref: 'OrderItem'}]
 });
 
-const Product = mongoose.model('Product', productSchema);
-module.exports.Product = Product;
+ 
+module.exports = mongoose.model('Product', productSchema);

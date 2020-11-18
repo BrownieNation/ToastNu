@@ -1,7 +1,7 @@
 // toastnu.js
 const express = require('express');
 const Orders = require("../model/orderSchema");
-const router = new express.Router();
+const router = express.Router();
 
 router
     //post

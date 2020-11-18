@@ -8,7 +8,7 @@ const controller = require('./controller/controller');
 // const OrderItem = require("../model/orderItemSchema");
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/html'));
 app.use(express.json());
 app.use(require('./routes/orderItems'));
 app.use(require('./routes/orders'));
