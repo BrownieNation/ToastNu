@@ -7,6 +7,7 @@ const config = require('./config');
 // const Order = require('../model/orderSchema');
 // const OrderItem = require("../model/orderItemSchema");
 
+
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(require('./routes/orderItems'));

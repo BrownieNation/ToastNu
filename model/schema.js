@@ -1,9 +1,9 @@
-// //schema.js
+// // //schema.js
 
 // const mongoose = require('mongoose');
-// // Schema = new mongoose.Schema
+// const Schema = mongoose.Schema;
 
-// var userSchema = new mongoose.Schema({
+// const userSchema = new Schema({
 //     _userID     : String,
 //     name        : String,
 //     password    : String,

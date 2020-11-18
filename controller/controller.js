@@ -8,8 +8,7 @@ const OrderItem = require("../model/orderItemSchema");
 const preProducts = require('../product');
 
 
-mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 async function createUser() {
     for (u of User.users) {
