@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const config = require('./config');
-// require('../controller/controller');
+const controller = require('./controller/controller');
 // const User = require('../model/userSchema');
 // const Product = require('../model/productSchema');
 // const Order = require('../model/orderSchema');
@@ -15,7 +15,7 @@ app.use(require('./routes/orders'));
 app.use(require('./routes/products'));
 app.use(require('./routes/users'))
 const port = process.env.PORT || config.localPort;
-app.listen(port);
+app.listen(port);   
 console.log('Listening on port ' + port + ' ...');
 
 module.exports = app; // test

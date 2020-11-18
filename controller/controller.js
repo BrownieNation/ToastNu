@@ -30,17 +30,17 @@ exports.getUsers = function () {
     return User.find().populate('users').exec();
 };
 
-async function createProduct() {
+// async function createProduct() {
     
-    for (p of preProducts.Produkter) {
-        await Product.create({
-            productID: p.productID,
-            productName: p.productName,
-            productDescription: p.productDescription,
-            productPrice: p.productPrice,
-        });
-    }
-};
+//     for (p of preProducts.Produkter) {
+//         await Product.create({
+//             productID: p.productID,
+//             productName: p.productName,
+//             productDescription: p.productDescription,
+//             productPrice: p.productPrice,
+//         });
+//     }
+// };
 exports.createProduct = function (productName, productDescription, productPrice){
     return Product.create({
         productName,
@@ -49,14 +49,14 @@ exports.createProduct = function (productName, productDescription, productPrice)
     });
 };
 
-exports.createProduct = function (productID, productName, productDescription, productPrice) {
-    return Product.create({
-        productID,
-        productName,
-        productDescription,
-        productPrice
-    });
-};
+// exports.createProduct = function (_productID, productName, productDescription, productPrice) {
+//     return Product.create({
+//         _productID,
+//         productName,
+//         productDescription,
+//         productPrice
+//     });
+// };
 
 exports.getProduct = function (productID) {
     return Product.findById(productID).exec();
@@ -97,12 +97,13 @@ exports.getOrderItem = function () {
     return OrderItem.find().populate('orderItems').exec();
 };
 
-// async function main() {
-//     try {
-//         createProduct();
+async function main() {
+    try {
+        // createProduct();
+        console.log(preProducts)
 
-//     } catch (e) {
-//         console.log(e.name + ": " + e.message);
-//     }
-// }
-// main();
+    } catch (e) {
+        console.log(e.name + ": " + e.message);
+    }
+}
+main();
