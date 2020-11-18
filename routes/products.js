@@ -1,40 +1,36 @@
 // toastnu.js
-const controller = require("../controller/controller");
 const express = require('express');
-//const { request } = require("../app");
-const router = express.Router();
+const Products = require("../model/productSchema");
+const router = new express.Router();
 
 router
+    //post
+    //products
+    .post('/products', async (request, response) => {
+        const product = new Products(request.body)
+        try {
+            await product.save()
+            response.status(201).send(product);
+
+        } catch (e) {
+            response.status(500).send(e.message);
+        }
+    }
+    )
+
     //get
     //products
-    .get('/api/products', async (request, response) => {
+    .get('/products', async (request, response) => {
         try {
-            let products = await controller.getProducts;
-            response.send(products);
+            const products = await Products.find()
+            if(!products){
+                return response.status(404).send()
+            }
+            response.status(200).send(products);
         } catch (e) {
-            sendStatus(e, products);
+            response.status(400).send(e.message)
         }
     })
 
-    //post
-    //products
-    .post('/api/products', async (request, response) => {
-        try {
-            let {_productID, productName, productDescription,  productPrice, orderItems } = request.body;
-            await controller.createProduct(_productID, productName, productDescription,  productPrice, orderItems);
-            response.send({ message: 'Product created' });
-
-        } catch (e) {
-            sendStatus(e, response);
-        }
-    }
-    );
-
-
-function sendStatus(e, response) {
-        console.error("Exception: " + e);
-        if (e.stack) console.error(e.stack);
-        response.status(500).send(e);
-}
     
 module.exports = router;

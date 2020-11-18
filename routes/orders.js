@@ -1,43 +1,36 @@
 // toastnu.js
-const controller = require("../controller/controller");
 const express = require('express');
-//const { request } = require("../app");
-const router = express.Router();
-
-
+const Orders = require("../model/orderSchema");
+const router = new express.Router();
 
 router
-    //get
-    //orders
-    .get('/api/orders', async (request, response) => {
+    //post
+    //orderItems
+    .post('/orders', async (request, response) => {
+        const order = new Orders(request.body)
         try {
-            let orders = await controller.getOrders;
-            response.send(orders);
+            await order.save()
+            response.status(201).send(order);
+
         } catch (e) {
-            sendStatus(e, orders);
+            response.status(500).send(e.message);
+        }
+    }
+    )
+
+    //get
+    //orderItems
+    .get('/orders', async (request, response) => {
+        try {
+            const orders = await Orders.find()
+            if(!orders){
+                return response.status(404).send()
+            }
+            response.status(200).send(orders);
+        } catch (e) {
+            response.status(400).send(e.message)
         }
     })
 
-
-    //post
-    //orders
-    .post('/api/orders', async (request, response) => {
-        try {
-            let {_orderID, date, userID,  orderItems } = request.body;
-            await controller.createOrder(_orderID, date, userID,  orderItems);
-            response.send({ message: 'Order created' });
-
-        } catch (e) {
-            sendStatus(e, response);
-        }
-    }
-    );
-
-
-function sendStatus(e, response) {
-        console.error("Exception: " + e);
-        if (e.stack) console.error(e.stack);
-        response.status(500).send(e);
-}
     
 module.exports = router;

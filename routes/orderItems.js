@@ -1,44 +1,36 @@
 // toastnu.js
-const controller = require("../controller/controller");
 const express = require('express');
-//const { request } = require("../app");
-const router = express.Router();
-
-
+const OrderItems = require("../model/orderItemSchema");
+const router = new express.Router();
 
 router
+    //post
+    //orderItems
+    .post('/orderItems', async (request, response) => {
+        const orderItem = new OrderItems(request.body)
+        try {
+            await orderItem.save()
+            response.status(201).send(orderItem);
+
+        } catch (e) {
+            response.status(500).send(e.message);
+        }
+    }
+    )
+
     //get
     //orderItems
-    .get('/api/orderItems', async (request, response) => {
+    .get('/orderItems', async (request, response) => {
         try {
-            let ordersItems = await controller.getOrderItem;
-            response.send(ordersItems);
+            const orderItems = await OrderItems.find()
+            if(!orderItems){
+                return response.status(404).send()
+            }
+            response.status(200).send(orderItems);
         } catch (e) {
-            sendStatus(e, ordersItems);
+            response.status(400).send(e.message)
         }
     })
 
-    //post
-    //orderItems
-    .post('/api/orderItems', async (request, response) => {
-        try {
-            let {_orderItemID, productID, orderID,  amount } = request.body;
-            await controller.createOrderItem(_orderItemID, productID, orderID,  amount );
-            response.send({ message: 'OrderItem created' });
-
-        } catch (e) {
-            sendStatus(e, response);
-        }
-    }
-    );
-
-
-
-
-function sendStatus(e, response) {
-        console.error("Exception: " + e);
-        if (e.stack) console.error(e.stack);
-        response.status(500).send(e);
-}
     
 module.exports = router;
