@@ -1,6 +1,5 @@
 
   body{
-    /* background-image: url("https://cdn.hipwallpaper.com/m/66/89/z1vS3w.jpg"); */
       padding-top: 100px; 
       background-color: lightgray;
       background-size: cover;
@@ -9,34 +8,35 @@
   nav {
     width: 100%;
     height: 40px;
-    background-color: grey !important;
+    background-color:none !important;
     background:transparent !important;
-    border-radius: 6px !important;
-    -moz-border-radius: 6px !important;
+    border: none !important;
        }
 
-.navbar{
-  background-color:rgba(0,0,0,.2)
-}
 
 a{
    color: black !important;
+   letter-spacing: 3px;
+   font-size: 12px;
    }
-.nav li {
-   padding-right:5px;
-   color: black;
-  }
+
+.nav-item {
+   padding-right:30px;
+  } 
 
 .dropdown-menu > li > a {
     background:  white;
 }
-.navbar {
-    font-size: 1.3em ;
-    color:black !important;
-    }
 
-#header{
-    font-size: 2em ; 
+#logo{
+    font-size: 20px ; 
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    border: 1px solid;
+    border-left: none;
+    border-bottom: none;
+    border-top: none;
 }
 .py-4 {
    position: static;
@@ -73,3 +73,27 @@ a{
   #valgteProdukt{
     vertical-align: top;
   }
+  
+
+#section{
+  padding-bottom: 30px;
+}
+
+.myFront{
+  width: 100%;
+}
+
+.hero{
+  text-align: center;
+  text-size-adjust: 50px;
+}
+.carousel-item{
+  height: 100px;
+}
+
+.item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 300px;
+}

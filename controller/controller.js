@@ -8,8 +8,7 @@ const OrderItem = require('../model/schema');
 const preProducts = require('../product');
 
 
-mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 async function createUser() {
     for (u of User.users) {
@@ -26,7 +25,7 @@ exports.getUser = function (userId) {
 };
 
 exports.getUsers = function () {
-    return User.find().populate('user').exec();
+    return User.find().populate('users').exec();
 };
 
 async function createProduct() {
@@ -54,7 +53,7 @@ exports.getProduct = function (productID) {
 };
 
 exports.getProducts = function () {
-    return Product.find().populate('product').exec();
+    return Product.find().populate('products').exec();
 };
 
 exports.createOrder = function (userID) {
@@ -69,7 +68,7 @@ exports.getOrder = function (_orderID) {
 };
 
 exports.getOrders = function () {
-    return Product.find().populate('Order').exec();
+    return Product.find().populate('orders').exec();
 };
 
 exports.createOrderItem = function (productID, orderID, amount) {
@@ -85,7 +84,7 @@ exports.getOrderItem = function (orderItemID) {
 };
 
 exports.getOrderItem = function () {
-    return OrderItem.find().populate('orderItem').exec();
+    return OrderItem.find().populate('orderItems').exec();
 };
 
 // async function main() {
