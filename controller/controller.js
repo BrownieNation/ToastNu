@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
-const User = require('../model/schema');
-const Product = require('../model/schema');
-const Order = require('../model/schema');
-const OrderItem = require('../model/schema');
+const User = require('../model/userSchema');
+const Product = require('../model/productSchema');
+const Order = require('../model/orderSchema');
+const OrderItem = require("../model/orderItemSchema");
 const preProducts = require('../product');
 
 
@@ -28,7 +28,7 @@ exports.getUser = function (_userId) {
 };
 
 exports.getUsers = function () {
-    return User.find().populate('user').exec();
+    return User.find().populate('users').exec();
 };
 
 async function createProduct() {
@@ -50,12 +50,21 @@ exports.createProduct = function (productName, productDescription, productPrice)
     });
 };
 
-exports.getProduct = function (_productID) {
-    return Product.findById(_productID).exec();
+exports.createProduct = function (productID, productName, productDescription, productPrice) {
+    return Product.create({
+        productID,
+        productName,
+        productDescription,
+        productPrice
+    });
+};
+
+exports.getProduct = function (productID) {
+    return Product.findById(productID).exec();
 };
 
 exports.getProducts = function () {
-    return Product.find().populate('Product').exec();
+    return Product.find().populate('products').exec();
 };
 
 exports.createOrder = function (userID) {
@@ -70,7 +79,7 @@ exports.getOrder = function (_orderID) {
 };
 
 exports.getOrders = function () {
-    return Product.find().populate('Order').exec();
+    return Product.find().populate('orders').exec();
 };
 
 exports.createOrderItem = function (productID, orderID, amount) {
@@ -86,16 +95,15 @@ exports.getOrderItem = function (orderItemID) {
 };
 
 exports.getOrderItem = function () {
-    return OrderItem.find().populate('orderItem').exec();
+    return OrderItem.find().populate('orderItems').exec();
 };
 
-async function main() {
-    try {
-      
-        // createProduct();
-        
-    } catch (e) {
-        console.log(e.name + ": " + e.message);
-    }
-}
-main();
+// async function main() {
+//     try {
+//         createProduct();
+
+//     } catch (e) {
+//         console.log(e.name + ": " + e.message);
+//     }
+// }
+// main();
