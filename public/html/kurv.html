@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css.css" ;>
+    <link rel="stylesheet" href="../css/css.css" ;>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -131,91 +132,37 @@
     </header>
 
     <!-- page content -->
-    <div class="col-sm-offset-3">
-        <div class="panel panel-primary" id="panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Klippekort</h3>
-            </div>
-            <div class="panel-body">
-                <div class="container">
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Produkter
-                                </button>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <button class="dropdown-item" type="button">Kaffe</button>
-                                    <button class="dropdown-item" type="button">Dagens ret</button>
-                                    <button class="dropdown-item" type="button">Frugter</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="valgteProdukt">Valgte Produkt:</label>
-                            <input type="text" id="valgteProdukt" name="valgteProdukt" disabled><br><br>
-
-                        </div>
-                    </div>
-                    <div class="row align-items-start">
-                        <div class="col">
-
-                        </div>
-
-                        <div class="col">
-                            <label for="prisKlippekort">Pris paa produkt:</label>
-                            <input type="text" id="prisKlippekort" name="prisKlippekort" disabled><br><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-offset-3">
-        <div class="panel panel-primary" id="panel2">
-            <div class="panel-heading">
-                <h3 class="panel-title">Abonoment</h3>
-            </div>
-            <div class="panel-body">
-                <div class="container">
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Produkter
-                                </button>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Kaffe</button>
-                                    <button class="dropdown-item" type="button">Dagens ret</button>
-                                    <button class="dropdown-item" type="button">Frugter</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="valgteProdukt">Valgte Produkt:</label>
-                            <input type="text" id="valgteProdukt" name="valgteProdukt" disabled><br><br>
-
-                        </div>
-                    </div>
-                    <div class="row align-items-start">
-                        <div class="col">
-
-                        </div>
-
-                        <div class="col">
-                            <label for="prisKlippekort">Pris paa produkt:</label>
-                            <input type="text" id="prisKlippekort" name="prisKlippekort" disabled><br><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="container main-section">
+      <div class="row">
+          <div class="col-lg-12 pb-2">
+              <h4>Indkøbskurv</h4>
+          </div>
+          <div class="col-lg-12 pl-3 pt-3">
+              <table class="table table-hover border bg-white">
+                  <thead>
+                        <tr>
+                          <th>Produkt</th>
+                          <th>Pris</th>
+                          <th style="width:10%;">Antal</th>
+                          <th>Subtotal</th>
+                          <th></th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                      
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td><a href="index.html" class="btn btn-warning text-white"><i class="fa fa-angle-left"></i> Fortsæt med at handle</a></td>
+                          <td colspan="2" class="hidden-xs"></td>
+                          <td class="hidden-xs text-center" style="width:10%;"><strong>Total : </strong></td>
+                          <td><a href="#" class="btn btn-success btn-block">Checkud <i class="fa fa-angle-right"></i></a></td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
 
     <!-- Footer -->
     <footer class="py-4">
@@ -240,3 +187,4 @@
 </body>
 
 </html>
+
