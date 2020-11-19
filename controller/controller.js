@@ -34,35 +34,33 @@ exports.getUsers = function () {
     return User.find().populate('users').exec();
 };
 
-async function createProduct() {
-    for (p of preProducts.Produkter) {
-        await Product.create({
-            _productID: p._productID,
-            productName: p.productName,
-            productDescription: p.productDescription,
-            productPrice: p.productPrice,
-            
-        })
-        
-        console.log('Produkt oprettet')
-    }
+// async function createProduct() {
+    
+//     for (p of preProducts.Produkter) {
+//         await Product.create({
+//             productID: p.productID,
+//             productName: p.productName,
+//             productDescription: p.productDescription,
+//             productPrice: p.productPrice,
+//         });
+//     }
+// };
+exports.createProduct = function (productName, productDescription, productPrice){
+    return Product.create({
+        productName,
+        productDescription ,
+        productPrice
+    });
 };
-// exports.createProduct = function (productName, productDescription, productPrice){
-//     return Product.create({
-//         productName,
-//         productDescription ,
-//         productPrice
-//     });
-// };
 
-// exports.createProduct = function (_productID, productName, productDescription, productPrice) {
-//     return Product.create({
-//         _productID,
-//         productName,
-//         productDescription,
-//         productPrice
-//     });
-// };
+exports.createProduct = function (_productID, productName, productDescription, productPrice) {
+    return Product.create({
+        _productID,
+        productName,
+        productDescription,
+        productPrice
+    });
+};
 
 exports.getProduct = function (productID) {
     return Product.findById(productID).exec();
@@ -99,17 +97,18 @@ exports.getOrderItem = function (orderItemID) {
     return OrderItem.findById(orderItemID).exec();
 };
 
-exports.getOrderItem = function () {
-    return OrderItem.find().populate('orderItems').exec();
+exports.getOrderItems = function () {
+    return OrderItem.find().populate('OrderItems').exec();
+};
+
+exports.deleteOrder = async function (orderID) {
+    return await Order.deleteOne().where('_id').eq(order._id).exec()
 };
 
 async function main() {
     try {
-        await createProduct();
-        // console.log(preProducts)
-        // console.log(preUsers)
-        // console.log(preOrders)
-        // console.log(preOrederItems)
+        // createProduct();
+        console.log(preProducts)
 
     } catch (e) {
         console.log(e.name + ": " + e.message);
