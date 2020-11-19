@@ -149,6 +149,35 @@
                         </tr>
                   </thead>
                   <tbody>
+
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-lg-2 Product-img">
+                                    <img id = "productImage"src="http://nicesnippets.com/demo/sc-images.jpg" alt="..." class="img-responsive"/>
+                                </div>
+                                <div class="col-lg-10">
+                                    <h4 class="nomargin" id = "productName">Lenovo K6 Power</h4>
+                                    <p id = "productDescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td id = "productPrice"> 12,000 </td>
+                        <td data-th="Quantity">
+                            <input id= "productAmount" type="number" class="form-control text-center" value="1">
+                        </td>
+                        <td id= "subtotal">12,000</td>
+                        <td class="actions" data-th="" style="width:10%;">
+                            <button id="buttonRefresh" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                            <button id="buttonDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+                        </td>
+                      </tr>
+
+
+
+
+
                       
                   </tbody>
                   <tfoot>
@@ -156,7 +185,7 @@
                           <td><a href="index.html" class="btn btn-warning text-white"><i class="fa fa-angle-left"></i> Fortsæt med at handle</a></td>
                           <td colspan="2" class="hidden-xs"></td>
                           <!-- Rød knap her "Ryd kurv" -->
-                          <td class="hidden-xs text-center" style="width:10%;" id= "total"><strong>Total : </strong></td>
+                          <td id = "totalAmount" class="hidden-xs text-center" style="width:10%;" id= "total"><strong>Total : </strong></td>
                           <td><a href="#" class="btn btn-success btn-block" id="checkout">Checkud <i class="fa fa-angle-right"></i></a></td>
                       </tr>
                   </tfoot>

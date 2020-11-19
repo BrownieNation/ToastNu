@@ -1,4 +1,12 @@
 var checkout = document.getElementById('checkout')
+var pImage = document.getElementById('productImage')
+var pName = document.getElementById('productName')
+var pDescription = document.getElementById('productDescription')
+var pPrice = document.getElementById('ProductPrice')
+var pAmount = document.getElementById('productAmount')
+var total = document.getElementById('totalAmount')
+
+
 
 
 checkout.onclick = checkoutHandler
@@ -26,4 +34,21 @@ async function post(url, objekt) {
 
 async function checkoutHandler() {
     
+}
+
+let calculateTotal = function(items)
+{
+    let price=0;
+    for(item of items)
+    {
+        price+=item.productPrice;
+    }
+
+    return price;
+}
+function createTablecontent()
+{
+
+
+
 }

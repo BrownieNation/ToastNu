@@ -89,6 +89,10 @@ exports.createOrderItem = function (productID, orderID, amount) {
     });
 };
 
+
+
+
+
 exports.getOrderItem = function (orderItemID) {
     return OrderItem.findById(orderItemID).exec();
 };

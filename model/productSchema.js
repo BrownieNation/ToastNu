@@ -6,7 +6,8 @@ const productSchema = new mongoose.Schema({
     productDescription : String,
     productPrice       : Number,
     productImage       : String,
-    orderItems: [{type: Number, ref: 'OrderItem'}]
+    productCategory    : String,
+//    orderItems: [{type: Number, ref: 'OrderItem'}]
 });
 
  
