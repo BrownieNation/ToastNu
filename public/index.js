@@ -37,29 +37,15 @@ async function deLete(url) {
 }
 
 
-
-// -- Test det --
-// adminNav.addEventListener('click', function() {
-//     openTab(adminNav.id);
-    
-// }, false)
-
-// bestillingerNav.addEventListener('click', function(){
-//     openTab(bestillingerNav.id);
-// }, false)
-
-function openTab(tab) {
-    $(document).ready(function () {
-        $('#div1').load(tab + '.html')
-    })
-}
-
-
-
+//Adds wares to cart
 function cartNumbers() {
+
+  console.log('Click');
+
     let productNumbers = localStorage.getItem('cartNumbers');
     
     productNumbers = parseInt(productNumbers);
+    
 
     if (productNumbers) {
         localStorage.setItem('cartNumbers', productNumbers + 1);
@@ -69,8 +55,19 @@ function cartNumbers() {
         document.getElementById('cartAmount').textContent = 1;
     }
 
-    
 }
+
+
+function onLoadCartNumbers(){
+  let productNumbers = localStorage.getItem('cartNumbers');
+
+  if (productNumbers) {
+    document.getElementById('cartAmount').textContent = productNumbers;
+  }
+}
+
+//Generates products from database w/ event listener on button
+
 async function generateItems(products)
 {
     let row= document.getElementById('itemcontent');
@@ -79,7 +76,7 @@ async function generateItems(products)
         let newitem=document.createElement('div');
         newitem.className="col-lg-4 col-md-6 mb-4";
         newitem.innerHTML=` <div class="card h-100">
-        <a href="#"><img class="card-img-top" src=${product.productImage} alt=""></a>
+        <a href="#"><img class="card-img-top" src= ${product.productImage} alt=""></a>
         <div class="card-body">
             <h4 class="card-title">
                 <a href="#">${product.productName}</a>
@@ -98,7 +95,7 @@ async function generateItems(products)
     let addToCartButtons = document.querySelectorAll('.shop-item-button');
     for (let i=0; i < addToCartButtons.length; i++) {
         addToCartButtons[i].addEventListener('click', () => {
-            cartNumbers();
+            cartNumbers(products[i]);
         })
     }
 
@@ -109,6 +106,7 @@ async function main()
  
     let products = await get('/products');
     generateItems(products);
+    onLoadCartNumbers()
     
 }
 main();
