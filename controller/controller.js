@@ -1,14 +1,25 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
+const Admin = require('../model/adminSchema');
 const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
 const Order = require('../model/orderSchema');
 const OrderItem = require("../model/orderItemSchema");
-const preProducts = require('../product');
+let preProducts = require('../product');
+
+// const preUsers = require('../user');
+// const preOrders = require('../order');
+// const preOrederItems = require('../orderItem');
 
 
 mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+// ----------------------------------------------------------------------
+// CRUD
+// TIL
+// USERS:
+// ----------------------------------------------------------------------
 
 async function createUser() {
     for (u of User.users) {
@@ -20,8 +31,6 @@ async function createUser() {
     }
 }
 
-
-
 exports.getUser = function (_userId) {
     return User.findById(_userId).exec();
 };
@@ -29,6 +38,37 @@ exports.getUser = function (_userId) {
 exports.getUsers = function () {
     return User.find().populate('users').exec();
 };
+
+// ----------------------------------------------------------------------
+// CRUD
+// TIL
+// ADMINS:
+// ----------------------------------------------------------------------
+
+async function createAdmin(name, password, phoneNumber) {
+    // for (a of Admin.admins) {
+        await Admin.create({
+            name: name,
+            password: password,
+            phoneNumber: phoneNumber,
+            isEmployee: true
+        });
+    // }
+}
+
+exports.getAdmin = function (_Id) {
+    return Admin.findById(_Id).exec();
+};
+
+exports.getAdmins = function () {
+    return Admin.find().populate('admins').exec();
+};
+
+// ----------------------------------------------------------------------
+// CRUD
+// TIL
+// PRODUCTS:
+// ----------------------------------------------------------------------
 
 // async function createProduct() {
     
@@ -41,6 +81,7 @@ exports.getUsers = function () {
 //         });
 //     }
 // };
+
 exports.createProduct = function (productName, productDescription, productPrice){
     return Product.create({
         productName,
@@ -66,6 +107,12 @@ exports.getProducts = function () {
     return Product.find().populate('products').exec();
 };
 
+// ----------------------------------------------------------------------
+// CRUD
+// TIL
+// ORDERS
+// ----------------------------------------------------------------------
+
 exports.createOrder = function (userID) {
     return Order.create({
         userID,
@@ -81,6 +128,16 @@ exports.getOrders = function () {
     return Product.find().populate('orders').exec();
 };
 
+exports.deleteOrder = async function (orderID) {
+    return await Order.deleteOne().where('_id').eq(order._id).exec()
+};
+
+// ----------------------------------------------------------------------
+// CRUD
+// TIL
+// ORDERITEMS:
+// ----------------------------------------------------------------------
+
 exports.createOrderItem = function (productID, orderID, amount) {
     return OrderItem.create({
         productID,
@@ -88,10 +145,6 @@ exports.createOrderItem = function (productID, orderID, amount) {
         amount
     });
 };
-
-
-
-
 
 exports.getOrderItem = function (orderItemID) {
     return OrderItem.findById(orderItemID).exec();
@@ -101,9 +154,9 @@ exports.getOrderItems = function () {
     return OrderItem.find().populate('OrderItems').exec();
 };
 
-exports.deleteOrder = async function (orderID) {
-    return await Order.deleteOne().where('_id').eq(order._id).exec()
-};
+// ----------------------------------------------------------------------
+// MAIN:
+// ----------------------------------------------------------------------
 
 async function main() {
     try {
