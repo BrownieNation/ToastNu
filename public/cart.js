@@ -1,4 +1,4 @@
-let addToCartButtons = document.querySelectorAll('.shop-item-button')
+let addToCartButtons = document.querySelectorAll('.shop-item-button');
 
 let products = [
     {
@@ -46,11 +46,11 @@ let products = [
 ]
 
 
-for (let i=0; i < addToCartButtons.length; i++) {
-    addToCartButtons[i].addEventListener('click', () => {
-        cartNumbers();
-    })
-}
+// for (let i=0; i < addToCartButtons.length; i++) {
+//     addToCartButtons[i].addEventListener('click', () => {
+//         cartNumbers();
+//     })
+// }
 
 function cartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');

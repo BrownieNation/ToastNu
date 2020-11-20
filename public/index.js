@@ -144,6 +144,24 @@ function openTab(tab) {
         $('#div1').load(tab + '.html')
     })
 }
+
+
+
+function cartNumbers() {
+    let productNumbers = localStorage.getItem('cartNumbers');
+    
+    productNumbers = parseInt(productNumbers);
+
+    if (productNumbers) {
+        localStorage.setItem('cartNumbers', productNumbers + 1);
+        document.getElementById('cartAmount').textContent = productNumbers + 1;
+    } else {
+        localStorage.setItem('cartNumbers', 1);
+        document.getElementById('cartAmount').textContent = 1;
+    }
+
+    
+}
 async function generateItems(products)
 {
     let row= document.getElementById('itemcontent');
@@ -168,6 +186,13 @@ async function generateItems(products)
 
     row.appendChild(newitem);
     }
+    let addToCartButtons = document.querySelectorAll('.shop-item-button');
+    for (let i=0; i < addToCartButtons.length; i++) {
+        addToCartButtons[i].addEventListener('click', () => {
+            cartNumbers();
+        })
+    }
+
 }
 
 async function main()
