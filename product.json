@@ -18,55 +18,71 @@
                         },
                         {
                             "_productID": "3",
-                            "productName ": "Sandwich with eggs & shrimps",
+                            "productName ": "Sandwich med æg og rejer",
                             "productDescription": "Sandwich med æg og rejser",
-                            "productPrice": "30"
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Sandwich"
                         },
                         {
                             "_productID": "4",
-                            "productName ": "Sandwich with ham & cheese",
+                            "productName ": "Sandwich med skine og ost",
                             "productDescription": "Sandwich med skinke og ost",
-                            "productPrice": "30"
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Sandwich"
                         },
                         {
                             "_productID": "5",
-                            "productName ": "Sandwich with smoked salmon",
+                            "productName ": "Sandwich med røget laks",
                             "productDescription": "Sandwich med røget laks",
-                            "productPrice": "35"
+                            "productPrice": "35",
+                            "productImage": "",
+                            "productCategory": "Sandwich"
                         },
                         {
                             "_productID": "6",
-                            "productName ": "Tuna sandwich",
+                            "productName ": "Tun sandwich",
                             "productDescription": "Sandwich med tun",
-                            "productPrice": "30"
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Sandwich"
                         }
                     ],
                     "Pita": [
                         {
                             "_productID": "7",
-                            "productName ": "Pita with kebab, salad & dressing",
-                            "productDescription": "Pita med kebab kød, salad og dressing til",
-                            "productPrice": "30"
+                            "productName ": "Pita med kebab, salat & dressing",
+                            "productDescription": "Pita med kebab kød, salat og dressing til",
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Pita"
                         },
                         {
                             "_productID": "8",
-                            "productName ": "Pita with chicken, salad & dressing",
-                            "productDescription": "Pita med kylling kød, salad og dressing til",
-                            "productPrice": "30"
+                            "productName ": "Pita med kylling, salat & dressing",
+                            "productDescription": "Pita med kyllinge kød, salat og dressing til",
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Pita"
                         }
                     ],
                     "Wraps": [
                         {
                             "_productID": "9",
-                            "productName ": "Wraps with kebab & salad",
-                            "productDescription": "Pita med kebab kød, salad og dressing til",
-                            "productPrice": "30"
+                            "productName ": "Wraps med kebab & salat",
+                            "productDescription": "Pita med kebab kød, salat og dressing til",
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Wraps"
                         },
                         {
                             "_productID": "10",
-                            "productName ": "Wraps with chicken & salad",
-                            "productDescription": "Pita med kylling kød, salad og dressing til",
-                            "productPrice": "30"
+                            "productName ": "Wraps med kylling & salat",
+                            "productDescription": "Pita med kylling kød, salat og dressing til",
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Wraps"
                         }
                     ],
                     "Toast": [
@@ -74,27 +90,36 @@
                             "_productID": "11",
                             "productName ": "Toast Med Ost Og Skinke",
                             "productDescription": "Varm toast med skinke og smeltet ost",
-                            "productPrice": "30"
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Toast"
                         },
                         {
                             "_productID": "12",
                             "productName ": "French Toast",
                             "productDescription": "French toast er en skål lavet af skivet brød gennemblødt i æg og typisk mælk og derefter stegt.",
-                            "productPrice": "30"
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Toast"
                         },
                         {
                             "_productID": "13",
-                            "productName ": "cowboy toast",
+                            "productName ": "Cowboy Toast",
                             "productDescription": "Cowboytoast består af to stykker toastbrød, smør, en hakkebøf og løg",
-                            "productPrice": "45"
+                            "productPrice": "45",
+                            "productImage": "",
+                            "productCategory": "Toast"
                         }
-                    ],
+                    ]
+                    ,
                     "Pasta": [
                         {
                             "_productID": "14",
                             "productName ": "Pasta salad with chicken & pesto",
                             "productDescription": "Pasta salad med kylling og pesto",
-                            "productPrice": "30"
+                            "productPrice": "30",
+                            "productImage": "",
+                            "productCategory": "Pasta"
                         }
                     ],
                     "Frugter": [
@@ -102,24 +127,31 @@
                             "_productID": "15",
                             "productName ": "Freshly cut fruit in a cup",
                             "productDescription": "En kop med frisk blandet frugter",
-                            "productPrice": "20"
+                            "productPrice": "20",
+                            "productImage": "",
+                            "productCategory": "Frugter"
                         },
                         {
                             "_productID": "16",
                             "productName ": "Banen",
                             "productDescription": "En lang brun en",
-                            "productPrice": "4"
+                            "productPrice": "4",
+                            "productImage": "",
+                            "productCategory": "Frugter"
                         },
                         {
                             "_productID": "17",
                             "productName ": "Æble",
                             "productDescription": "En rund rød en",
-                            "productPrice": "4"
+                            "productPrice": "4",
+                            "productImage": "",
+                            "productCategory": "Frugter"
                         }
                     ]
                 }
                 
-            ],
+            ]
+            ,
             "Snacks": [
                 {
                     "Slik":[
@@ -127,35 +159,45 @@
                             "_productID": "18",
                             "productName ": "Mars bar",
                             "productDescription": "",
-                            "productPrice": "12"
+                            "productPrice": "12",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         },
 
                         {
                             "_productID": "19",
                             "productName ": "Snickers",
                             "productDescription": "",
-                            "productPrice": "12"
+                            "productPrice": "12",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         },
 
                         {
                             "_productID": "20",
                             "productName ": "Bounty",
                             "productDescription": "",
-                            "productPrice": "12"
+                            "productPrice": "12",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         }, 
 
                         {
                             "_productID": "21",
                             "productName ": "Matador mix 120 gram",
                             "productDescription": "",
-                            "productPrice": "22"
+                            "productPrice": "22",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         },
 
                         {
                             "_productID": "22",
                             "productName ": "Kinder maxi",
                             "productDescription": "",
-                            "productPrice": "6"
+                            "productPrice": "6",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         }
                     ],
 
@@ -164,25 +206,32 @@
                             "_productID": "23",
                             "productName ": "Kims Sour Cream & Onion 25g",
                             "productDescription": "",
-                            "productPrice": "12"
+                            "productPrice": "12",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         },
 
                         {
                             "_productID": "24",
                             "productName ": "Kims Havsalt 25g",
                             "productDescription": "",
-                            "productPrice": "12"
+                            "productPrice": "12",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         },
 
                         {
                             "_productID": "24",
                             "productName ": "Kims BBQ 25g",
                             "productDescription": "",
-                            "productPrice": "12"
+                            "productPrice": "12",
+                            "productImage": "",
+                            "productCategory": "Snacks"
                         }
                     ]
                 }
-            ],
+            ]
+            ,
 
             "Drikkevare":[
                 {
@@ -191,42 +240,54 @@
                             "_productID": "25",
                             "productName ": "Coca Cola 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "20" 
+                            "productPrice": "20" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "26",
                             "productName ": "Carlsberg Sport 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "20" 
+                            "productPrice": "20" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "27",
                             "productName ": "Cola Zero 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "20" 
+                            "productPrice": "20" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "28",
                             "productName ": "Pepsi Max 0,5 liter",
                             "productDescription": "",
-                            "productPrice": "20" 
+                            "productPrice": "20" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "29",
                             "productName ": "Pepsi 0,5 liter",
                             "productDescription": "",
-                            "productPrice": "20" 
+                            "productPrice": "20" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "30",
                             "productName ": "Faxe Kondi 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "20" 
+                            "productPrice": "20" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         }
 
                     ],
@@ -236,21 +297,27 @@
                             "_productID": "31",
                             "productName ": "Juice, Appelsin 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "15" 
+                            "productPrice": "15" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "32",
                             "productName ": "Juice, Æble 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "15" 
+                            "productPrice": "15" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "33",
                             "productName ": "Juice, Hyldeblomst 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "15" 
+                            "productPrice": "15" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         }
                     ],
 
@@ -260,14 +327,18 @@
                             "_productID": "34",
                             "productName ": "Fire energy drink 0,25 L.",
                             "productDescription": "",
-                            "productPrice": "10" 
+                            "productPrice": "10" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "35",
                             "productName ": "Fire Zero energy drink 0,25 L.",
                             "productDescription": "",
-                            "productPrice": "10" 
+                            "productPrice": "10" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         }
                     ],
 
@@ -277,21 +348,27 @@
                             "_productID": "36",
                             "productName ": "Mineral Water (still) 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "10" 
+                            "productPrice": "10" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
                         
                         {
                             "_productID": "37",
                             "productName ": "Vitamin well citron/lime 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "22" 
+                            "productPrice": "22" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         },
 
                         {
                             "_productID": "38",
                             "productName ": "Vitamin well citrus/hyldeblomst 0,5 L.",
                             "productDescription": "",
-                            "productPrice": "22" 
+                            "productPrice": "22" ,
+                            "productImage": "",
+                            "productCategory": "Drikkevare"
                         }
                     ]
                     

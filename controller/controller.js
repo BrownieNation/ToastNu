@@ -6,7 +6,11 @@ const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
 const Order = require('../model/orderSchema');
 const OrderItem = require("../model/orderItemSchema");
-const preProducts = require('../product');
+let preProducts = require('../product');
+
+// const preUsers = require('../user');
+// const preOrders = require('../order');
+// const preOrederItems = require('../orderItem');
 
 
 mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true })
