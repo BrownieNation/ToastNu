@@ -65,6 +65,6 @@ function cartNumbers() {
         document.getElementById('cartAmount').textContent = 1;
     }
 
-    
+
 }
 
