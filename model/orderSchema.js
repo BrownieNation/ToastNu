@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
 //  orders      : [{ type: Schema.Types.ObjectId, ref: 'Order'}],
     time        : Number,
     userID      : { type: String, ref: 'User' },
-    orderItems: [{type: Number, ref: 'OrderItem'}],
+    orderItems  : [{type: Number, ref: 'OrderItem'}],
     userID      : { type: Number, ref: 'User' },
 
 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../css/css.css" ;>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="https://www.flaticon.com/svg/static/icons/svg/189/189122.svg" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../login.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <a class="navbar-brand" id="logo" href="#">ToastNu.dk</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="abonKort.html">Klippekort & Abonnement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakt.html">Om Os</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                                    class="glyphicon glyphicon-user"></span>Konto
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" data-toggle="modal" data-target="#tilmeldModal"><span
+                                            class="glyphicon glyphicon-user"></span> Tilmeld</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#loginModal"><span
+                                            class="glyphicon glyphicon-log-in"></span> Log Ind</a></li>
+                                <!-- Modal -->
+                            </ul>
+                        <li><a href="kurv.html"><span class="glyphicon glyphicon-shopping-cart"></span> Kurv</a></li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+
+        <!-- Modal for log ind-->
+        <div id="loginModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logIndmodalContent">Log Ind</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="imgcontainer">
+                            <img src="https://res.cloudinary.com/bitcharge/image/upload/v1535940305/panda-avatar.png"
+                                alt="Avatar" class="avatar">
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label for="username" class="col-form-label">BrugerNavn:</label>
+                                <input type="text" class="form-control" placeholder="Indtast Torben"
+                                    id="userUsername" required></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password:</label>
+                                <input type="password" class="form-control" placeholder="Indtast 123"
+                                    id="userPassword" required></input>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                        <button type="button" class="btn btn-primary" onclick="validateLogin()">Log Ind</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade bd-godkend-modal-sm" id=godkendt tabindex="-1" role="dialog" aria-labelledby="godkendt" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  Logind Godkendt
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <!-- Modal for tilmelding-->
+        <div id="tilmeldModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tilmeldModalContent">Tilmelding</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group" style="min-width: 50%">
+                                <label for="fuldenavn" class="col-form-label">Fulde Navn:</label>
+                                <input type="text" class="form-control" id="fuldenavn"></intput>
+                            </div>
+                            <div class="form-group" style="min-width: 50%">
+                                <label for="studieId" class="col-form-label">Studie ID:</label>
+                                <input type="text" class="form-control" id="studieId" maxlength="7"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <input type="email" class="form-control validate" id="email"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password:</label>
+                                <input type="password" class="form-control validate" id="password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="conPassword" class="col-form-label">Bekræft Password:</label>
+                                <input type="Password" class="form-control" id="conPassword"></input>
+                            </div>
+                            <div id="message">
+                                <h3>Password must contain the following:</h3>
+                                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                <p id="number" class="invalid">A <b>number</b></p>
+                                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                        <button type="button" class="btn btn-primary">Tilmeld</button>
+                    </div>
+
+    </header>
+
+</body>

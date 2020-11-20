@@ -52,16 +52,37 @@ function openTab(tab) {
         $('#div1').load(tab + '.html')
     })
 }
-
-function main()
+async function generateItems(products)
 {
-    // $.getJSON("./product.json", function(json) {
-    //     console.log(json); // this will show the info it in firebug console
-    // });
+    let row= document.getElementById('itemcontent');
+    for(product of products)
+    {
+        let newitem=document.createElement('div');
+        newitem.className="col-lg-4 col-md-6 mb-4";
+        newitem.innerHTML=` <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="${product.productImage}" alt=""></a>
+        <div class="card-body">
+            <h4 class="card-title">
+                <a href="#">"${product.productName}"</a>
+            </h4>
+            <h5>"${product.productPrice}" ,-</h5>
+            <p class="card-text">"${product.productDescription}"</p>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary shop-item-button"
+            type="button">ADD TO CART</button>
+        </div>
+    </div>`;
 
+    row.appendChild(newitem);
+    }
+}
 
-    let product= require('../product.json');
-    console.log(product.Produkter);
-  
+async function main()
+{
+ 
+    let products = await get('/products');
+    generateItems(products);
+    
 }
 main();
