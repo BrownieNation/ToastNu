@@ -85,7 +85,7 @@ async function generateItems(products)
                 <a href="#">${product.productName}</a>
             </h4>
             <p class="card-text">${product.productDescription}</p>
-            <h5>${product.productPrice},-</h5>
+            <h5>${product.productPrice} ,-</h5>
         </div>
         <div class="card-footer">
             <button class="btn btn-primary shop-item-button"
