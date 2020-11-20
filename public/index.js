@@ -60,13 +60,13 @@ async function generateItems(products)
         let newitem=document.createElement('div');
         newitem.className="col-lg-4 col-md-6 mb-4";
         newitem.innerHTML=` <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="${product.productImage}" alt=""></a>
+        <a href="#"><img class="card-img-top" src=${product.productImage} alt=""></a>
         <div class="card-body">
             <h4 class="card-title">
-                <a href="#">"${product.productName}"</a>
+                <a href="#">${product.productName}</a>
             </h4>
-            <h5>"${product.productPrice}" ,-</h5>
-            <p class="card-text">"${product.productDescription}"</p>
+            <p class="card-text">${product.productDescription}</p>
+            <h5>${product.productPrice},-</h5>
         </div>
         <div class="card-footer">
             <button class="btn btn-primary shop-item-button"
