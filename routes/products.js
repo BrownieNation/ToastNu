@@ -1,7 +1,8 @@
 // toastnu.js
 const express = require('express');
 const Products = require("../model/productSchema");
-const router = new express.Router();
+const router = express.Router();
+const controller = require("../controller/controller");
 
 router
     //post
@@ -30,7 +31,18 @@ router
         } catch (e) {
             response.status(400).send(e.message)
         }
-    })
+    }
+    
+)
+
+.delete('/:productID', async (request, response) => {
+    try {
+        await controller.deleteOrder(request.params.orderID)
+        response.send({message: 'Order is deleted'});
+    } catch (e) {
+        sendStatus(e, response);
+    }
+});
 
     
 module.exports = router;

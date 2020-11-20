@@ -1,7 +1,8 @@
 // toastnu.js
 const express = require('express');
 const OrderItems = require("../model/orderItemSchema");
-const router = new express.Router();
+const router =  express.Router();
+const controller = require("../controller/controller");
 
 router
     //post
@@ -22,7 +23,8 @@ router
     //orderItems
     .get('/orderItems', async (request, response) => {
         try {
-            const orderItems = await OrderItems.find()
+            const orderItems = await controller.getOrderItems();
+           
             if(!orderItems){
                 return response.status(404).send()
             }
