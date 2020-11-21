@@ -101,7 +101,7 @@ function generatecartItems()
         </div>
     </div>
 </td>
-<td id = "productPrice"> ${parseInt(finalstring[i][0])} ,- </td>
+<td id = "productPrice"> ${parseFloat(finalstring[i][0])} ,- </td>
 <td data-th="Quantity">
     <input id= "productAmount" type="number" class="form-control text-center" value="1">
 </td>
