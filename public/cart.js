@@ -151,12 +151,21 @@ function generatecartItems()
             newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2]);
             cart.appendChild(newitem);
             // newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',addItemAmount(parseFloat(finalstring[i][0]),newitem.getElementsByClassName('subtotal')[0]))
+         
+            //removebutton eventlistener
             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
                 let target=event.target.parentElement.parentElement;
                 target.remove();
                 removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2]);
                 calculateTotal();
             });
+            // quantity eventlistener
+            newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
+                console.log("JAJAJAJA");
+                newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
+                localStorage.setItem('cartitems',localStorage.getItem('cartitems') + finalstring[i][0] + "splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "__");
+                calculateTotal();
+            })
         }
         else
         {
