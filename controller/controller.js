@@ -86,7 +86,9 @@ exports.createProduct = function (productName, productDescription, productPrice)
     return Product.create({
         productName,
         productDescription ,
-        productPrice
+        productPrice,
+        productImage,
+        productCategory
     });
 };
 
@@ -95,7 +97,9 @@ exports.createProduct = function (_productID, productName, productDescription, p
         _productID,
         productName,
         productDescription,
-        productPrice
+        productPrice,
+        productImage,
+        productCategory
     });
 };
 
@@ -113,8 +117,9 @@ exports.getProducts = function () {
 // ORDERS
 // ----------------------------------------------------------------------
 
-exports.createOrder = function (userID) {
+exports.createOrder = function (time, userID, date) {
     return Order.create({
+        time,
         userID,
         date
     });

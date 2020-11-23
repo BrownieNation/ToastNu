@@ -1,4 +1,4 @@
-
+var checkout = document.getElementById('checkout')
 
 let products = [
     {
@@ -92,6 +92,7 @@ function generatecartHTML(price,title,imgsrc)
     `;
     return toreturn;
 }
+
 function addItemAmount(price,subtotal)
 {
     let valofSub=parseFloat(subtotal.innerHTML.split(" ")[0]);
@@ -101,12 +102,9 @@ function addItemAmount(price,subtotal)
 function removefromStorage(price,titel,imgsrc)
 {
     let cartItemString=localStorage.getItem('cartitems');
-    let cartNumbers=localStorage.getItem('cartNumbers');
-    
-    let value= cartItemString.replaceAll(price+" ,-splithere"+titel+"splithere"+imgsrc+"__","");
-    //  console.log(price+" ,-splithere"+titel+"splithere"+imgsrc+"__","");
-    // cartNumbers=parseInt(cartNumbers);
-   
+    let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc+"__","");
+  
+    localStorage.setItem('cartNumbers',parseInt(localStorage.getItem('cartNumbers')-1));
     localStorage.setItem('cartitems',value);
 }
 function calculateTotal()
@@ -161,9 +159,8 @@ function generatecartItems()
             });
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
-                console.log("JAJAJAJA");
                 newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
-                localStorage.setItem('cartitems',localStorage.getItem('cartitems') + finalstring[i][0] + "splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "__");
+                // localStorage.setItem('cartitems',localStorage.getItem('cartitems') + finalstring[i][0] + "splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "__");
                 calculateTotal();
             })
         }
@@ -180,9 +177,24 @@ function generatecartItems()
 
         
     }
+
+    
     calculateTotal();
    
     
 }
+
+//giver alert efter checkout
+function checkoutAlert(){
+    
+        checkout.addEventListener('click', function(event) {         
+            alert("Placeholder alert, der er ikke sket noget endnu");
+        })
+
+    
+
+
+}
+checkoutAlert();
 
 generatecartItems();
