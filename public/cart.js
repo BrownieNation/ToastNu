@@ -59,10 +59,10 @@ function cartNumbers() {
 
     if (productNumbers) {
         localStorage.setItem('cartNumbers', productNumbers + 1);
-        document.querySelectorAll('.glyphicon glyphicon-shopping-cart span').textContent = productNumbers + 1;
+        document.querySelectorAll('.cart span').textContent = productNumbers + 1;
     } else {
         localStorage.setItem('cartNumbers', 1);
-        document.querySelectorAll('.glyphicon glyphicon-shopping-cart span').textContent = 1;
+        document.querySelectorAll('.cart span').innerText = 1;
     }
 
     
