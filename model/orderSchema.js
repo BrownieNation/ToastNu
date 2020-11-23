@@ -7,7 +7,6 @@ const orderSchema = new mongoose.Schema({
     time        : Number,
     userID      : { type: String, ref: 'User' },
     orderItems  : [{type: Number, ref: 'OrderItem'}],
-    userID      : { type: Number, ref: 'User' },
 
 
 });
