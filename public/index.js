@@ -56,33 +56,32 @@ function cartNumbers() {
     }
 
 }
-
-
-function onLoadCartNumbers(){
-  let productNumbers = localStorage.getItem('cartNumbers');
-
-  if (productNumbers) {
-    document.getElementById('cartAmount').textContent = productNumbers;
-  }
+function cartItems(price,title,img)
+{
+   let buystring= localStorage.getItem('cartitems');
+    if(buystring===null)
+        buystring="";
+   buystring+=price + "splithere" + title + "splithere" + img + "__";
+   localStorage.setItem('cartitems',buystring);
+   
 }
-
-//Generates products from database w/ event listener on button
-
 async function generateItems(products)
 {
     let row= document.getElementById('itemcontent');
+    let categories= document.getElementById('list');
+    let categorylist=[];
     for(product of products)
     {
         let newitem=document.createElement('div');
         newitem.className="col-lg-4 col-md-6 mb-4";
         newitem.innerHTML=` <div class="card h-100">
-        <a href="#"><img class="card-img-top" src= ${product.productImage} alt=""></a>
+        <a href="#"><img class="card-img-top" src="${product.productImage}" alt=""></a>
         <div class="card-body">
             <h4 class="card-title">
-                <a href="#">${product.productName}</a>
+                <a href="#" class="productname">${product.productName}</a>
             </h4>
             <p class="card-text">${product.productDescription}</p>
-            <h5>${product.productPrice},-</h5>
+            <h5 class="pricetag">${product.productPrice} ,-</h5>
         </div>
         <div class="card-footer">
             <button class="btn btn-primary shop-item-button"
@@ -91,12 +90,30 @@ async function generateItems(products)
     </div>`;
 
     row.appendChild(newitem);
+    if(!categorylist.includes(product.productCategory))
+        categorylist.push(product.productCategory);
+
     }
-    let addToCartButtons = document.querySelectorAll('.shop-item-button');
-    for (let i=0; i < addToCartButtons.length; i++) {
-        addToCartButtons[i].addEventListener('click', () => {
-            cartNumbers(products[i]);
+    let addeeventtoitems= document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
+    // let addToCartButtons = document.querySelectorAll('.shop-item-button');
+    for (let i=0; i < addeeventtoitems.length; i++) {
+        let addToCartButtons = addeeventtoitems[i].querySelector('.shop-item-button');
+         let price = addeeventtoitems[i].getElementsByClassName('pricetag')[0].innerHTML;
+        let title = addeeventtoitems[i].getElementsByClassName('productname')[0].innerHTML;
+        let img = addeeventtoitems[i].getElementsByClassName('card-img-top')[0].src;
+        console.log(img);
+        addToCartButtons.addEventListener('click', () => {
+            cartNumbers();
+            cartItems(price,title,img);
         })
+    }
+    for(category of categorylist)
+    {
+        let toadd = document.createElement('a');
+        toadd.textContent=category;
+        toadd.className="list-group-item";
+        toadd.href="#"
+        categories.appendChild(toadd);
     }
 
 }
