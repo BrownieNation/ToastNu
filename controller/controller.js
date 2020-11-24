@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const config = require('../config');
-
 const Admin = require('../model/adminSchema');
 const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
@@ -13,7 +12,7 @@ let preProducts = require('../product');
 // const preOrederItems = require('../orderItem');
 
 
-mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // ----------------------------------------------------------------------
 // CRUD
@@ -24,11 +23,19 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 async function createUser() {
     for (u of User.users) {
         await User.create({
+            _userID : u._userID,
             name: u.name,
             password: u.password,
             phoneNumber: u.phoneNumber
         });
     }
+}
+
+exports.createUser = function (_userID, name, password, phoneNumber) {
+    return User.create({
+        _userID, name, password, phoneNumber
+    }
+    )
 }
 
 exports.getUser = function (_userId) {
@@ -47,12 +54,12 @@ exports.getUsers = function () {
 
 async function createAdmin(name, password, phoneNumber) {
     // for (a of Admin.admins) {
-        await Admin.create({
-            name: name,
-            password: password,
-            phoneNumber: phoneNumber,
-            isEmployee: true
-        });
+    await Admin.create({
+        name: name,
+        password: password,
+        phoneNumber: phoneNumber,
+        isEmployee: true
+    });
     // }
 }
 
@@ -71,7 +78,7 @@ exports.getAdmins = function () {
 // ----------------------------------------------------------------------
 
 // async function createProduct() {
-    
+
 //     for (p of preProducts.Produkter) {
 //         await Product.create({
 //             productID: p.productID,
@@ -82,10 +89,10 @@ exports.getAdmins = function () {
 //     }
 // };
 
-exports.createProduct = function (productName, productDescription, productPrice){
+exports.createProduct = function (productName, productDescription, productPrice) {
     return Product.create({
         productName,
-        productDescription ,
+        productDescription,
         productPrice,
         productImage,
         productCategory
@@ -117,11 +124,11 @@ exports.getProducts = function () {
 // ORDERS
 // ----------------------------------------------------------------------
 
-exports.createOrder = function (time, userID, date) {
+exports.createOrder = function (date, userID, products) {
     return Order.create({
-        time,
+        date,
         userID,
-        date
+        products
     });
 };
 

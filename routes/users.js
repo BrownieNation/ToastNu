@@ -2,14 +2,19 @@
 const express = require('express');
 const Users = require("../model/userSchema");
 const router = express.Router();
+const controller = require('../controller/controller');
 
-router
+
     //get
     //users
-    .post('/users', async (request, response) => {
-        const user = new Users(request.body)
+    router.post('/users', async (request, response) => {
+        
+        // const user = new Users(request.body)
+        
         try {
-            await user.save()
+            let {_userID, name, password, phooneNumber} = request.body;
+            await controller.createUser(_userID, name, password, phooneNumber);
+            // await user.save();
             response.status(201).send(user);
 
         } catch (e) {
@@ -18,12 +23,25 @@ router
     }
     )
 
+    //fra joke
+    // .post('/api/jokes', async (request, response) => {
+    //     try {
+    //         let { setup, punchline } = request.body;
+    //         await controller.createJoke(setup, punchline);
+    //         response.send({ message: 'Joke saved!' });
+
+    //     } catch (e) {
+    //         sendStatus(e, response);
+    //     }
+
+    // })
+
     //get
     //products
-    .get('/users', async (request, response) => {
+    router.get('/users', async (request, response) => {
         try {
             const users = await Users.find()
-            if(!users){
+            if (!users) {
                 return response.status(404).send()
             }
             response.status(200).send(users);
@@ -33,4 +51,6 @@ router
     })
 
     
+
+
 module.exports = router;

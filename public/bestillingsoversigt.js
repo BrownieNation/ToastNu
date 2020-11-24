@@ -81,7 +81,7 @@ function generatecartHTML(title,imgsrc, amount, customer)
 async function main()
 {
     let ordertable= document.getElementsByClassName('orderTable')[0];
-    let orders= await get("/orderItems");
+    let orders= await get("/orders");
     console.log(orders);
     for(order of orders)
     {

@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     name        : String,
     password    : String,
     phoneNumber : Number,
-    orders      : [{type: Number, ref: 'Order'}]
+    // orders      : [{type: Number, ref: 'Order'}]
 
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', 'user', 'Users', 'users', userSchema);
