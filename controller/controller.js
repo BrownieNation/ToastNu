@@ -20,22 +20,16 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 // USERS:
 // ----------------------------------------------------------------------
 
-async function createUser() {
-    {
-        return User.create({
-            _userID,
-            name,
-            password,
-            phoneNumber
-        });
-    }
-}
+
 
 exports.createUser = function (_userID, name, password, phoneNumber) {
     return User.create({
-        _userID, name, password, phoneNumber
+        _userID,
+        name, 
+        password,
+        phoneNumber
     }
-    )
+    );
 }
 
 exports.getUser = function (_userId) {
@@ -170,13 +164,13 @@ exports.getOrderItems = function () {
 // MAIN:
 // ----------------------------------------------------------------------
 
-async function main() {
-    try {
-        // createProduct();
-        console.log(preProducts)
+// async function main() {
+//     try {
+//         // createProduct();
+//         console.log(preProducts)
 
-    } catch (e) {
-        console.log(e.name + ": " + e.message);
-    }
-}
-main();
+//     } catch (e) {
+//         console.log(e.name + ": " + e.message);
+//     }
+// }
+// main();

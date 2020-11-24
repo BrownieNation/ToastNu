@@ -40,7 +40,7 @@ async function deLete(url) {
 //Adds wares to cart
 function cartNumbers() {
 
-  console.log('Click');
+ 
 
     let productNumbers = localStorage.getItem('cartNumbers');
     

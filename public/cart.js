@@ -101,7 +101,7 @@ function generatecartHTML(price,title,imgsrc,_productID)
         <button id="buttonDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
     </td>
     `;
-    console.log(_productID);
+   
     return toreturn;
 }
 
@@ -155,14 +155,13 @@ function generatecartItems()
         let newitem=document.getElementById(finalstring[i][1]);
         if(newitem==null)
         {
-            
+            //create tr Innerhtml og append til cart
             newitem= document.createElement('tr');
             newitem.id=finalstring[i][1];
             newitem.className='items';
             newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
             cart.appendChild(newitem);
-            // newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',addItemAmount(parseFloat(finalstring[i][0]),newitem.getElementsByClassName('subtotal')[0]))
-         
+            
             //removebutton eventlistener
             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
                 let target=event.target.parentElement.parentElement;
@@ -173,7 +172,6 @@ function generatecartItems()
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
                 newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
-                // localStorage.setItem('cartitems',localStorage.getItem('cartitems') + finalstring[i][0] + "splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "__");
                 calculateTotal();
             })
         }

@@ -11,12 +11,14 @@ const controller = require('../controller/controller');
     router.post('/users', async (request, response) => {
         
         try {
+           
             let {_userID, name, password, phoneNumber} = request.body;
             await controller.createUser(_userID, name, password, phoneNumber);
-            // await user.save();
-            response.status(201).send(user);
-
+            response.send({message:"User Saved"});
+          
+            
         } catch (e) {
+            
             response.status(500).send(e.message);
         }
     }
