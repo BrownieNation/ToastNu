@@ -58,11 +58,17 @@ function cartNumbers() {
 }
 function cartItems(price,title,img)
 {
-   let buystring= localStorage.getItem('cartitems');
+    let buystring= localStorage.getItem('cartitems');
     if(buystring===null)
         buystring="";
-   buystring+=price + "splithere" + title + "splithere" + img + "__";
-   localStorage.setItem('cartitems',buystring);
+    let newstring=price + "splithere" + title + "splithere" + img + "__";
+    console.log(buystring.includes(newstring));
+    if(!buystring.includes(newstring))
+    {
+        buystring+=newstring;
+        localStorage.setItem('cartitems',buystring);
+        cartNumbers();
+    }
    
 }
 async function generateItems(products)
@@ -102,9 +108,9 @@ async function generateItems(products)
         let title = addeeventtoitems[i].getElementsByClassName('productname')[0].innerHTML;
         let img = addeeventtoitems[i].getElementsByClassName('card-img-top')[0].src;
         console.log(img);
-        addToCartButtons.addEventListener('click', () => {
-            cartNumbers();
+        addToCartButtons.addEventListener('click', () => {           
             cartItems(price,title,img);
+            
         })
     }
     for(category of categorylist)
