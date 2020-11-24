@@ -8,4 +8,4 @@ const adminSchema = new mongoose.Schema({
     isEmployee  : Boolean,
 });
 
-module.exports = mongoose.model('Admin', adminSchema);
+module.exports = mongoose.model('Admin','admin', 'Admins', 'admins', adminSchema);

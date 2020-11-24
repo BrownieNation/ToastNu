@@ -77,7 +77,6 @@ function cartItems(price,title,img)
     if(buystring===null)
         buystring="";
     let newstring=price + "splithere" + title + "splithere" + img + "__";
-    console.log(buystring.includes(newstring));
     if(!buystring.includes(newstring))
     {
         buystring+=newstring;
@@ -104,16 +103,22 @@ async function generateItems(products)
             <p class="card-text">${product.productDescription}</p>
             <h5 class="pricetag">${product.productPrice} ,-</h5>
         </div>
+        <p style="display: none;"> 
+        ${product._productID} 
+        </p> 
         <div class="card-footer">
             <button class="btn btn-primary shop-item-button"
             type="button">ADD TO CART</button>
         </div>
     </div>`;
-
-    row.appendChild(newitem);
-    if(!categorylist.includes(product.productCategory))
-        categorylist.push(product.productCategory);
-
+        row.appendChild(newitem);
+        if(!categorylist.includes(product.productCategory))
+        {
+            let bottom=newitem.getBoundingClientRect().bottom;
+            categorylist.push(product.productCategory);
+            categorylist.push(bottom);
+    
+        }
     }
     let addeeventtoitems= document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
     // let addToCartButtons = document.querySelectorAll('.shop-item-button');
@@ -121,19 +126,26 @@ async function generateItems(products)
         let addToCartButtons = addeeventtoitems[i].querySelector('.shop-item-button');
          let price = addeeventtoitems[i].getElementsByClassName('pricetag')[0].innerHTML;
         let title = addeeventtoitems[i].getElementsByClassName('productname')[0].innerHTML;
+       // let productID = addeeventtoitems[i].getElementById('productID')[0].innerHTML;
         let img = addeeventtoitems[i].getElementsByClassName('card-img-top')[0].src;
-        console.log(img);
+        
+
         addToCartButtons.addEventListener('click', () => {           
             cartItems(price,title,img);
             
         })
     }
-    for(category of categorylist)
+  
+    for(let i=0;i<categorylist.length;i+=2)
     {
         let toadd = document.createElement('a');
-        toadd.textContent=category;
+        toadd.textContent=categorylist[i];
         toadd.className="list-group-item";
-        toadd.href="#"
+         toadd.href="#" + categorylist[i];
+        toadd.addEventListener('click',function()
+        {
+            window.scrollTo(0,categorylist[i+1]);
+        });
         categories.appendChild(toadd);
     }
 

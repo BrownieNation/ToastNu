@@ -78,6 +78,9 @@ function generatecartHTML(price,title,imgsrc)
             <div class="col-lg-10">
                 <h4 class="nomargin" id = "productName">${title}</h4>
             </div>
+            <p id = "productID" style="display: none;"> 
+            ${product._productID} 
+            </p>
         </div>
     </td>
     <td id = "productPrice"> ${theprice} ,- </td>
