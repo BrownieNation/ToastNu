@@ -171,6 +171,9 @@ function generatecartItems()
             });
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
+                console.log(event.target.value);
+                if(event.target.value<=0)
+                    event.target.value=1;
                 newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
                 calculateTotal();
             })
