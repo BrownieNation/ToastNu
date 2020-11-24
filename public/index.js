@@ -56,14 +56,17 @@ function cartNumbers() {
     }
 
 }
-function cartItems(price,title,img)
+function cartItems(price,title,img,_productID)
 {
     let buystring= localStorage.getItem('cartitems');
     if(buystring===null)
         buystring="";
-    let newstring=price + "splithere" + title + "splithere" + img + "__";
-    if(!buystring.includes(newstring))
+    let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "__";
+    if(buystring.includes(newstring))
     {
+       alert("Product already added to cart!"); 
+    } 
+    else {
         buystring+=newstring;
         localStorage.setItem('cartitems',buystring);
         cartNumbers();
@@ -88,7 +91,7 @@ async function generateItems(products)
             <p class="card-text">${product.productDescription}</p>
             <h5 class="pricetag">${product.productPrice} ,-</h5>
         </div>
-        <p style="display: none;"> 
+        <p style="display: none;" class="productID"> 
         ${product._productID} 
         </p> 
         <div class="card-footer">
@@ -99,9 +102,9 @@ async function generateItems(products)
         row.appendChild(newitem);
         if(!categorylist.includes(product.productCategory))
         {
-            let bottom=newitem.getBoundingClientRect().bottom;
+            let top=newitem.getBoundingClientRect().top;
             categorylist.push(product.productCategory);
-            categorylist.push(bottom);
+            categorylist.push(top);
     
         }
     }
@@ -111,12 +114,13 @@ async function generateItems(products)
         let addToCartButtons = addeeventtoitems[i].querySelector('.shop-item-button');
          let price = addeeventtoitems[i].getElementsByClassName('pricetag')[0].innerHTML;
         let title = addeeventtoitems[i].getElementsByClassName('productname')[0].innerHTML;
-       // let productID = addeeventtoitems[i].getElementById('productID')[0].innerHTML;
+        let productID = addeeventtoitems[i].getElementsByClassName('productID')[0].innerHTML;
         let img = addeeventtoitems[i].getElementsByClassName('card-img-top')[0].src;
+        
         
 
         addToCartButtons.addEventListener('click', () => {           
-            cartItems(price,title,img);
+            cartItems(price,title,img,productID);
             
         })
     }
@@ -129,11 +133,19 @@ async function generateItems(products)
          toadd.href="#" + categorylist[i];
         toadd.addEventListener('click',function()
         {
-            window.scrollTo(0,categorylist[i+1]);
+            window.scrollTo(0,categorylist[i+1]+i*100);
         });
         categories.appendChild(toadd);
     }
 
+}
+
+function onLoadCartNumbers(){
+    let productNumbers = localStorage.getItem('cartNumbers')
+
+    if (productNumbers) {
+        document.getElementById('cartAmount').textContent = productNumbers;
+    }
 }
 
 async function main()
@@ -141,7 +153,7 @@ async function main()
  
     let products = await get('/products');
     generateItems(products);
-    onLoadCartNumbers()
+    onLoadCartNumbers();
     
 }
 main();

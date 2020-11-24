@@ -66,7 +66,15 @@ function cartNumbers() {
 
 }
 
-function generatecartHTML(price,title,imgsrc)
+/* function onLoadCartNumbers(){
+    let productNumbers = localStorage.getItem('cartNumbers')
+
+    if (productNumbers) {
+        document.getElementById('cartAmount').textContent = productNumbers;
+    }
+} */
+
+function generatecartHTML(price,title,imgsrc,_productID)
 {
     let theprice=parseFloat(price);
     let toreturn =` 
@@ -79,20 +87,21 @@ function generatecartHTML(price,title,imgsrc)
                 <h4 class="nomargin" id = "productName">${title}</h4>
             </div>
             <p id = "productID" style="display: none;"> 
-            ${product._productID} 
-            </p>
+            ${_productID} 
+            </p> 
         </div>
     </td>
-    <td id = "productPrice"> ${theprice} ,- </td>
+    <td id = "productPrice"> ${theprice},-</td>
     <td data-th="Quantity">
         <input id= "productAmount" type="number" class="form-control text-center" value="1">
     </td>
-    <td class = "subtotal">${theprice} ,-</td>
+    <td class = "subtotal">${theprice},-</td>
     <td class="actions" data-th="" style="width:10%;">
         <button id="buttonRefresh" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
         <button id="buttonDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
     </td>
     `;
+    console.log(_productID);
     return toreturn;
 }
 
@@ -102,10 +111,10 @@ function addItemAmount(price,subtotal)
     
     
 }
-function removefromStorage(price,titel,imgsrc)
+function removefromStorage(price,titel,imgsrc,_productID)
 {
     let cartItemString=localStorage.getItem('cartitems');
-    let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc+"__","");
+    let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc + "splithere" + _productID +"__","");
   
     localStorage.setItem('cartNumbers',parseInt(localStorage.getItem('cartNumbers')-1));
     localStorage.setItem('cartitems',value);
@@ -146,10 +155,11 @@ function generatecartItems()
         let newitem=document.getElementById(finalstring[i][1]);
         if(newitem==null)
         {
+            
             newitem= document.createElement('tr');
             newitem.id=finalstring[i][1];
             newitem.className='items';
-            newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2]);
+            newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
             cart.appendChild(newitem);
             // newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',addItemAmount(parseFloat(finalstring[i][0]),newitem.getElementsByClassName('subtotal')[0]))
          
@@ -157,7 +167,7 @@ function generatecartItems()
             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
                 let target=event.target.parentElement.parentElement;
                 target.remove();
-                removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2]);
+                removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
                 calculateTotal();
             });
             // quantity eventlistener
@@ -187,17 +197,22 @@ function generatecartItems()
     
 }
 
+
 //giver alert efter checkout
 function checkoutAlert(){
     
         checkout.addEventListener('click', function(event) {         
             alert("Placeholder alert, der er ikke sket noget endnu");
+
+            
         })
 
     
 
 
 }
+// onLoadCartNumbers();
+
 checkoutAlert();
 
 generatecartItems();

@@ -1,6 +1,7 @@
 // toastnu.js
 const express = require('express');
-const Users = require("../model/userSchema");
+// const app = express();
+const User = require("../model/userSchema");
 const router = express.Router();
 const controller = require('../controller/controller');
 
@@ -9,11 +10,9 @@ const controller = require('../controller/controller');
     //users
     router.post('/users', async (request, response) => {
         
-        // const user = new Users(request.body)
-        
         try {
-            let {_userID, name, password, phooneNumber} = request.body;
-            await controller.createUser(_userID, name, password, phooneNumber);
+            let {_userID, name, password, phoneNumber} = request.body;
+            await controller.createUser(_userID, name, password, phoneNumber);
             // await user.save();
             response.status(201).send(user);
 

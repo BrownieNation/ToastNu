@@ -21,12 +21,12 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 // ----------------------------------------------------------------------
 
 async function createUser() {
-    for (u of User.users) {
-        await User.create({
-            _userID : u._userID,
-            name: u.name,
-            password: u.password,
-            phoneNumber: u.phoneNumber
+    {
+        return User.create({
+            _userID,
+            name,
+            password,
+            phoneNumber
         });
     }
 }

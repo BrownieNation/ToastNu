@@ -1,7 +1,7 @@
 
 const app = express();
 const router = express.Router();
-const fetch = require('node-fetch');
+var User = require('../model/userSchema');
 
 app.use("/", router);
 
@@ -17,12 +17,18 @@ async function post(url, objekt) {
     return await respons.json();
 }
 
-document.getElementById('submit').addEventListener('click', function () {
-    let _userID = document.getElementById("_userID").value;
-    let name = document.getElementById("name").value;
-    let password = document.getElementById("password").value;
-    let phoneNumber = document.getElementById("phoneNumber").value;
-    await post('/users', {
-        _userID, name, password, phoneNumber
-    })
-});
+//  async function postUser(){
+   
+// document.getElementById('confirm').addEventListener('click', function () {
+//     console.log("Node");
+//     let _userID = document.getElementById("_userID").value;
+//     let name = document.getElementById("name").value;
+//     let password = document.getElementById("password").value;
+//     let phoneNumber = document.getElementById("phoneNumber").value;
+//     await post('/users', {
+//         _userID, name, password, phoneNumber
+//     })
+// });
+// }
+
+

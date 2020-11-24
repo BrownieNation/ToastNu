@@ -4,9 +4,9 @@ const userSchema = new mongoose.Schema({
     _userID     : String,
     name        : String,
     password    : String,
-    phoneNumber : Number,
+    phoneNumber : String
     // orders      : [{type: Number, ref: 'Order'}]
 
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('users', userSchema);
