@@ -14,7 +14,8 @@ async function validateLogin() {
         let users = await get('/users');
         console.log(users)
         for (user of users) {
-                if (user._userID == userName && user.password == password) {
+                const isMatch = await bcrypt.compare(password, user.password)
+                if (user._userID == userName && isMatch) {
 
                         alert("Logind Godkendt!");
                         window.location = "kontakt.html";
@@ -31,8 +32,12 @@ async function postUser() {
         let name = document.getElementById("name").value;
         let password = document.getElementById("password").value;
         let phoneNumber = parseInt(document.getElementById("phoneNumber").value);
+
+        let hashedPassword = await bcrypt.hash(password, 8)
+
+
         await post('/users', {
-                _userID, name, password, phoneNumber
+                _userID, name, hashedPassword, phoneNumber
         });
 
 }
