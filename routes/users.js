@@ -6,7 +6,7 @@ const router = express.Router();
 const controller = require('../controller/controller');
 
 
-    //get
+    //post
     //users
     router.post('/users', async (request, response) => {
         
@@ -24,23 +24,13 @@ const controller = require('../controller/controller');
     }
     )
 
-    //fra joke
-    // .post('/api/jokes', async (request, response) => {
-    //     try {
-    //         let { setup, punchline } = request.body;
-    //         await controller.createJoke(setup, punchline);
-    //         response.send({ message: 'Joke saved!' });
-
-    //     } catch (e) {
-    //         sendStatus(e, response);
-    //     }
-
-    // })
+   
 
     //get
-    //products
+    //users
     router.get('/users', async (request, response) => {
         try {
+            console.log(" er i Users");
             const users = await Users.find()
             if (!users) {
                 return response.status(404).send()
@@ -49,7 +39,7 @@ const controller = require('../controller/controller');
         } catch (e) {
             response.status(400).send(e.message)
         }
-    })
+    });
 
     
 

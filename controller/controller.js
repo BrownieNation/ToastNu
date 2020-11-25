@@ -40,6 +40,10 @@ exports.getUsers = function () {
     return User.find().populate('users').exec();
 };
 
+exports.deleteUser = async function (id) {
+    return await User.deleteOne().where('_id').eq(id).exec()
+};
+
 // ----------------------------------------------------------------------
 // CRUD
 // TIL
@@ -120,6 +124,7 @@ exports.getProducts = function () {
 
 exports.createOrder = function (date, userID, products) {
     return Order.create({
+        _orderID,
         date,
         userID,
         products

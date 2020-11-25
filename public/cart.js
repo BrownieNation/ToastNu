@@ -53,13 +53,13 @@ let products = [
 // }
 
 function cartNumbers() {
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     productNumbers = parseInt(productNumbers);
     if (productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers + 1);
+        sessionStorage.setItem('cartNumbers', productNumbers + 1);
         document.getElementById('cartAmount').textContent = productNumbers + 1;
     } else {
-        localStorage.setItem('cartNumbers', 1);
+        sessionStorage.setItem('cartNumbers', 1);
         document.getElementById('cartAmount').textContent = 1;
     }
 
@@ -113,11 +113,11 @@ function addItemAmount(price,subtotal)
 }
 function removefromStorage(price,titel,imgsrc,_productID)
 {
-    let cartItemString=localStorage.getItem('cartitems');
+    let cartItemString=sessionStorage.getItem('cartitems');
     let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc + "splithere" + _productID +"__","");
   
-    localStorage.setItem('cartNumbers',parseInt(localStorage.getItem('cartNumbers')-1));
-    localStorage.setItem('cartitems',value);
+    sessionStorage.setItem('cartNumbers',parseInt(sessionStorage.getItem('cartNumbers')-1));
+    sessionStorage.setItem('cartitems',value);
 }
 function calculateTotal()
 {
@@ -133,7 +133,9 @@ function calculateTotal()
 function generatecartItems()
 {
     let cart= document.getElementsByClassName('cartbody')[0];
-    let buyString=localStorage.getItem('cartitems');
+    let buyString=sessionStorage.getItem('cartitems');
+    if(buyString!=null)
+    {
     let arr=buyString.split("__");
     let finalstring=[];
 
@@ -195,17 +197,17 @@ function generatecartItems()
     
     calculateTotal();
    
-    
+}
 }
 
 
 //giver alert efter checkout
-function checkoutAlert(){
+ function checkout(){
     
-        checkout.addEventListener('click', function(event) {         
-            alert("Placeholder alert, der er ikke sket noget endnu");
-
+        checkout.addEventListener('click', async function(event) {         
             
+            await post('/orders',{})
+
         })
 
     
@@ -214,6 +216,6 @@ function checkoutAlert(){
 }
 // onLoadCartNumbers();
 
-checkoutAlert();
+// checkout();
 
 generatecartItems();
