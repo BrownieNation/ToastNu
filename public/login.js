@@ -1,16 +1,10 @@
 
-async function get(url) {
-        const respons = await fetch(url);
-        if (respons.status !== 200) // OK
-            throw new Error(respons.status);
-        return await respons.json();
-    }
-
 async function validateLogin() {
        
         let userName = document.getElementById("userUsername").value;
         let password = document.getElementById("userPassword").value;
-
+        let products = await get('/products');
+        console.log(products);
         let users = await get('/users');
         console.log(users)
         for (user of users) {

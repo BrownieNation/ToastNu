@@ -11,6 +11,8 @@ const controller = require('./controller/controller');
 app.use(express.static('public'));
 app.use(express.static('public/html'));
 app.use(express.json());
+// app.use(require('./routes/*'));
+// app.use('/login', require('./routes/users'))
 app.use(require('./routes/orderItems'));
 app.use(require('./routes/orders'));
 app.use(require('./routes/products'));

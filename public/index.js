@@ -127,15 +127,15 @@ async function generateItems(products)
   
     for(let i=0;i<categorylist.length;i+=2)
     {
-        let toadd = document.createElement('a');
-        toadd.textContent=categorylist[i];
-        toadd.className="list-group-item";
-         toadd.href="#" + categorylist[i];
-        toadd.addEventListener('click',function()
+        let toAdd = document.createElement('a');
+        toAdd.textContent=categorylist[i];
+        toAdd.className="list-group-item";
+        toAdd.href="#" + categorylist[i];
+        toAdd.addEventListener('click',function()
         {
             window.scrollTo(0,categorylist[i+1]+i*100);
         });
-        categories.appendChild(toadd);
+        categories.appendChild(toAdd);
     }
 
 }

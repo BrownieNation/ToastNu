@@ -1,14 +1,15 @@
 // toastnu.js
 const express = require('express');
-// const app = express();
-const User = require("../model/userSchema");
 const router = express.Router();
-const controller = require('../controller/controller');
+const controller = require("../controller/controller");
+const User = require("../model/userSchema");
 
 
     //post
     //users
-    router.post('/users', async (request, response) => {
+    router
+
+    .post('/users', async (request, response) => {
         
         try {
            
@@ -21,17 +22,16 @@ const controller = require('../controller/controller');
             
             response.status(500).send(e.message);
         }
-    }
-    )
+    });
 
-   
+
 
     //get
     //users
     router.get('/users', async (request, response) => {
         try {
             console.log(" er i Users");
-            const users = await Users.find()
+            const users = await controller.getUsers();
             if (!users) {
                 return response.status(404).send()
             }
@@ -40,6 +40,13 @@ const controller = require('../controller/controller');
             response.status(400).send(e.message)
         }
     });
+  
+
+
+   
+
+    
+    
 
     
 

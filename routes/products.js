@@ -23,7 +23,7 @@ router
     //products
     .get('/products', async (request, response) => {
         try {
-            const products = await Products.find()
+            const products = await controller.getProducts();
             if(!products){
                 return response.status(404).send()
             }
@@ -31,18 +31,16 @@ router
         } catch (e) {
             response.status(400).send(e.message)
         }
-    }
-    
-)
+    })
 
-.delete('/:productID', async (request, response) => {
+/* .delete('/:productID', async (request, response) => {
     try {
         await controller.deleteOrder(request.params.orderID)
         response.send({message: 'Product deleted'});
     } catch (e) {
         response.status(500).send(e.message);
     }
-});
+}) */;
 
     
 module.exports = router;
