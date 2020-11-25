@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     _userID     : String,
     name        : String,
     password    : String,
-    phoneNumber : String
+    phoneNumber : Number
     // orders      : [{type: Number, ref: 'Order'}]
 
 });

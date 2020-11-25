@@ -20,22 +20,16 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 // USERS:
 // ----------------------------------------------------------------------
 
-async function createUser() {
-    {
-        return User.create({
-            _userID,
-            name,
-            password,
-            phoneNumber
-        });
-    }
-}
+
 
 exports.createUser = function (_userID, name, password, phoneNumber) {
     return User.create({
-        _userID, name, password, phoneNumber
+        _userID,
+        name, 
+        password,
+        phoneNumber
     }
-    )
+    );
 }
 
 exports.getUser = function (_userId) {
@@ -44,6 +38,10 @@ exports.getUser = function (_userId) {
 
 exports.getUsers = function () {
     return User.find().populate('users').exec();
+};
+
+exports.deleteUser = async function (id) {
+    return await User.deleteOne().where('_id').eq(id).exec()
 };
 
 // ----------------------------------------------------------------------
@@ -126,6 +124,7 @@ exports.getProducts = function () {
 
 exports.createOrder = function (date, userID, products) {
     return Order.create({
+        _orderID,
         date,
         userID,
         products
@@ -170,13 +169,13 @@ exports.getOrderItems = function () {
 // MAIN:
 // ----------------------------------------------------------------------
 
-async function main() {
-    try {
-        // createProduct();
-        console.log(preProducts)
+// async function main() {
+//     try {
+//         // createProduct();
+//         console.log(preProducts)
 
-    } catch (e) {
-        console.log(e.name + ": " + e.message);
-    }
-}
-main();
+//     } catch (e) {
+//         console.log(e.name + ": " + e.message);
+//     }
+// }
+// main();

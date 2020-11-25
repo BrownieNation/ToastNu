@@ -1,15 +1,17 @@
-// toastnu.js
+// orders.js
 const express = require('express');
 const Orders = require("../model/orderSchema");
 const router = express.Router();
+const controller = require('../controller/controller');
 
 router
     //post
-    //orderItems
+    //orders
     .post('/orders', async (request, response) => {
-        const order = new Orders(request.body)
+    
         try {
-            await order.save()
+            let {_orderID, date, userID, products} = request.body;
+            await controller.createOrder(_orderID, date, userID, products);
             response.status(201).send(order);
 
         } catch (e) {
@@ -19,7 +21,7 @@ router
     )
 
     //get
-    //orderItems
+    //orders
     .get('/orders', async (request, response) => {
         try {
             const orders = await Orders.find()
@@ -31,6 +33,17 @@ router
             response.status(400).send(e.message)
         }
     })
+    
+    //delete
+    //orders
+    .delete('/:orderID', async (request, response) => {
+    try {
+        await controller.deleteOrder(request.params.orderID)
+        response.send({ message: 'Order deleted' });
+    } catch (e) {
+        response.status(500).send(e.message);
+    }
+});
 
     
 module.exports = router;

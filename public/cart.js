@@ -53,13 +53,13 @@ let products = [
 // }
 
 function cartNumbers() {
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     productNumbers = parseInt(productNumbers);
     if (productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers + 1);
+        sessionStorage.setItem('cartNumbers', productNumbers + 1);
         document.getElementById('cartAmount').textContent = productNumbers + 1;
     } else {
-        localStorage.setItem('cartNumbers', 1);
+        sessionStorage.setItem('cartNumbers', 1);
         document.getElementById('cartAmount').textContent = 1;
     }
 
@@ -101,7 +101,7 @@ function generatecartHTML(price,title,imgsrc,_productID)
         <button id="buttonDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
     </td>
     `;
-    console.log(_productID);
+   
     return toreturn;
 }
 
@@ -113,11 +113,11 @@ function addItemAmount(price,subtotal)
 }
 function removefromStorage(price,titel,imgsrc,_productID)
 {
-    let cartItemString=localStorage.getItem('cartitems');
+    let cartItemString=sessionStorage.getItem('cartitems');
     let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc + "splithere" + _productID +"__","");
   
-    localStorage.setItem('cartNumbers',parseInt(localStorage.getItem('cartNumbers')-1));
-    localStorage.setItem('cartitems',value);
+    sessionStorage.setItem('cartNumbers',parseInt(sessionStorage.getItem('cartNumbers')-1));
+    sessionStorage.setItem('cartitems',value);
 }
 function calculateTotal()
 {
@@ -133,7 +133,9 @@ function calculateTotal()
 function generatecartItems()
 {
     let cart= document.getElementsByClassName('cartbody')[0];
-    let buyString=localStorage.getItem('cartitems');
+    let buyString=sessionStorage.getItem('cartitems');
+    if(buyString!=null)
+    {
     let arr=buyString.split("__");
     let finalstring=[];
 
@@ -155,14 +157,13 @@ function generatecartItems()
         let newitem=document.getElementById(finalstring[i][1]);
         if(newitem==null)
         {
-            
+            //create tr Innerhtml og append til cart
             newitem= document.createElement('tr');
             newitem.id=finalstring[i][1];
             newitem.className='items';
             newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
             cart.appendChild(newitem);
-            // newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',addItemAmount(parseFloat(finalstring[i][0]),newitem.getElementsByClassName('subtotal')[0]))
-         
+            
             //removebutton eventlistener
             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
                 let target=event.target.parentElement.parentElement;
@@ -172,8 +173,10 @@ function generatecartItems()
             });
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
+                console.log(event.target.value);
+                if(event.target.value<=0)
+                    event.target.value=1;
                 newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
-                // localStorage.setItem('cartitems',localStorage.getItem('cartitems') + finalstring[i][0] + "splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "__");
                 calculateTotal();
             })
         }
@@ -194,17 +197,17 @@ function generatecartItems()
     
     calculateTotal();
    
-    
+}
 }
 
 
 //giver alert efter checkout
-function checkoutAlert(){
+ function checkout(){
     
-        checkout.addEventListener('click', function(event) {         
-            alert("Placeholder alert, der er ikke sket noget endnu");
-
+        checkout.addEventListener('click', async function(event) {         
             
+            await post('/orders',{})
+
         })
 
     
@@ -213,6 +216,6 @@ function checkoutAlert(){
 }
 // onLoadCartNumbers();
 
-checkoutAlert();
+// checkout();
 
 generatecartItems();

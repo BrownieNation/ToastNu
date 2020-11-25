@@ -40,25 +40,25 @@ async function deLete(url) {
 //Adds wares to cart
 function cartNumbers() {
 
-  console.log('Click');
+ 
 
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     
     productNumbers = parseInt(productNumbers);
     
 
     if (productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers + 1);
+        sessionStorage.setItem('cartNumbers', productNumbers + 1);
         document.getElementById('cartAmount').textContent = productNumbers + 1;
     } else {
-        localStorage.setItem('cartNumbers', 1);
+        sessionStorage.setItem('cartNumbers', 1);
         document.getElementById('cartAmount').textContent = 1;
     }
 
 }
 function cartItems(price,title,img,_productID)
 {
-    let buystring= localStorage.getItem('cartitems');
+    let buystring= sessionStorage.getItem('cartitems');
     if(buystring===null)
         buystring="";
     let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "__";
@@ -68,7 +68,7 @@ function cartItems(price,title,img,_productID)
     } 
     else {
         buystring+=newstring;
-        localStorage.setItem('cartitems',buystring);
+        sessionStorage.setItem('cartitems',buystring);
         cartNumbers();
     }
    
@@ -141,7 +141,7 @@ async function generateItems(products)
 }
 
 function onLoadCartNumbers(){
-    let productNumbers = localStorage.getItem('cartNumbers')
+    let productNumbers = sessionStorage.getItem('cartNumbers')
 
     if (productNumbers) {
         document.getElementById('cartAmount').textContent = productNumbers;
