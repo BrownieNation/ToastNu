@@ -8,10 +8,12 @@ router
     //post
     //orders
     .post('/orders', async (request, response) => {
-    
+      
         try {
-            let {_orderID, date, userID, products} = request.body;
-            await controller.createOrder(_orderID, date, userID, products);
+            let {date, userID, products} = request.body;
+            console.log(products);
+            await controller.createOrder(date, userID, products);
+            
             response.send({message:"order sent"});
 
         } catch (e) {

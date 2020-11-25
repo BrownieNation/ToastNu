@@ -185,11 +185,9 @@ let checkout = document.getElementById('checkout')
                 let amount= parseInt(item.getElementsByClassName('form-control text-center')[0].value);
                 arr.push({id,amount});
             }
-           let hej="Hej"
-            let orders = await get('/orders');
-            console.log(orders);
+      
             await post('/orders',{
-                date,userID,hej
+                date,userID,arr
             });
 
         })
