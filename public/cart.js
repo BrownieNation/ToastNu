@@ -174,9 +174,12 @@ async function post(url, objekt) {
 //giver alert efter checkout
 let checkout = document.getElementById('checkout')
 
-        checkout.addEventListener('click', async function(event) {         
+        checkout.addEventListener('click', async function(event) {   
+           let userID=sessionStorage.getItem('UserID');
+            if(userID!=null)     
+            { 
             let date = new Date();
-            let userID=1;
+           
             let items = document.getElementsByClassName('items');
             let arr=[];
             for(item of items)
@@ -191,9 +194,11 @@ let checkout = document.getElementById('checkout')
             });
             sessionStorage.clear()
             location.reload();
+        }
+        else alert("du har ikke logget ind endnu");
         })
 
-    
+        
 
 
 
