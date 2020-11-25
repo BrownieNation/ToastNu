@@ -12,13 +12,27 @@ router
         try {
             let {_orderID, date, userID, products} = request.body;
             await controller.createOrder(_orderID, date, userID, products);
-            response.status(201).send(order);
+            response.send({message:"order sent"});
 
         } catch (e) {
             response.status(500).send(e.message);
         }
     }
     )
+    // .post('/users', async (request, response) => {
+        
+    //     try {
+           
+    //         let {_userID, name, password, phoneNumber} = request.body;
+    //         await controller.createUser(_userID, name, password, phoneNumber);
+    //         response.send({message:"User Saved"});
+          
+            
+    //     } catch (e) {
+            
+    //         response.status(500).send(e.message);
+    //     }
+    // });
 
     //get
     //orders
