@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema({
 
     date        : Date,
     userID      : Number,
-    products    : []
+    products    : Array
 });
 
 

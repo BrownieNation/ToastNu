@@ -122,7 +122,7 @@ exports.getProducts = function () {
 // ORDERS
 // ----------------------------------------------------------------------
 
-exports.createOrder = function (date, userID, products[]) {
+exports.createOrder = function (date, userID, products) {
     return Order.create({
         date,
         userID,
