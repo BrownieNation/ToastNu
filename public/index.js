@@ -42,23 +42,23 @@ function cartNumbers() {
 
  
 
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     
     productNumbers = parseInt(productNumbers);
     
 
     if (productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers + 1);
+        sessionStorage.setItem('cartNumbers', productNumbers + 1);
         document.getElementById('cartAmount').textContent = productNumbers + 1;
     } else {
-        localStorage.setItem('cartNumbers', 1);
+        sessionStorage.setItem('cartNumbers', 1);
         document.getElementById('cartAmount').textContent = 1;
     }
 
 }
 function cartItems(price,title,img,_productID)
 {
-    let buystring= localStorage.getItem('cartitems');
+    let buystring= sessionStorage.getItem('cartitems');
     if(buystring===null)
         buystring="";
     let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "__";
@@ -68,7 +68,7 @@ function cartItems(price,title,img,_productID)
     } 
     else {
         buystring+=newstring;
-        localStorage.setItem('cartitems',buystring);
+        sessionStorage.setItem('cartitems',buystring);
         cartNumbers();
     }
    
@@ -91,9 +91,7 @@ async function generateItems(products)
             <p class="card-text">${product.productDescription}</p>
             <h5 class="pricetag">${product.productPrice} ,-</h5>
         </div>
-        <p style="display: none;" class="productID"> 
-        ${product._productID} 
-        </p> 
+        <p style="display: none;" class="productID">${product._productID}</p> 
         <div class="card-footer">
             <button class="btn btn-primary shop-item-button"
             type="button">ADD TO CART</button>
@@ -116,8 +114,7 @@ async function generateItems(products)
         let title = addeeventtoitems[i].getElementsByClassName('productname')[0].innerHTML;
         let productID = addeeventtoitems[i].getElementsByClassName('productID')[0].innerHTML;
         let img = addeeventtoitems[i].getElementsByClassName('card-img-top')[0].src;
-        
-        
+    
 
         addToCartButtons.addEventListener('click', () => {           
             cartItems(price,title,img,productID);
@@ -127,21 +124,21 @@ async function generateItems(products)
   
     for(let i=0;i<categorylist.length;i+=2)
     {
-        let toadd = document.createElement('a');
-        toadd.textContent=categorylist[i];
-        toadd.className="list-group-item";
-         toadd.href="#" + categorylist[i];
-        toadd.addEventListener('click',function()
+        let toAdd = document.createElement('a');
+        toAdd.textContent=categorylist[i];
+        toAdd.className="list-group-item";
+        toAdd.href="#" + categorylist[i];
+        toAdd.addEventListener('click',function()
         {
             window.scrollTo(0,categorylist[i+1]+i*100);
         });
-        categories.appendChild(toadd);
+        categories.appendChild(toAdd);
     }
 
 }
 
 function onLoadCartNumbers(){
-    let productNumbers = localStorage.getItem('cartNumbers')
+    let productNumbers = sessionStorage.getItem('cartNumbers')
 
     if (productNumbers) {
         document.getElementById('cartAmount').textContent = productNumbers;

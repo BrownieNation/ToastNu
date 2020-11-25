@@ -40,6 +40,10 @@ exports.getUsers = function () {
     return User.find().populate('users').exec();
 };
 
+exports.deleteUser = async function (_userID) {
+    return await User.deleteOne().where('_userID').eq(_userID).exec();
+};
+
 // ----------------------------------------------------------------------
 // CRUD
 // TIL
@@ -135,7 +139,7 @@ exports.getOrders = function () {
 };
 
 exports.deleteOrder = async function (orderID) {
-    return await Order.deleteOne().where('_id').eq(order._id).exec()
+    return await Order.deleteOne().where('_id').eq(order._id).exec();
 };
 
 // ----------------------------------------------------------------------

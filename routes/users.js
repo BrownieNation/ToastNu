@@ -1,13 +1,19 @@
 // toastnu.js
 const express = require('express');
+<<<<<<< HEAD
 // const app = express();
+=======
+>>>>>>> 983231a6cf755570e9e551f38872b7e6c10f08ac
 const router = express.Router();
-const controller = require('../controller/controller');
+const controller = require("../controller/controller");
+const User = require("../model/userSchema");
 
 
-    //get
+    //post
     //users
-    router.post('/users', async (request, response) => {
+    router
+
+    .post('/users', async (request, response) => {
         
         try {
            
@@ -20,27 +26,19 @@ const controller = require('../controller/controller');
             
             response.status(500).send(e.message);
         }
-    }
-    )
+    });
 
-    //fra joke
-    // .post('/api/jokes', async (request, response) => {
-    //     try {
-    //         let { setup, punchline } = request.body;
-    //         await controller.createJoke(setup, punchline);
-    //         response.send({ message: 'Joke saved!' });
 
-    //     } catch (e) {
-    //         sendStatus(e, response);
-    //     }
-
-    // })
 
     //get
-    //products
+    //users
     router.get('/users', async (request, response) => {
         try {
+<<<<<<< HEAD
             
+=======
+            console.log(" er i Users");
+>>>>>>> 983231a6cf755570e9e551f38872b7e6c10f08ac
             const users = await controller.getUsers();
             if (!users) {
                 return response.status(404).send()
@@ -49,7 +47,14 @@ const controller = require('../controller/controller');
         } catch (e) {
             response.status(400).send(e.message)
         }
-    })
+    });
+  
+
+
+   
+
+    
+    
 
     
 

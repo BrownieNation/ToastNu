@@ -2,13 +2,10 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
 
-    _orderID    : Number,
-    date        : Number,
+    date        : Date,
     userID      : Number,
-    products    : []
-
-
+    products    : Array
 });
 
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('orders', orderSchema);
