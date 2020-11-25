@@ -12,6 +12,7 @@ const controller = require('../controller/controller');
         
         try {
             let {_userID, name, password, phoneNumber} = request.body;
+            console.log("Jeg er i postUsers");
             await controller.createUser(_userID, name, password, phoneNumber);
             // await user.save();
             response.status(201).send(user);
