@@ -192,10 +192,10 @@ let checkout = document.getElementById('checkout')
             await post('/orders',{
                 date,userID,"products":arr
             });
-            sessionStorage.clear()
+            sessionStorage.removeItem('cartitems');
             location.reload();
         }
-        else alert("du har ikke logget ind endnu");
+        else alert("du er ikke logget ind ...");
         })
 
         
