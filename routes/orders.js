@@ -11,7 +11,6 @@ router
       
         try {
             let {date, userID, products} = request.body;
-            console.log(products);
             await controller.createOrder(date, userID, products);
             
             response.send({message:"order sent"});
