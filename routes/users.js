@@ -1,7 +1,6 @@
 // toastnu.js
 const express = require('express');
 // const app = express();
-const User = require("../model/userSchema");
 const router = express.Router();
 const controller = require('../controller/controller');
 
@@ -31,8 +30,8 @@ const controller = require('../controller/controller');
     //users
     router.get('/users', async (request, response) => {
         try {
-            console.log(" er i Users");
-            const users = await Users.find()
+            
+            const users = await controller.getUsers();
             if (!users) {
                 return response.status(404).send()
             }

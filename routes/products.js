@@ -23,6 +23,7 @@ router
     //products
     .get('/products', async (request, response) => {
         try {
+           
             const products = await Products.find()
             if(!products){
                 return response.status(404).send()
