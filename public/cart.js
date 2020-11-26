@@ -174,9 +174,12 @@ async function post(url, objekt) {
 //giver alert efter checkout
 let checkout = document.getElementById('checkout')
 
-        checkout.addEventListener('click', async function(event) {         
+        checkout.addEventListener('click', async function(event) {   
+           let userID=sessionStorage.getItem('UserID');
+            if(userID!=null)     
+            { 
             let date = new Date();
-            let userID=1;
+           
             let items = document.getElementsByClassName('items');
             let arr=[];
             for(item of items)
@@ -185,16 +188,17 @@ let checkout = document.getElementById('checkout')
                 let amount= parseInt(item.getElementsByClassName('form-control text-center')[0].value);
                 arr.push({id,amount});
             }
-           let hej="Hej"
-            let orders = await get('/orders');
-            console.log(orders);
+           
             await post('/orders',{
-                date,userID,arr
+                date,userID,"products":arr
             });
-
+            sessionStorage.removeItem('cartitems');
+            location.reload();
+        }
+        else alert("du er ikke logget ind ...");
         })
 
-    
+        
 
 
 

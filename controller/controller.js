@@ -123,6 +123,7 @@ exports.getProducts = function () {
 // ----------------------------------------------------------------------
 
 exports.createOrder = function (date, userID, products) {
+    console.log("Date" + date + " UserID" + userID + " Products" + products);
     return Order.create({
         date,
         userID,

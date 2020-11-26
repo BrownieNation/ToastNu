@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
 
-    date        : Date,
-    userID      : Number,
+    date        : String,
+    userID      : String,
     products    : Array
 });
 

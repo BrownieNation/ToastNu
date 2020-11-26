@@ -12,6 +12,7 @@ async function validateLogin() {
 
                         alert("Logind Godkendt!");
                         window.location = "kontakt.html";
+                        sessionStorage.setItem('UserID',user._userID);
                         return true;
                 } 
         }

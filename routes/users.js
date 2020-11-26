@@ -30,7 +30,6 @@ const User = require("../model/userSchema");
     //users
     router.get('/users', async (request, response) => {
         try {
-            console.log(" er i Users");
             const users = await controller.getUsers();
             if (!users) {
                 return response.status(404).send()

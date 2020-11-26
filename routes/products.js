@@ -23,7 +23,9 @@ router
     //products
     .get('/products', async (request, response) => {
         try {
+
             const products = await controller.getProducts();
+
             if(!products){
                 return response.status(404).send()
             }
