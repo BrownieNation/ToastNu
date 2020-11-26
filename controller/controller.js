@@ -40,8 +40,8 @@ exports.getUsers = function () {
     return User.find().populate('users').exec();
 };
 
-exports.deleteUser = async function (id) {
-    return await User.deleteOne().where('_id').eq(id).exec()
+exports.deleteUser = async function (_userID) {
+    return await User.deleteOne().where('_userID').eq(_userID).exec();
 };
 
 // ----------------------------------------------------------------------
@@ -123,8 +123,8 @@ exports.getProducts = function () {
 // ----------------------------------------------------------------------
 
 exports.createOrder = function (date, userID, products) {
+    console.log("Date" + date + " UserID" + userID + " Products" + products);
     return Order.create({
-        _orderID,
         date,
         userID,
         products
@@ -140,7 +140,7 @@ exports.getOrders = function () {
 };
 
 exports.deleteOrder = async function (orderID) {
-    return await Order.deleteOne().where('_id').eq(order._id).exec()
+    return await Order.deleteOne().where('_id').eq(order._id).exec();
 };
 
 // ----------------------------------------------------------------------

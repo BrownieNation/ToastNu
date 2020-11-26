@@ -99,11 +99,6 @@ a{
   object-fit:cover
   }
   
-  @media(max-width:768px){
-  .carousel .carousel-inner{
-  height:auto
-   }
-  }
 
   h1{
     text-align: center;
@@ -176,6 +171,7 @@ a{
     left: 1000px;
     bottom: -15px;
   }
+
 
 
 

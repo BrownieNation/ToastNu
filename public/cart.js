@@ -1,49 +1,3 @@
-var checkout = document.getElementById('checkout')
-
-let products = [
-    {
-        name:'placeholder1',
-        category: 'food',
-        price: 20,
-        inCart: 0
-    },
-
-    {
-        name:'placeholder2',
-        category: 'snack',
-        price: 10,
-        inCart: 0
-    },
-
-    {
-        name:'placeholder3',
-        category: 'food',
-        price: 30,
-        inCart: 0
-    },
-
-    {
-        name:'placeholder4',
-        category: 'drink',
-        price: 15,
-        inCart: 0
-    },
-
-    {
-        name:'placeholder5',
-        category: 'drink',
-        price: 18,
-        inCart: 0
-    },
-
-    {
-        name:'placeholder6',
-        category: 'food',
-        price: 10,
-        inCart: 0
-    },
-
-]
 
 
 // for (let i=0; i < addToCartButtons.length; i++) {
@@ -86,9 +40,7 @@ function generatecartHTML(price,title,imgsrc,_productID)
             <div class="col-lg-10">
                 <h4 class="nomargin" id = "productName">${title}</h4>
             </div>
-            <p id = "productID" style="display: none;"> 
-            ${_productID} 
-            </p> 
+                <p class = "productID" style="display: none;">${_productID}</p> 
         </div>
     </td>
     <td id = "productPrice"> ${theprice},-</td>
@@ -101,7 +53,6 @@ function generatecartHTML(price,title,imgsrc,_productID)
         <button id="buttonDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
     </td>
     `;
-   
     return toreturn;
 }
 
@@ -166,11 +117,15 @@ function generatecartItems()
             
             //removebutton eventlistener
             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
-                let target=event.target.parentElement.parentElement;
+                let target=event.target;
+                while(target.className!="items")
+                    target=target.parentElement;
+
                 target.remove();
                 removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
                 calculateTotal();
             });
+
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
                 console.log(event.target.value);
@@ -200,20 +155,53 @@ function generatecartItems()
 }
 }
 
-
+async function get(url) {
+    const respons = await fetch(url);
+    if (respons.status !== 200) // OK
+        throw new Error(respons.status);
+    return await respons.json();
+}
+async function post(url, objekt) {
+    const respons = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(objekt),
+        headers: { 'Content-Type': 'application/json' }
+    });
+    if (respons.status !== 200) // Created
+        throw new Error(respons.status);
+    return await respons.json();
+}
 //giver alert efter checkout
- function checkout(){
-    
-        checkout.addEventListener('click', async function(event) {         
-            
-            await post('/orders',{})
+let checkout = document.getElementById('checkout')
 
+        checkout.addEventListener('click', async function(event) {   
+           let userID=sessionStorage.getItem('UserID');
+            if(userID!=null)     
+            { 
+            let date = new Date();
+           
+            let items = document.getElementsByClassName('items');
+            let arr=[];
+            for(item of items)
+            {
+                let id= parseInt(item.getElementsByClassName('productID')[0].innerHTML);
+                let amount= parseInt(item.getElementsByClassName('form-control text-center')[0].value);
+                arr.push({id,amount});
+            }
+           
+            await post('/orders',{
+                date,userID,"products":arr
+            });
+            sessionStorage.removeItem('cartitems');
+            location.reload();
+        }
+        else alert("du er ikke logget ind ...");
         })
 
-    
+        
 
 
-}
+
 // onLoadCartNumbers();
 
 // checkout();
