@@ -41,7 +41,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
                                     class="glyphicon glyphicon-user"></span>Konto
-                                <span class="caret"></span></a>
+                                <span class=""></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" data-toggle="modal" data-target="#tilmeldModal"><span
                                             class="glyphicon glyphicon-user"></span> Tilmeld</a></li>
@@ -74,7 +74,7 @@
                         </div>
                         <form>
                             <div class="form-group">
-                                <label for="username" class="col-form-label">BrugerNavn:</label>
+                                <label for="username" class="col-form-label">StudieID:</label>
                                 <input type="text" class="form-control" placeholder="Indtast StudieID"
                                     id="userUsername" required></input>
                             </div>
@@ -131,7 +131,7 @@
                             <div class="form-group">
                                 <label for="password" class="col-form-label">Password:</label>
                                 <input type="password" class="form-control validate" id="password"
-                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></input>
                             </div>
                             <div class="form-group">
@@ -143,7 +143,7 @@
                                 <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
                                 <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                                 <p id="number" class="invalid">A <b>number</b></p>
-                                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                                <p id="length" class="invalid">Minimum <b>6 characters</b></p>
                             </div>
                         </form>
                     </div>
