@@ -189,7 +189,7 @@ let checkout = document.getElementById('checkout')
             let orders = await get('/orders');
             console.log(orders);
             await post('/orders',{
-                date,userID,hej
+                date,userID,arr
             });
 
         })
