@@ -24,7 +24,7 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 
 
 
-exports.createUser = function (_userID, name, password, phoneNumber) {
+exports.createUser = async function (_userID, name, password, phoneNumber) {
     const hashedPassword = await bcrypt.hash(password,8)
     
     return User.create({
@@ -36,7 +36,7 @@ exports.createUser = function (_userID, name, password, phoneNumber) {
     );
 }
 
-exports.verifyPassword = function(hashedPassword, password){
+exports.verifyPassword = async function(hashedPassword, password){
 const isMatch = await bcrypt.compare(hashedPassword, password)
 
 return isMatch
@@ -177,33 +177,33 @@ exports.getOrderItems = function () {
 
 
 
-User.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ _userID })    
+// User.statics.findByCredentials = async function (_userID, password) => {
+//     const user = await User.findOne({ _userID })    
 
-    if (!user) {
-        throw new error ('Unable to login')
-    }
+//     if (!user) {
+//         throw new error ('Unable to login')
+//     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+//     const isMatch = await bcrypt.compare(password, user.password)
 
-    if (!isMatch) {
-        throw new Error('Unable to login')
-    }
+//     if (!isMatch) {
+//         throw new Error('Unable to login')
+//     }
 
-    return user
+//     return user
 
-}
+// }
 
-User.pre('save', async function (next) {
-    const user = this
+// User.pre('save', async function (next) {
+//     const user = this
 
-    console.log('Something magical is happening, JK password encrypted')
+//     console.log('Something magical is happening, JK password encrypted')
 
-    if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
-    }
-    next()
-})
+//     if (user.isModified('password')) {
+//         user.password = await bcrypt.hash(user.password, 8)
+//     }
+//     next()
+// })
 // ----------------------------------------------------------------------
 // MAIN:
 // ----------------------------------------------------------------------
