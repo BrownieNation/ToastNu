@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/css.css" ;>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="https://www.flaticon.com/svg/static/icons/svg/189/189122.svg" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../login.js"> defer</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <a class="navbar-brand" id="logo" href="index.html">ToastNu.dk</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarOUT" <!--
+                aria-controls="navbarOUT" aria-expanded="true" aria-label="Toggle navigation"> -->
+                <!-- <span class="navbar-toggler-icon"></span> -->
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarOUT">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="abonKort.html">Klippekort & Abonnement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakt.html">Om Os</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                                    class="glyphicon glyphicon-cog"></span>Settings
+                                <span class=""></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><span
+                                            class="glyphicon glyphicon-user"></span> Min Konto</a></li>
+                                <li><a onclick="logud();" href="#"><span
+                                            class="glyphicon glyphicon-log-in"></span> Log Ud</a></li>
+                                <!-- Modal -->
+                            </ul>
+                        <li><a href="kurv.html"><span class="glyphicon glyphicon-shopping-cart"></span> Kurv <span
+                                    id="cartAmount"></span></a></li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+</body>

@@ -60,6 +60,7 @@ async function postUser() {
 
 
 function loginCheck() {
+
         if(sessionStorage.getItem("UserID")){
         $.get("navbarIN.html", function(data){
         $("#nav-placeholder").replaceWith(data);
