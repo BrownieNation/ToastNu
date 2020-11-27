@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require("../controller/controller");
-const User = require("../model/userSchema");
+const User = require('../model/userSchema')
 
 
     //post
@@ -23,6 +23,16 @@ const User = require("../model/userSchema");
             
             response.status(500).send(e.message);
         }
+    })
+
+
+    .post('/users/login', async (request, response) => {
+        try {
+            const user = await User.findByCredentials(request.body._userID, request.body.password)
+            response.send(user)
+        } catch (e){
+            response.status(400).send()
+        }
     });
 
 
@@ -40,15 +50,45 @@ const User = require("../model/userSchema");
             response.status(400).send(e.message)
         }
     });
+
+    router.patch('/users/:id', async (req, res) => {
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['name', 'password', 'phoneNumber']
+        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+    
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
+        }
+    
+        try {
+            const user = await User.findById(req.params._id)
+    
+            updates.forEach((update) => user[update] = req.body[update])
+            await user.save()
+    
+            if (!user) {
+                return res.status(404).send()
+            }
+    
+            res.send(user)
+        } catch (e) {
+            res.status(400).send(e)
+        }
+    })
   
-
-
-   
-
+    router.delete('/users/:id', async (req, res) => {
+        try {
+            const user = await User.findByIdAndDelete(req.params._id)
     
+            if (!user) {
+                return res.status(404).send()
+            }
     
-
-    
+            res.send(user)
+        } catch (e) {
+            res.status(500).send()
+        }
+    })
 
 
 module.exports = router;

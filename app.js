@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const config = require('./config');
 const controller = require('./controller/controller');
-const bcrypt = require('bcryptjs');
 // const User = require('../model/userSchema');
 // const Product = require('../model/productSchema');
 // const Order = require('../model/orderSchema');

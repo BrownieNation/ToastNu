@@ -5,7 +5,9 @@ const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
 const Order = require('../model/orderSchema');
 const OrderItem = require("../model/orderItemSchema");
+const bcrypt = require('bcryptjs')
 let preProducts = require('../product');
+
 
 // const preUsers = require('../user');
 // const preOrders = require('../order');
@@ -23,14 +25,22 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 
 
 exports.createUser = function (_userID, name, password, phoneNumber) {
+    const hashedPassword = await bcrypt.hash(password,8)
+    
     return User.create({
         _userID,
         name, 
-        password,
+        hashedPassword,
         phoneNumber
     }
     );
 }
+
+exports.verifyPassword = function(hashedPassword, password){
+const isMatch = await bcrypt.compare(hashedPassword, password)
+
+return isMatch
+};
 
 exports.getUser = function (_userId) {
     return User.findById(_userId).exec();
@@ -165,6 +175,35 @@ exports.getOrderItems = function () {
     return OrderItem.find().populate('OrderItems').exec();
 };
 
+
+
+User.statics.findByCredentials = async (email, password) => {
+    const user = await User.findOne({ _userID })    
+
+    if (!user) {
+        throw new error ('Unable to login')
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if (!isMatch) {
+        throw new Error('Unable to login')
+    }
+
+    return user
+
+}
+
+User.pre('save', async function (next) {
+    const user = this
+
+    console.log('Something magical is happening, JK password encrypted')
+
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+    next()
+})
 // ----------------------------------------------------------------------
 // MAIN:
 // ----------------------------------------------------------------------

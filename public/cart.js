@@ -28,7 +28,7 @@ function cartNumbers() {
     }
 } */
 
-function generatecartHTML(price,title,imgsrc,_productID)
+function generatecartHTML(price,title,imgsrc,_productID,amount)
 {
     let theprice=parseFloat(price);
     let toreturn =` 
@@ -45,7 +45,7 @@ function generatecartHTML(price,title,imgsrc,_productID)
     </td>
     <td id = "productPrice"> ${theprice},-</td>
     <td data-th="Quantity">
-        <input id= "productAmount" type="number" class="form-control text-center" value="1">
+        <input id= "productAmount" type="number" class="form-control text-center" value="${amount}">
     </td>
     <td class = "subtotal">${theprice},-</td>
     <td class="actions" data-th="" style="width:10%;">
@@ -62,10 +62,10 @@ function addItemAmount(price,subtotal)
     
     
 }
-function removefromStorage(price,titel,imgsrc,_productID)
+function removefromStorage(price,titel,imgsrc,_productID,amount)
 {
     let cartItemString=sessionStorage.getItem('cartitems');
-    let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc + "splithere" + _productID +"__","");
+    let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc + "splithere" + _productID + "splithere" + amount + "__","");
   
     sessionStorage.setItem('cartNumbers',parseInt(sessionStorage.getItem('cartNumbers')-1));
     sessionStorage.setItem('cartitems',value);
@@ -112,7 +112,7 @@ function generatecartItems()
             newitem= document.createElement('tr');
             newitem.id=finalstring[i][1];
             newitem.className='items';
-            newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
+            newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3],finalstring[i][4]);
             cart.appendChild(newitem);
             
             //removebutton eventlistener
@@ -122,17 +122,26 @@ function generatecartItems()
                     target=target.parentElement;
 
                 target.remove();
-                removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);
+                removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3],finalstring[i][4]);
                 calculateTotal();
             });
 
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
-                console.log(event.target.value);
+              
                 if(event.target.value<=0)
+                {
                     event.target.value=1;
-                newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
-                calculateTotal();
+                   
+                }
+               console.log(event.target.value);
+              
+               let newValue= sessionStorage.getItem('cartitems').replace((finalstring[i][0] + " ,-splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "splithere" + finalstring[i][3] + "splithere" + event.target.defaultValue + "__"),(finalstring[i][0] + " ,-splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "splithere" + finalstring[i][3] + "splithere" + event.target.value + "__"));
+                console.log(newValue);
+               sessionStorage.setItem('cartitems',newValue);
+               newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
+               event.target.defaultValue=event.target.value;
+            calculateTotal();
             })
         }
         else
@@ -175,7 +184,7 @@ async function post(url, objekt) {
 let checkout = document.getElementById('checkout')
 
         checkout.addEventListener('click', async function(event) {   
-           let userID=sessionStorage.getItem('UserID');
+            let userID=sessionStorage.getItem('UserID');
             if(userID!=null)     
             { 
             let date = new Date();
@@ -193,6 +202,7 @@ let checkout = document.getElementById('checkout')
                 date,userID,"products":arr
             });
             sessionStorage.removeItem('cartitems');
+            sessionStorage.removeItem('cartNumbers');
             location.reload();
         }
         else alert("du er ikke logget ind ...");
@@ -206,4 +216,7 @@ let checkout = document.getElementById('checkout')
 
 // checkout();
 
+
 generatecartItems();
+
+

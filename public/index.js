@@ -61,7 +61,8 @@ function cartItems(price,title,img,_productID)
     let buystring= sessionStorage.getItem('cartitems');
     if(buystring===null)
         buystring="";
-    let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "__";
+    let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "splithere" + 1 + "__";
+
     if(buystring.includes(newstring))
     {
        alert("Product already added to cart!"); 
@@ -130,7 +131,7 @@ async function generateItems(products)
         toAdd.href="#" + categorylist[i];
         toAdd.addEventListener('click',function()
         {
-            window.scrollTo(0,categorylist[i+1]+i*100);
+            window.scrollTo(0,categorylist[i+1]+i*85);
         });
         categories.appendChild(toAdd);
     }
