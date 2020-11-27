@@ -43,11 +43,11 @@ function generatecartHTML(price,title,imgsrc,_productID,amount)
                 <p class = "productID" style="display: none;">${_productID}</p> 
         </div>
     </td>
-    <td id = "productPrice"> ${theprice},-</td>
+    <td id = "productPrice" class="productPrice"> ${theprice},-</td>
     <td data-th="Quantity">
         <input id= "productAmount" type="number" class="form-control text-center" value="${amount}">
     </td>
-    <td class = "subtotal">${theprice},-</td>
+    <td class = "subtotal">${theprice*amount},-</td>
     <td class="actions" data-th="" style="width:10%;">
         <button id="buttonRefresh" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
         <button id="buttonDelete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
@@ -59,15 +59,15 @@ function generatecartHTML(price,title,imgsrc,_productID,amount)
 function addItemAmount(price,subtotal)
 {
     let valofSub=parseFloat(subtotal.innerHTML.split(" ")[0]);
-    
-    
 }
-function removefromStorage(price,titel,imgsrc,_productID,amount)
+
+function removefromStorage(price,title,imgsrc,_productID,amount)
 {
+   
     let cartItemString=sessionStorage.getItem('cartitems');
-    let value= cartItemString.replace(price+" ,-splithere"+titel+"splithere"+imgsrc + "splithere" + _productID + "splithere" + amount + "__","");
+    let value= cartItemString.replace(price+" ,-splithere"+title+"splithere"+imgsrc + "splithere" + _productID + "splithere" + amount + "__","");
   
-    sessionStorage.setItem('cartNumbers',parseInt(sessionStorage.getItem('cartNumbers')-1));
+    sessionStorage.setItem('cartNumbers',sessionStorage.getItem('cartNumbers')-1);
     sessionStorage.setItem('cartitems',value);
 }
 function calculateTotal()
@@ -80,6 +80,41 @@ function calculateTotal()
         totalprice+=parseFloat(subtotal.innerHTML.split(" ")[0]);
     }
     document.getElementById("totalAmount").textContent = "Total: " + (totalprice>0?totalprice + " ,-":"");
+}
+function updateSubtotal()
+{
+    for(item of document.getElementsByClassName('items'))
+    {
+        let price=parseFloat(item.getElementsByClassName('productPrice')[0].value);
+        let amount=parseInt(item.getElementsByClassName('form-control text-center')[0].value);
+        item.getElementsByClassName('subtotal')[0].textContent=price*amount + " ,-";
+    }
+    
+}
+function removebuttonevent(target,price,title,imgsrc,productID,amount)
+{
+
+    while(target.className!="items")
+        target=target.parentElement;
+
+    target.remove();
+    removefromStorage(price,title,imgsrc,productID,amount);
+    calculateTotal();
+}
+function quantityevent(item,target,price,title,imgsrc,productID)
+{
+    if(target.value<=0)
+    {
+        target.value=1;
+       
+    }
+  
+   let newValue= sessionStorage.getItem('cartitems').replace((price + " ,-splithere" + title + "splithere" + imgsrc + "splithere" + productID + "splithere" + target.defaultValue + "__"),(price + " ,-splithere" + title + "splithere" + imgsrc + "splithere" + productID + "splithere" + target.value + "__"));
+   sessionStorage.setItem('cartitems',newValue);
+   item.getElementsByClassName('subtotal')[0].innerHTML=price*target.value + " ,-";
+   target.defaultValue=target.value;
+   calculateTotal();
+
 }
 function generatecartItems()
 {
@@ -117,32 +152,12 @@ function generatecartItems()
             
             //removebutton eventlistener
             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
-                let target=event.target;
-                while(target.className!="items")
-                    target=target.parentElement;
-
-                target.remove();
-                removefromStorage(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3],finalstring[i][4]);
-                calculateTotal();
-            });
+            removebuttonevent(event.target,finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3],newitem.getElementsByClassName('form-control text-center')[0].value);});
+           
 
             // quantity eventlistener
             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
-              
-                if(event.target.value<=0)
-                {
-                    event.target.value=1;
-                   
-                }
-               console.log(event.target.value);
-              
-               let newValue= sessionStorage.getItem('cartitems').replace((finalstring[i][0] + " ,-splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "splithere" + finalstring[i][3] + "splithere" + event.target.defaultValue + "__"),(finalstring[i][0] + " ,-splithere" + finalstring[i][1] + "splithere" + finalstring[i][2] + "splithere" + finalstring[i][3] + "splithere" + event.target.value + "__"));
-                console.log(newValue);
-               sessionStorage.setItem('cartitems',newValue);
-               newitem.getElementsByClassName('subtotal')[0].innerHTML=finalstring[i][0]*event.target.value + " ,-";
-               event.target.defaultValue=event.target.value;
-            calculateTotal();
-            })
+              quantityevent(newitem,event.target,finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);})
         }
         else
         {

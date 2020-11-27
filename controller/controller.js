@@ -24,7 +24,7 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 
 
 
-exports.createUser = async function (_userID, name, password, phoneNumber) {
+exports.createUser =  async function (_userID, name, password, phoneNumber) {
     const hashedPassword = await bcrypt.hash(password,8)
     
     return User.create({
@@ -177,7 +177,7 @@ exports.getOrderItems = function () {
 
 
 
-// User.statics.findByCredentials = async function (_userID, password) => {
+// User.statics.findByCredentials = async (email, password) => {
 //     const user = await User.findOne({ _userID })    
 
 //     if (!user) {
