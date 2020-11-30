@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     },
     name: {
         type: String,
-        required: true,
         trim: true
 
     },
@@ -27,7 +26,9 @@ const userSchema = new mongoose.Schema({
         minlength: 8
     },
 
-    isAdmin: false
+    isAdmin: {
+type: Boolean
+    }
     // orders      : [{type: Number, ref: 'Order'}]
 
 });

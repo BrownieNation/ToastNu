@@ -54,10 +54,10 @@ async function postUser() {
         let name = document.getElementById("name").value;
         let password = document.getElementById("password").value;
         let phoneNumber = parseInt(document.getElementById("phoneNumber").value);
-        let isAdmin = document.getElementById("isAdmin");
+        let isAdmin = false;
         // controller.createUser(_userID, name, password, phoneNumber, false);
         await post('/users', {
-                _userID, name, password, phoneNumber, isAdmin
+                _userID, name, password, phoneNumber, isAdmin,
         });
 
 }

@@ -112,11 +112,12 @@ function removebuttonevent(target,price,title,imgsrc,productID,amount)
 }
 function quantityevent(item,target,price,title,imgsrc,productID)
 {
-    if(target.value<=0)
+    // console.log(target.value%1);
+    if(target.value<=0 || target.value % 1 != 0)
     {
         target.value=1;
-       
     }
+  
   
    let newValue= sessionStorage.getItem('cartitems').replace((price + " ,-splithere" + title + "splithere" + imgsrc + "splithere" + productID + "splithere" + target.defaultValue + "__"),(price + " ,-splithere" + title + "splithere" + imgsrc + "splithere" + productID + "splithere" + target.value + "__"));
    sessionStorage.setItem('cartitems',newValue);

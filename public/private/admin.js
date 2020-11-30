@@ -10,9 +10,3 @@ async function generateProducts()
     }
 }
 generateProducts();
-
-function logudAdmin() {
-    sessionStorage.clear();
-    window.location = "/public/index.html";
-    
-}
