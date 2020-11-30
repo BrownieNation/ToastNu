@@ -24,14 +24,15 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 
 
 
-exports.createUser =  async function (_userID, name, password, phoneNumber) {
+exports.createUser =  async function (_userID, name, password, phoneNumber, isAdmin) {
     const hashedPassword = await bcrypt.hash(password,8)
     
     return User.create({
         _userID,
         name, 
         hashedPassword,
-        phoneNumber
+        phoneNumber,
+        isAdmin
     }
     );
 }

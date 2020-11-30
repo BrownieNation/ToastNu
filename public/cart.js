@@ -66,8 +66,6 @@ function removefromStorage(price,title,imgsrc,_productID,amount)
    
     let cartItemString=sessionStorage.getItem('cartitems');
     let value= cartItemString.replace(price+" ,-splithere"+title+"splithere"+imgsrc + "splithere" + _productID + "splithere" + amount + "__","");
-  
-    sessionStorage.setItem('cartNumbers',sessionStorage.getItem('cartNumbers')-1);
     sessionStorage.setItem('cartitems',value);
 }
 function calculateTotal()
@@ -91,6 +89,16 @@ function updateSubtotal()
     }
     
 }
+function calculateCart()
+{
+    let cart=0;
+    for(quantity of document.getElementsByClassName('form-control text-center'))
+    {
+        cart+=parseInt(quantity.value);
+    }
+    
+    sessionStorage.setItem('cartNumbers',cart>0?cart:"");
+}
 function removebuttonevent(target,price,title,imgsrc,productID,amount)
 {
 
@@ -100,6 +108,7 @@ function removebuttonevent(target,price,title,imgsrc,productID,amount)
     target.remove();
     removefromStorage(price,title,imgsrc,productID,amount);
     calculateTotal();
+    calculateCart();
 }
 function quantityevent(item,target,price,title,imgsrc,productID)
 {
@@ -114,6 +123,7 @@ function quantityevent(item,target,price,title,imgsrc,productID)
    item.getElementsByClassName('subtotal')[0].innerHTML=price*target.value + " ,-";
    target.defaultValue=target.value;
    calculateTotal();
+   calculateCart();
 
 }
 function generatecartItems()
@@ -135,6 +145,12 @@ function generatecartItems()
         }
         tmp[0]=(tmp[0].replace(" ,-",""));
         finalstring.push(tmp);
+    }
+    let trashItems=JSON.parse(sessionStorage.getItem('trash'));
+    // console.log(trashItems);
+    for(item of trashItems)
+    {
+        console.log(item);
     }
     
 

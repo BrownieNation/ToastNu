@@ -2,30 +2,32 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema({
-    _userID     : {
+    _userID: {
         type: String,
         required: true,
         trim: true, 
         unique : true
     },
-    name        : {
+    name: {
         type: String,
-        requred: true,
+        required: true,
         trim: true
 
     },
-    password    : {
+    password: {
         type: String,
-        requred: true,
+        required: true,
         minlength: 6,
         trim: true,
         
 
     },
-    phoneNumber : {
+    phoneNumber: {
         type: Number,
         minlength: 8
-    }
+    },
+
+    isAdmin: false
     // orders      : [{type: Number, ref: 'Order'}]
 
 });
