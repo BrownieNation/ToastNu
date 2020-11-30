@@ -40,6 +40,8 @@ async function deLete(url) {
 //Adds wares to cart
 function cartNumbers() {
 
+ 
+
     let productNumbers = sessionStorage.getItem('cartNumbers');
     
     productNumbers = parseInt(productNumbers);
@@ -60,9 +62,29 @@ function cartItems(price,title,img,_productID)
     if(buystring===null)
         buystring="";
     let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "splithere" + 1 + "__";
-    
-    
+
+    let trashItems=JSON.parse(sessionStorage.getItem('trash'));
+    if(trashItems==null)
+        trashItems=[];
+
+    let found=false;
+    let i=0;
+    for(;i<trashItems.length;i+=5)
+    {
+        console.log(trashItems[i]);
+        if(trashItems[i]==_productID)
+        {
+            found=true;
+            break;
+        }
+    }
+    if(found)
+        trashItems[i+4]+=1;
+    else
+        trashItems.push(_productID,title,price,img,1);
    
+        sessionStorage.setItem('trash',JSON.stringify(trashItems));
+
     if(buystring.includes(newstring))
     {
        alert("Product already added to cart!"); 
@@ -71,14 +93,6 @@ function cartItems(price,title,img,_productID)
         buystring+=newstring;
         sessionStorage.setItem('cartitems',buystring);
         cartNumbers();
-        // prøver noget nyt
-        let trashItems=JSON.parse(sessionStorage.getItem('trash'));
-        if(trashItems==null)
-            trashItems=[];
-
-        trashItems.push(_productID,title,price,img,1);
-   
-        sessionStorage.setItem('trash',JSON.stringify(trashItems));
     }
    
 }
