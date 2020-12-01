@@ -11,7 +11,7 @@ Header set Strict-Transport-Security "max-age=31536000" env=HTTPS;
     SetOutputFilter DEFLATE
     # Don't compress images
     SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
-    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/plain    
     AddOutputFilterByType DEFLATE text/html
     AddOutputFilterByType DEFLATE text/xml
     AddOutputFilterByType DEFLATE text/css

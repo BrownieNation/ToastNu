@@ -13,14 +13,12 @@ const User = require('../model/userSchema')
         
         try {
            
-            let {_userID, name, password, phoneNumber} = request.body;
-            console.log("Jeg er i postUsers");
-            await controller.createUser(_userID, name, password, phoneNumber);
+            let {_userID, name, password, phoneNumber, isAdmin} = request.body;
+            await controller.createUser(_userID, name, password, phoneNumber, isAdmin);
             response.send({message:"User Saved"});
           
             
         } catch (e) {
-            
             response.status(500).send(e.message);
         }
     })

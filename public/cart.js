@@ -61,14 +61,23 @@ function addItemAmount(price,subtotal)
     let valofSub=parseFloat(subtotal.innerHTML.split(" ")[0]);
 }
 
-function removefromStorage(price,title,imgsrc,_productID,amount)
+function removefromStorage(_productID)
 {
    
-    let cartItemString=sessionStorage.getItem('cartitems');
-    let value= cartItemString.replace(price+" ,-splithere"+title+"splithere"+imgsrc + "splithere" + _productID + "splithere" + amount + "__","");
-  
-    sessionStorage.setItem('cartNumbers',sessionStorage.getItem('cartNumbers')-1);
-    sessionStorage.setItem('cartitems',value);
+    let cartItems=JSON.parse(sessionStorage.getItem('cartitems'));
+    for(let i=0;i<cartItems.length;i++)
+    {
+      
+        if(cartItems[i][0]==_productID)
+        {
+            console.log(cartItems[i][0]);
+            console.log(_productID);
+            cartItems.splice(i,1);
+            
+        }
+    }
+    
+    sessionStorage.setItem('cartitems',JSON.stringify(cartItems));
 }
 function calculateTotal()
 {
@@ -81,102 +90,85 @@ function calculateTotal()
     }
     document.getElementById("totalAmount").textContent = "Total: " + (totalprice>0?totalprice + " ,-":"");
 }
-function updateSubtotal()
+
+function calculateCart()
 {
-    for(item of document.getElementsByClassName('items'))
+    let cart=0;
+    for(quantity of document.getElementsByClassName('form-control text-center'))
     {
-        let price=parseFloat(item.getElementsByClassName('productPrice')[0].value);
-        let amount=parseInt(item.getElementsByClassName('form-control text-center')[0].value);
-        item.getElementsByClassName('subtotal')[0].textContent=price*amount + " ,-";
+        cart+=parseInt(quantity.value);
     }
     
+   cart= cart>0?cart:"";
+    sessionStorage.setItem('cartNumbers',cart);
+    document.getElementById('cartAmount').textContent=cart;
 }
-function removebuttonevent(target,price,title,imgsrc,productID,amount)
+
+function removebuttonevent(target,productID)
 {
 
     while(target.className!="items")
         target=target.parentElement;
 
     target.remove();
-    removefromStorage(price,title,imgsrc,productID,amount);
+    removefromStorage(productID);
     calculateTotal();
+    calculateCart();
 }
-function quantityevent(item,target,price,title,imgsrc,productID)
+function quantityevent(item,target,productID)
 {
-    if(target.value<=0)
+    // console.log(target.value%1);
+    if(target.value<=0 || target.value % 1 != 0)
     {
         target.value=1;
-       
     }
+
+   let cartItems= JSON.parse(sessionStorage.getItem('cartitems'));
+   
+   for(let i=0;i<cartItems.length;i++)
+   {
+
+        if(cartItems[i][0]==productID)
+        {
+            console.log(cartItems[i]);
+            console.log(productID);
+            cartItems[i][4]=target.value;
+            item.getElementsByClassName('subtotal')[0].innerHTML=cartItems[i][2]*target.value + " ,-";
+            sessionStorage.setItem('cartitems',JSON.stringify(cartItems));
+            break;
+        }
+   }
   
-   let newValue= sessionStorage.getItem('cartitems').replace((price + " ,-splithere" + title + "splithere" + imgsrc + "splithere" + productID + "splithere" + target.defaultValue + "__"),(price + " ,-splithere" + title + "splithere" + imgsrc + "splithere" + productID + "splithere" + target.value + "__"));
-   sessionStorage.setItem('cartitems',newValue);
-   item.getElementsByClassName('subtotal')[0].innerHTML=price*target.value + " ,-";
-   target.defaultValue=target.value;
    calculateTotal();
+   calculateCart();
 
 }
 function generatecartItems()
 {
     let cart= document.getElementsByClassName('cartbody')[0];
-    let buyString=sessionStorage.getItem('cartitems');
-    if(buyString!=null)
-    {
-    let arr=buyString.split("__");
-    let finalstring=[];
-
-    for(let i=0;i<arr.length;i++)
-    {
-        let itemstring=arr[i].split("splithere");
-        let tmp=[];
-        for(let j=0;j<itemstring.length;j++)
+   
+        let cartItems=JSON.parse(sessionStorage.getItem('cartitems'));
+        for(let i=0;i<cartItems.length;i++)
         {
-             tmp.push(itemstring[j]);
-        }
-        tmp[0]=(tmp[0].replace(" ,-",""));
-        finalstring.push(tmp);
-    }
-    
+            // generating html
+              let newitem= document.createElement('tr');
+              newitem.id=cartItems[i][0];
+              newitem.className='items';
+              newitem.innerHTML=generatecartHTML(cartItems[i][2],cartItems[i][1],cartItems[i][3],cartItems[i][0],cartItems[i][4]);
+              cart.appendChild(newitem);
 
-    for(let i=0;i<finalstring.length-1;i++)
-    {
-        let newitem=document.getElementById(finalstring[i][1]);
-        if(newitem==null)
-        {
-            //create tr Innerhtml og append til cart
-            newitem= document.createElement('tr');
-            newitem.id=finalstring[i][1];
-            newitem.className='items';
-            newitem.innerHTML=generatecartHTML(finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3],finalstring[i][4]);
-            cart.appendChild(newitem);
-            
-            //removebutton eventlistener
-            newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
-            removebuttonevent(event.target,finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3],newitem.getElementsByClassName('form-control text-center')[0].value);});
-           
-
-            // quantity eventlistener
-            newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
-              quantityevent(newitem,event.target,finalstring[i][0],finalstring[i][1],finalstring[i][2],finalstring[i][3]);})
-        }
-        else
-        {
-            // tæller value op på  item i cart
-            let productAmount= newitem.getElementsByClassName('form-control text-center')[0];
-            productAmount.value=(parseInt(productAmount.value)+1);
-            let subtotal=newitem.getElementsByClassName('subtotal')[0];
-            let valofSub=parseFloat(subtotal.innerHTML.split(" ")[0]);
-            subtotal.innerHTML=parseFloat(finalstring[i][0])*parseInt(productAmount.value) + " ,-";
+             //removebutton eventlistener
+             newitem.getElementsByClassName('btn btn-danger btn-sm')[0].addEventListener('click',function(event){
+             removebuttonevent(event.target,cartItems[i][0]);});
+               
+             // quantity eventlistener
+             newitem.getElementsByClassName('form-control text-center')[0].addEventListener('change',function(event){
+             quantityevent(newitem,event.target,cartItems[i][0]);})
             
         }
 
-        
-    }
-
-    
     calculateTotal();
    
-}
 }
 
 async function get(url) {
