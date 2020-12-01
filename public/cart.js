@@ -225,5 +225,11 @@ let checkout = document.getElementById('checkout')
 
 
 generatecartItems();
-
-
+// set cartamount on load
+// function updateCartNumber()
+// {
+//     let cart=sessionStorage.getItem('cartNumbers');
+//     cart= cart>0?cart:"";
+//     document.getElementById('cartAmount').textContent=cart;
+// }
+// updateCartNumber(); 

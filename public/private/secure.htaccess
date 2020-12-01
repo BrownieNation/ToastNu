@@ -1,4 +1,4 @@
-Header set Strict-Transport-Security "max-age=31536000" env=HTTPS;
+<!-- Header set Strict-Transport-Security "max-age=31536000" env=HTTPS;
 
 # protect .htaccess and .htpasswd
 <Files ~ "^.*\.([Hh][Tt])">
@@ -40,4 +40,4 @@ Header set Strict-Transport-Security "max-age=31536000" env=HTTPS;
 <Files .htaccess>
 Order Allow,Deny
 Deny from all
-</Files>
+</Files> -->
