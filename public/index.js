@@ -58,43 +58,33 @@ function cartNumbers() {
 }
 function cartItems(price,title,img,_productID)
 {
-    let buystring= sessionStorage.getItem('cartitems');
-    if(buystring===null)
-        buystring="";
-    let newstring=price + "splithere" + title + "splithere" + img + "splithere"+ _productID + "splithere" + 1 + "__";
-
-    let trashItems=JSON.parse(sessionStorage.getItem('trash'));
-    if(trashItems==null)
-        trashItems=[];
+    let cartitems=JSON.parse(sessionStorage.getItem('cartitems'));
+    if(cartitems==null)
+        cartitems=[];
 
     let found=false;
     let i=0;
-    for(;i<trashItems.length;i+=5)
+   
+    for(;i<cartitems.length;i++)
     {
-        console.log(trashItems[i]);
-        if(trashItems[i]==_productID)
+       
+        if(cartitems[i][0]==_productID)
         {
+           
             found=true;
             break;
         }
     }
     if(found)
-        trashItems[i+4]+=1;
-    else
-        trashItems.push(_productID,title,price,img,1);
-   
-        sessionStorage.setItem('trash',JSON.stringify(trashItems));
-
-    if(buystring.includes(newstring))
     {
-       alert("Product already added to cart!"); 
-    } 
-    else {
-        buystring+=newstring;
-        sessionStorage.setItem('cartitems',buystring);
-        cartNumbers();
+        cartitems[i][4]=parseInt(cartitems[i][4])+1;
     }
-   
+    else
+    {
+        cartitems.push([_productID,title,price.split(" ")[0],img,1]);
+    }
+        sessionStorage.setItem('cartitems',JSON.stringify(cartitems));
+        cartNumbers();
 }
 async function generateItems(products)
 {
@@ -121,6 +111,7 @@ async function generateItems(products)
         </div>
     </div>`;
         row.appendChild(newitem);
+        // sidebar categories
         if(!categorylist.includes(product.productCategory))
         {
             let top=newitem.getBoundingClientRect().top;
@@ -130,7 +121,7 @@ async function generateItems(products)
         }
     }
     let addeeventtoitems= document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
-    // let addToCartButtons = document.querySelectorAll('.shop-item-button');
+    
     for (let i=0; i < addeeventtoitems.length; i++) {
         let addToCartButtons = addeeventtoitems[i].querySelector('.shop-item-button');
          let price = addeeventtoitems[i].getElementsByClassName('pricetag')[0].innerHTML;
