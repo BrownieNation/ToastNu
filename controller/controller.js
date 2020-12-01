@@ -6,7 +6,7 @@ const Product = require('../model/productSchema');
 const Order = require('../model/orderSchema');
 const OrderItem = require("../model/orderItemSchema");
 const bcrypt = require('bcryptjs')
-let preProducts = require('../product');
+
 
 
 // const preUsers = require('../user');
@@ -25,23 +25,23 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 
 
 exports.createUser =  async function (_userID, name, password, phoneNumber, isAdmin) {
-    const hashedPassword = await bcrypt.hash(password,8)
+    // const hashedPassword = await bcrypt.hash(password,8)
     
     return User.create({
         _userID,
         name, 
-        hashedPassword,
+        password,
         phoneNumber,
         isAdmin
     }
     );
 }
 
-exports.verifyPassword = async function(hashedPassword, password){
-const isMatch = await bcrypt.compare(hashedPassword, password)
+// exports.verifyPassword = async function(hashedPassword, password){
+// const isMatch = await bcrypt.compare(hashedPassword, password)
 
-return isMatch
-};
+// return isMatch
+// };
 
 exports.getUser = function (_userId) {
     return User.findById(_userId).exec();

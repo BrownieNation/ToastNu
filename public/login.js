@@ -55,7 +55,7 @@ async function postUser() {
         let password = document.getElementById("password").value;
         let phoneNumber = parseInt(document.getElementById("phoneNumber").value);
         let isAdmin = false;
-        // controller.createUser(_userID, name, password, phoneNumber, false);
+        
         await post('/users', {
                 _userID, name, password, phoneNumber, isAdmin,
         });
@@ -76,7 +76,8 @@ function loginCheck() {
                         $("#nav-placeholder").replaceWith(data);
                 });
         }
-} loginCheck();
+} 
+loginCheck();
 
 
 function logud() {

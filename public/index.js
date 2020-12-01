@@ -121,7 +121,7 @@ async function generateItems(products)
         }
     }
     let addeeventtoitems= document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
-    
+
     for (let i=0; i < addeeventtoitems.length; i++) {
         let addToCartButtons = addeeventtoitems[i].querySelector('.shop-item-button');
          let price = addeeventtoitems[i].getElementsByClassName('pricetag')[0].innerHTML;

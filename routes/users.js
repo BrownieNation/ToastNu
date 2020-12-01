@@ -19,7 +19,6 @@ const User = require('../model/userSchema')
           
             
         } catch (e) {
-            
             response.status(500).send(e.message);
         }
     })
