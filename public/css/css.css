@@ -5,11 +5,12 @@
       
   
   }
+  /* Jeg har ændret navbar baggrunden til hvid så den er mere læsbar -Magnus */
   nav {
     width: 100%;
     height: 40px;
-    background-color:none !important;
-    background:transparent !important;
+    background-color:#F8F8F8 !important;
+    /* background:transparent !important; */
     border: none !important;
        }
 
@@ -89,22 +90,26 @@ a{
 .hero{
   text-align: center;
   text-size-adjust: 100px;
+  position: absolute;
+  top: 3%;
+  left: 40%;
 }
 
 .carousel .carousel-inner{
-  height:650px
-  }
-  .carousel-inner .carousel-item img{
-  min-height:200px;
-  object-fit:cover
+  height:600px;
+  /* align-content: center; */
+  position: center;
+  left: 13%;
+  width:80%;
   }
   
 
-  h1{
+
+h1{
     text-align: center;
   }
 
-  #om{
+#om{
     border: none;
     border-left: none;
     border-bottom: 1px solid;
@@ -112,24 +117,24 @@ a{
     padding-bottom: 3mm;
 
   }
-  #drive{
+#drive{
     text-align: left !important;
     padding: 50px;
     
   }
 
-  #omOsHeader{
+#omOsHeader{
     position: relative;
     left: 100px;
     bottom: -100px;
 
   }
 
-  #kantinePic{
+#kantinePic{
   padding-left: 150px;
   }
 
-  .avatar{
+.avatar{
     width: 200px;
     height: 200px;
     margin-left: 150px;
@@ -137,24 +142,24 @@ a{
     top: 50%;
   }
 
-  #map{
+#map{
     width: 300px;
     height: 300px;
     
   }
 
-  #adresseText{
+#adresseText{
     font-size: 14px;
     font-weight: bold;
   }
 
-  #mapDiv{
+#mapDiv{
     position: relative;
     left: 1000px;
     bottom: 35px;
     padding-top: 75px;
   }
-  #open{
+#open{
     position: absolute;
     border-left: none;
     border-bottom: 1px solid;
@@ -166,7 +171,7 @@ a{
     bottom: 200px;
   }
 
-  #Åbeningstid{
+#Åbeningstid{
     position: relative;
     left: 1000px;
     bottom: -15px;
@@ -181,4 +186,35 @@ a{
   padding: 50px;
 }
 
+#list{
+  position: relative;
+  left: -40%;
+}
 
+#itemcontent{
+  position: relative;
+  left: -10%;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+}

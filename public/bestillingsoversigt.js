@@ -46,9 +46,6 @@ function generatecartHTML(title,imgsrc, amount, customer)
         <tr>
         <td>
         <div class="row">
-            <div class="col-lg-2 Product-img">
-                <img id = "productImage" src="${imgsrc}" alt="..." class="img-responsive"/>
-            </div>
             <div class="col-lg-10">
                 <h4 class="nomargin" id = "productName">${title}</h4>
             </div>
