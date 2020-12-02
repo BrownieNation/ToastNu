@@ -57,7 +57,7 @@ async function postUser() {
         let isAdmin = false;
         
         await post('/users', {
-                _userID, name, password, phoneNumber, isAdmin,
+                _userID, name, password, phoneNumber, isAdmin
         });
 
 }

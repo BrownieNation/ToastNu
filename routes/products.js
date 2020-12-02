@@ -8,12 +8,15 @@ router
     //post
     //products
     .post('/products', async (request, response) => {
-        const product = new Products(request.body)
+       
         try {
-            await product.save()
-            response.status(201).send(product);
+            let {id,productName,beskrivelse,pris,img,category} = request.body
+            console.log(id,productName,beskrivelse,pris,img,category);
+            await controller.createProduct(id,productName,beskrivelse,pris,img,category);
+            response.send({message:"Product saved"});
 
         } catch (e) {
+            console.log(e.message);
             response.status(500).send(e.message);
         }
     }
@@ -35,14 +38,17 @@ router
         }
     })
 
-/* .delete('/:productID', async (request, response) => {
+    .delete('/products', async (request, response) => {
     try {
-        await controller.deleteOrder(request.params.orderID)
+        console.log("hej");
+        let productID= request.body;
+        console.log(productID);
+        await controller.deleteOrder(productID);
         response.send({message: 'Product deleted'});
     } catch (e) {
         response.status(500).send(e.message);
     }
-}) */;
+}) ;
 
     
 module.exports = router;

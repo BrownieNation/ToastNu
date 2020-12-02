@@ -98,17 +98,10 @@ exports.getAdmins = function () {
 //     }
 // };
 
-exports.createProduct = function (productName, productDescription, productPrice) {
-    return Product.create({
-        productName,
-        productDescription,
-        productPrice,
-        productImage,
-        productCategory
-    });
-};
 
-exports.createProduct = function (_productID, productName, productDescription, productPrice) {
+
+exports.createProduct = function (_productID, productName, productDescription, productPrice,productImage,productCategory) {
+    console.log("creating product");
     return Product.create({
         _productID,
         productName,
@@ -134,7 +127,7 @@ exports.getProducts = function () {
 // ----------------------------------------------------------------------
 
 exports.createOrder = function (date, userID, products) {
-    console.log("Date" + date + " UserID" + userID + " Products" + products);
+ 
     return Order.create({
         date,
         userID,
