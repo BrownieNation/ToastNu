@@ -101,7 +101,6 @@ exports.getAdmins = function () {
 
 
 exports.createProduct = function (_productID, productName, productDescription, productPrice,productImage,productCategory) {
-    console.log("creating product");
     return Product.create({
         _productID,
         productName,

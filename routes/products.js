@@ -11,7 +11,6 @@ router
        
         try {
             let {id,productName,beskrivelse,pris,img,category} = request.body
-            console.log(id,productName,beskrivelse,pris,img,category);
             await controller.createProduct(id,productName,beskrivelse,pris,img,category);
             response.send({message:"Product saved"});
 
@@ -42,6 +41,7 @@ router
         try {
             
             let productID= request.params.productID;
+            console.log(productID);
             controller.deleteProduct(productID);
             response.send({message: 'Product deleted'});
         } catch (e) {

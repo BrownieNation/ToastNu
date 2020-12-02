@@ -35,7 +35,7 @@ async function generateProducts()
        let option = document.createElement('option');
        option.className='productlistitem';
        option.id=product._productID
-       option.textContent = product.productName;
+       option.textContent = product.productName + " id:" + product._productID;
        selector.appendChild(option);
     }
 
@@ -47,14 +47,17 @@ async function postProduct() {
     let pris = document.getElementById("ProductPris").value;
     let beskrivelse = document.getElementById("ProductBeskrivelse").value;
     let category= document.getElementById("Katogori").value;
-    let id = document.getElementById("ProductId").value;
+    let id = await get('/products');
+    id=parseInt(id[id.length-1]._productID)+1;
+    console.log(id);
     let img =document.getElementById("myImg").value;
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
-    if(productName && pris && beskrivelse && id)
+    if(productName && pris && beskrivelse && category && id)
         await post('/products', {
             id,productName,beskrivelse,pris,img,category
         });
-
+    alert("Du har tilføjet " + productName + " til databasen!");
+    location.reload();
 }
 
 generateProducts();
@@ -65,17 +68,18 @@ document.getElementById('delete').addEventListener('click',async function()
 
 
     let item = document.getElementById('selector').value;
-    for(product of await get('/products'))
-    {
-        if(product.productName==item)
-        {
-            item=product._productID;
-            break;
-        }
-        
+
+    arr = item.split(" id:");
+    if(confirm(`Er du sikker på at du vil slette ${arr[0]}?`)){
+        let data=parseInt(arr[1]);
+        txt = `Du har slettet ${arr[0]}`;
+        await DELETE(`/products/${data}`,{data});
+        alert(txt);
+        location.reload();
+    } else {
+        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
+        alert(txt);
     }
-        alert("Produkt slettet!")
-        await DELETE(`/products/${item}`,item);
 
     
 
@@ -90,7 +94,12 @@ window.addEventListener('load', function() {
         }
     });
   });
-  
+
+  document.getElementById('addButton').addEventListener('click',function(){
+    postProduct();
+    
+    
+  })
   function imageIsLoaded() { 
     alert(this.src);  // blob url
     // update width and height ...
