@@ -71,11 +71,33 @@ document.getElementById('delete').addEventListener('click',async function()
 
     arr = item.split(" id:");
     if(confirm(`Er du sikker på at du vil slette ${arr[0]}?`)){
+        //--------------------------
+        if(confirm(`Er du helt sikker på at du vil slette ${arr[0]}?`)){
+            if(confirm(`Er du absolut helt sikker på at du vil slette ${arr[0]}?`)){
+                if(confirm(`Er du bombesikker på at du vil slette ${arr[0]}?`)){
+                    if(confirm(`Haha, en bombe er ikke sikker! Men vil du slette ${arr[0]}?`)){
+                        //------------------------
         let data=parseInt(arr[1]);
         txt = `Du har slettet ${arr[0]}`;
         await DELETE(`/products/${data}`,{data});
         alert(txt);
         location.reload();
+        //-------------------------
+                    }else {
+                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
+                        alert(txt);
+                    }}else {
+                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
+                        alert(txt);
+                    }}else {
+                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
+                        alert(txt);
+                    }}else {
+                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
+                        alert(txt);
+                    }
+
+                    //----------------------------
     } else {
         txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
         alert(txt);
