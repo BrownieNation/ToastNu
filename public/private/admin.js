@@ -6,7 +6,6 @@ async function get(url) {
     return await respons.json();
 }
 async function DELETE(url, objekt) {
-    console.log(url);
     const respons = await fetch(url, {
         method: "DELETE",
         body: JSON.stringify(objekt),
@@ -47,9 +46,9 @@ async function postProduct() {
     let productName= document.getElementById("ProductName").value;
     let pris = document.getElementById("ProductPris").value;
     let beskrivelse = document.getElementById("ProductBeskrivelse").value;
+    let category= document.getElementById("Katogori").value;
     let id = document.getElementById("ProductId").value;
-    let img =document.getElementById("fileToUpload");
-    let category="Drikkevare";
+    let img =document.getElementById("myImg").value;
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
     if(productName && pris && beskrivelse && id)
         await post('/products', {
@@ -75,16 +74,26 @@ document.getElementById('delete').addEventListener('click',async function()
         }
         
     }
-    console.log(item);
-        await DELETE('/products',{item});
+        alert("Produkt slettet!")
+        await DELETE(`/products/${item}`,item);
 
     
 
 })
 
-document.getElementById('addButton').addEventListener('click',async function()
-{
-    postProduct();
-})
+window.addEventListener('load', function() {
+    document.querySelector('input[type="file"]').addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            var img = document.querySelector('img');  // $('img')[0]
+            img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+            img.onload = imageIsLoaded;
+        }
+    });
+  });
+  
+  function imageIsLoaded() { 
+    alert(this.src);  // blob url
+    // update width and height ...
+  }
 
 

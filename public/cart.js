@@ -194,7 +194,8 @@ let checkout = document.getElementById('checkout')
             let userID=sessionStorage.getItem('UserID');
             if(userID!=null)     
             { 
-            let date = new Date();
+                // Sætter dato til ordre, uden tidspunkt
+            let date = new Date().toLocaleDateString();
            
             let items = document.getElementsByClassName('items');
             let arr=[];

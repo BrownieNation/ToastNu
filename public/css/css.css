@@ -195,7 +195,7 @@ h1{
   position: relative;
   left: -10%;
 }
-table{
+#tableAdmin{
   width:100%;
   table-layout: fixed;
 }

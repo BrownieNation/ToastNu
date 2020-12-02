@@ -38,17 +38,16 @@ router
         }
     })
 
-    .delete('/products', async (request, response) => {
-    try {
-        console.log("hej");
-        let productID= request.body;
-        console.log(productID);
-        await controller.deleteOrder(productID);
-        response.send({message: 'Product deleted'});
-    } catch (e) {
-        response.status(500).send(e.message);
-    }
-}) ;
+    .delete('/products/:productID', async (request, response) => {
+        try {
+            
+            let productID= request.params.productID;
+            controller.deleteProduct(productID);
+            response.send({message: 'Product deleted'});
+        } catch (e) {
+            response.status(500).send(e.message);
+        }
+    }) ;
 
     
 module.exports = router;

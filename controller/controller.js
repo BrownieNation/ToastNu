@@ -119,6 +119,10 @@ exports.getProduct = function (productID) {
 exports.getProducts = function () {
     return Product.find().populate('products').exec();
 };
+exports.deleteProduct = async function(productID)
+{
+    return await Product.deleteOne().where('_productID').eq(productID).exec();
+}
 
 // ----------------------------------------------------------------------
 // CRUD
