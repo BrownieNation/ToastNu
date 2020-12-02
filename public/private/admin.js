@@ -48,7 +48,7 @@ async function postProduct() {
     let pris = document.getElementById("ProductPris").value;
     let beskrivelse = document.getElementById("ProductBeskrivelse").value;
     let id = document.getElementById("ProductId").value;
-    let img ="https://images2.minutemediacdn.com/image/upload/c_crop,h_843,w_1500,x_0,y_10/v1555172614/shape/mentalfloss/iStock-177369626_1.jpg?itok=YfyNMOBR";
+    let img =document.getElementById("fileToUpload");
     let category="Drikkevare";
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
     if(productName && pris && beskrivelse && id)
