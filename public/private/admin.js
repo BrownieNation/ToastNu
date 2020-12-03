@@ -50,9 +50,10 @@ async function postProduct() {
     let id = await get('/products');
     id=parseInt(id[id.length-1]._productID)+1;
     console.log(id);
-    let img =document.getElementById("myImg").value;
+    let img = document.images.src("../img.product/");
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
     if(productName && pris && beskrivelse && category && id)
+        
         await post('/products', {
             id,productName,beskrivelse,pris,img,category
         });
@@ -71,33 +72,13 @@ document.getElementById('delete').addEventListener('click',async function()
 
     arr = item.split(" id:");
     if(confirm(`Er du sikker på at du vil slette ${arr[0]}?`)){
-        //--------------------------
-        if(confirm(`Er du helt sikker på at du vil slette ${arr[0]}?`)){
-            if(confirm(`Er du absolut helt sikker på at du vil slette ${arr[0]}?`)){
-                if(confirm(`Er du bombesikker på at du vil slette ${arr[0]}?`)){
-                    if(confirm(`Haha, en bombe er ikke sikker! Men vil du slette ${arr[0]}?`)){
-                        //------------------------
+
         let data=parseInt(arr[1]);
         txt = `Du har slettet ${arr[0]}`;
         await DELETE(`/products/${data}`,{data});
         alert(txt);
         location.reload();
-        //-------------------------
-                    }else {
-                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
-                        alert(txt);
-                    }}else {
-                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
-                        alert(txt);
-                    }}else {
-                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
-                        alert(txt);
-                    }}else {
-                        txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
-                        alert(txt);
-                    }
 
-                    //----------------------------
     } else {
         txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
         alert(txt);
@@ -122,9 +103,28 @@ window.addEventListener('load', function() {
     
     
   })
-  function imageIsLoaded() { 
-    alert(this.src);  // blob url
-    // update width and height ...
+ 
+  var btnUpload = $("#upload_file"),
+  btnOuter = $(".button_outer");
+btnUpload.on("change", function(e){
+  var ext = btnUpload.val().split('.').pop().toLowerCase();
+  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+      $(".error_msg").text("Not an Image...");
+  } else {
+      $(".error_msg").text("");
+      btnOuter.addClass("file_uploading");
+      setTimeout(function(){
+          btnOuter.addClass("file_uploaded");
+      },3000);
+      var uploadedFile = URL.createObjectURL(e.target.files[0]);
+      setTimeout(function(){
+          $("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");
+      },3500);
   }
-
-
+});
+$(".file_remove").on("click", function(e){
+  $("#uploaded_view").removeClass("show");
+  $("#uploaded_view").find("img").remove();
+  btnOuter.removeClass("file_uploading");
+  btnOuter.removeClass("file_uploaded");
+});
