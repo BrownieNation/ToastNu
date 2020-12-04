@@ -1,4 +1,5 @@
 
+
 async function get(url) {
     const respons = await fetch(url);
     if (respons.status !== 200) // OK
@@ -18,6 +19,16 @@ async function DELETE(url, objekt) {
 async function post(url, objekt) {
     const respons = await fetch(url, {
         method: "POST",
+        body: JSON.stringify(objekt),
+        headers: { 'Content-Type': 'application/json' }
+    });
+    if (respons.status !== 200) // Created
+        throw new Error(respons.status);
+    return await respons.json();
+}
+async function move(url, objekt) {
+    const respons = await fetch(url, {
+        method: "MOVE",
         body: JSON.stringify(objekt),
         headers: { 'Content-Type': 'application/json' }
     });
@@ -49,7 +60,6 @@ async function postProduct() {
     let category= document.getElementById("Katogori").value;
     let id = await get('/products');
     id=parseInt(id[id.length-1]._productID)+1;
-    console.log(id);
     let img = document.images.src("../img.product/");
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
     if(productName && pris && beskrivelse && category && id)
@@ -66,8 +76,6 @@ generateProducts();
 
 document.getElementById('delete').addEventListener('click',async function()
 {
-
-
     let item = document.getElementById('selector').value;
 
     arr = item.split(" id:");
@@ -83,9 +91,6 @@ document.getElementById('delete').addEventListener('click',async function()
         txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
         alert(txt);
     }
-
-    
-
 })
 
 window.addEventListener('load', function() {
@@ -98,11 +103,7 @@ window.addEventListener('load', function() {
     });
   });
 
-  document.getElementById('addButton').addEventListener('click',function(){
-    postProduct();
-    
-    
-  })
+  document.getElementById('addButton').addEventListener('click',function(){postProduct();})
  
   $("div#myId").dropzone({ url: "/file/post" });
   Dropzone.options.myAwesomeDropzone = {
@@ -115,4 +116,157 @@ window.addEventListener('load', function() {
       else { done(); }
     }
   };
+
+
+function generateOrderHTML(order,productID,amount)
+{
+
+    let toreturn =` 
+    <table class="table table-hover border bg-white">
+        <tbody class="orderbody">
+        <tr>
+        <td>
+        <div class="row">
+            <div class="col-lg-10">
+                <h4 class="nomargin" id = "productName">${order._id}</h4>
+            </div>
+        </div>
+    </td>
+    <td>
+        <div class="row">
+            <div class="col-lg-10">
+                <h4 class="nomargin" id = "productName">${productID}</h4>
+            </div>
+        </div>
+    </td>
+    <td>
+    <div class="row">
+        <div class="col-lg-10">
+            <h4 class="nomargin" id = "productName">${amount}</h4>
+        </div>
+    </div>
+</td>
+    <td>
+        <div class="row">
+            <div class="col-lg-10">
+                <h4 class="nomargin" id = "productName">${order.userID}</h4>
+            </div>
+        </div>
+    </td>
+    
+
+    <td class="actions" data-th="" style="width:10%;">
+        <button type="button" class="btn btn-success">Udført</button>								
+    </td>
+        </tfoot>
+    </table>
+
+    `;
+    return toreturn;
+}
+function generateCompletedOrderHTML(order,productID,amount)
+{
+
+    let toreturn =` 
+    <table class="table table-hover border bg-white">
+        <tbody class="orderbody">
+        <tr>
+        <td>
+        <div class="row">
+            <div class="col-lg-10">
+                <h4 class="nomargin" id = "productName">${order._id}</h4>
+            </div>
+        </div>
+    </td>
+    <td>
+        <div class="row">
+            <div class="col-lg-10">
+                <h4 class="nomargin" id = "productName">${productID}</h4>
+            </div>
+        </div>
+    </td>
+    <td>
+    <div class="row">
+        <div class="col-lg-10">
+            <h4 class="nomargin" id = "productName">${amount}</h4>
+        </div>
+    </div>
+</td>
+    <td>
+        <div class="row">
+            <div class="col-lg-10">
+                <h4 class="nomargin" id = "productName">${order.userID}</h4>
+            </div>
+        </div>
+    </td>
+        </tfoot>
+    </table>
+
+    `;
+    return toreturn;
+}
+{/* <td> class = "amount">${order.products}</td>
+<td> class = "customer">${order.userID}</td> */}
+
+async function moveTocompletedOrders(orderID)
+{
+    if(confirm(`er du sikker på at du vil flytte ${orderID} til færdige ordre?`))
+    {
+        move(`/orders/${orderID}`);
+        alert("Ordre er noteret færdig");
+        
+    }
+}
+async function orders()
+{
+    let orderItems=document.getElementById('orderItems');
+   let orders= await get('/orders');
+    for(let i=0;i<orders.length;i++)
+    {
+        let div = document.createElement('div');
+        div.className="col-lg-12 pl-3 pt-3";
+       
+        let productIDs=[];
+        let productAmount=[];
+        for(product of orders[i].products)
+        {
+            productIDs.push(product.id);
+            productAmount.push(product.amount);
+
+        }
+        div.innerHTML= generateOrderHTML(orders[i],productIDs,productAmount);
+        orderItems.appendChild(div);
+        div.getElementsByClassName('btn btn-success')[0].addEventListener('click',async function(event){
+            moveTocompletedOrders(orders[i]._id);
+        });
+    }
+    // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
+}
+async function completedorders()
+{
+    let orderItems=document.getElementById('completedorders');
+   
+    for(order of await get('/completedorders'))
+    {
+        
+        let div = document.createElement('div');
+        div.className="col-lg-12 pl-3 pt-3";
+       
+        let productIDs=[];
+        let productAmount=[];
+        for(product of order.products)
+        {
+            
+            productIDs.push(product.id);
+            productAmount.push(product.amount);
+
+        }
+        div.innerHTML= generateCompletedOrderHTML(order,productIDs,productAmount);
+        orderItems.appendChild(div);
+        
+    }
+    // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
+}
+orders();
+completedorders();
 

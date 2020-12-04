@@ -80,21 +80,24 @@
                                 <div class="row" style="padding: 10px;">
                                     <div class="col-sm-6">
 
-                                        <form action="../img/product/" method="post class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+                                        <form action="../img/product/" method="post class=" dropzone"
+                                            id="my-awesome-dropzone" enctype="multipart/form-data">
                                             <input type="file" name="file" />
-                                          </form>
-                                          <div class="dz-preview dz-file-preview">
+                                        </form>
+                                        <div class="dz-preview dz-file-preview">
                                             <div class="dz-details">
-                                              <div class="dz-filename"><span data-dz-name></span></div>
-                                              <div class="dz-size" data-dz-size></div>
-                                              <img data-dz-thumbnail style="max-width: 100%;" />
+                                                <div class="dz-filename"><span data-dz-name></span></div>
+                                                <div class="dz-size" data-dz-size></div>
+                                                <img data-dz-thumbnail style="max-width: 100%;" />
                                             </div>
-                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-                                            <img src="removebutton.png" alt="Click me to remove the file." data-dz-remove />
+                                            <div class="dz-progress"><span class="dz-upload"
+                                                    data-dz-uploadprogress></span></div>
+                                            <img src="removebutton.png" alt="Click me to remove the file."
+                                                data-dz-remove />
                                             <div class="dz-success-mark"><span>✔</span></div>
                                             <div class="dz-error-mark"><span>✘</span></div>
                                             <div class="dz-error-message"><span data-dz-errormessage></span></div>
-                                          </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -141,17 +144,17 @@
                                         </div>
                                         <div class="tbl-content">
                                             <table cellpadding="0" cellspacing="0">
-                                                <tbody>
+                                                <tbody id="orderItems">
 
                                                 </tbody>
                                             </table>
                                         </div>
                                     </section>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-success">Udført</button>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-success">Udført</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +182,8 @@
                                         </div>
                                         <div class="tbl-content">
                                             <table cellpadding="0" cellspacing="0">
-                                                <tbody>
+                                                <tbody id="completedorders">
+
 
                                                 </tbody>
                                             </table>
@@ -188,11 +192,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
