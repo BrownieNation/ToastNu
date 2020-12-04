@@ -39,19 +39,42 @@ router
     //orders
     .get('/orders', async (request, response) => {
         try {
-            const orders = await Orders.find()
-            if(!orders){
+
+            const products = await controller.getOrders();
+
+            if(!products){
                 return response.status(404).send()
             }
-            response.status(200).send(orders);
+            response.status(200).send(products);
         } catch (e) {
             response.status(400).send(e.message)
         }
     })
-    
+    .move('/orders/:orderID', async (request, response) => {
+        try {
+            await controller.moveOrder(request.params.orderID)
+            response.send({ message: 'Order moved' });
+        } catch (e) {
+            console.log(e.message);
+            response.status(500).send(e.message);
+        }
+    })
+    .get('/completedorders', async (request, response) => {
+        try {
+
+            const products = await controller.getcompletedOrders();
+
+            if(!products){
+                return response.status(404).send()
+            }
+            response.status(200).send(products);
+        } catch (e) {
+            response.status(400).send(e.message)
+        }
+    })
     //delete
     //orders
-    .delete('/:orderID', async (request, response) => {
+    .delete('/orders/:orderID', async (request, response) => {
     try {
         await controller.deleteOrder(request.params.orderID)
         response.send({ message: 'Order deleted' });

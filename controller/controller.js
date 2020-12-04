@@ -4,8 +4,10 @@ const Admin = require('../model/adminSchema');
 const User = require('../model/userSchema');
 const Product = require('../model/productSchema');
 const Order = require('../model/orderSchema');
+const CompletedOrder = require('../model/completedOrderSchema');
 const OrderItem = require("../model/orderItemSchema");
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const completedOrderSchema = require('../model/completedOrderSchema');
 
 
 
@@ -21,7 +23,6 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 // TIL
 // USERS:
 // ----------------------------------------------------------------------
-
 
 
 exports.createUser =  async function (_userID, name, password, phoneNumber, isAdmin) {
@@ -137,18 +138,38 @@ exports.createOrder = function (date, userID, products) {
         products
     });
 };
+exports.createCompletedOrder = function (date, userID, products) {
+ 
+    return CompletedOrder.create({
+        date,
+        userID,
+        products
+    });
+};
 
-exports.getOrder = function (_orderID) {
-    return Product.findById(_orderID).exec();
+exports.getOrder = async function (orderID) {
+    return Order.findById(orderID).exec();
 };
 
 exports.getOrders = function () {
-    return Product.find().populate('orders').exec();
+    return Order.find().populate('orders').exec();
+};
+exports.getcompletedOrders = function () {
+    return CompletedOrder.find().populate('orders').exec();
 };
 
-exports.deleteOrder = async function (orderID) {
-    return await Order.deleteOne().where('_id').eq(order._id).exec();
+exports.deleteOrder = function (order) {
+    return  Order.deleteOne().where('_id').eq(order._id).exec();
 };
+exports.moveOrder = async function (orderID)
+{  console.log(orderID);
+    let order= await exports.getOrder(orderID);
+    // console.log(order);
+    exports.deleteOrder(order);
+    exports.createCompletedOrder(order._id,order.userID,order.products);
+
+
+}
 
 // ----------------------------------------------------------------------
 // CRUD
