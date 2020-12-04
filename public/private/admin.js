@@ -92,31 +92,7 @@ document.getElementById('delete').addEventListener('click',async function()
         alert(txt);
     }
 })
-
-window.addEventListener('load', function() {
-    document.querySelector('input[type="file"]').addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            var img = document.querySelector('img');  // $('img')[0]
-            img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-            img.onload = imageIsLoaded;
-        }
-    });
-  });
-
   document.getElementById('addButton').addEventListener('click',function(){postProduct();})
- 
-  $("div#myId").dropzone({ url: "/file/post" });
-  Dropzone.options.myAwesomeDropzone = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 10, // MB
-    accept: function(file, done) {
-      if (file.name == "justinbieber.jpg") {
-        done("Naha, you don't.");
-      }
-      else { done(); }
-    }
-  };
-
 
 function generateOrderHTML(order,productID,amount)
 {
@@ -128,7 +104,7 @@ function generateOrderHTML(order,productID,amount)
         <td>
         <div class="row">
             <div class="col-lg-10">
-                <h4 class="nomargin" id = "productName">${order._id}</h4>
+                <h4 class="nomargin" id = "productName">${order.orderNumber}</h4>
             </div>
         </div>
     </td>
@@ -164,7 +140,7 @@ function generateOrderHTML(order,productID,amount)
     `;
     return toreturn;
 }
-function generateCompletedOrderHTML(order,productID,amount)
+function generateCompletedOrderHTML(order,productNames,amount)
 {
 
     let toreturn =` 
@@ -174,14 +150,14 @@ function generateCompletedOrderHTML(order,productID,amount)
         <td>
         <div class="row">
             <div class="col-lg-10">
-                <h4 class="nomargin" id = "productName">${order._id}</h4>
+                <h4 class="nomargin" id = "productName">${order.orderNumber}</h4>
             </div>
         </div>
     </td>
     <td>
         <div class="row">
             <div class="col-lg-10">
-                <h4 class="nomargin" id = "productName">${productID}</h4>
+                <h4 class="nomargin" id = "productName">${productNames}</h4>
             </div>
         </div>
     </td>
@@ -210,7 +186,7 @@ function generateCompletedOrderHTML(order,productID,amount)
 
 async function moveTocompletedOrders(orderID)
 {
-    if(confirm(`er du sikker på at du vil flytte ${orderID} til færdige ordre?`))
+    if(confirm(`er du sikker på at du vil flytte ${orderNumber} til færdige ordre?`))
     {
         move(`/orders/${orderID}`);
         alert("Ordre er noteret færdig");
@@ -226,15 +202,15 @@ async function orders()
         let div = document.createElement('div');
         div.className="col-lg-12 pl-3 pt-3";
        
-        let productIDs=[];
+        let productNames=[];
         let productAmount=[];
         for(product of orders[i].products)
         {
-            productIDs.push(product.id);
+            productNames.push(product.productName);
             productAmount.push(product.amount);
 
         }
-        div.innerHTML= generateOrderHTML(orders[i],productIDs,productAmount);
+        div.innerHTML= generateOrderHTML(orders[i],productNames,productAmount);
         orderItems.appendChild(div);
         div.getElementsByClassName('btn btn-success')[0].addEventListener('click',async function(event){
             moveTocompletedOrders(orders[i]._id);
@@ -242,11 +218,11 @@ async function orders()
     }
     // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
 }
-async function completedorders()
+async function completedOrders()
 {
-    let orderItems=document.getElementById('completedorders');
+    let orderItems=document.getElementById('completedOrders');
    
-    for(order of await get('/completedorders'))
+    for(order of await get('/completedOrders'))
     {
         
         let div = document.createElement('div');
@@ -261,12 +237,12 @@ async function completedorders()
             productAmount.push(product.amount);
 
         }
-        div.innerHTML= generateCompletedOrderHTML(order,productIDs,productAmount);
+        div.innerHTML= generateCompletedOrderHTML(orderNumber,order,productIDs,productAmount);
         orderItems.appendChild(div);
         
     }
     // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
 }
 orders();
-completedorders();
+completedOrders();
 

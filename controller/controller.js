@@ -130,17 +130,19 @@ exports.deleteProduct = async function(productID)
 // ORDERS
 // ----------------------------------------------------------------------
 
-exports.createOrder = function (date, userID, products) {
+exports.createOrder = function (orderNumber, date, userID, products) {
  
     return Order.create({
+        orderNumber,
         date,
         userID,
         products
     });
 };
-exports.createCompletedOrder = function (date, userID, products) {
+exports.createCompletedOrder = function (orderNumber, date, userID, products) {
  
     return CompletedOrder.create({
+        orderNumber,
         date,
         userID,
         products
@@ -166,7 +168,7 @@ exports.moveOrder = async function (orderID)
     let order= await exports.getOrder(orderID);
     // console.log(order);
     exports.deleteOrder(order);
-    exports.createCompletedOrder(order._id,order.userID,order.products);
+    exports.createCompletedOrder(order.orderNumber,order.date,order.userID,order.products);
 
 
 }

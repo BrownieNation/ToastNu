@@ -10,8 +10,8 @@ router
     .post('/orders', async (request, response) => {
       
         try {
-            let {date, userID, products} = request.body;
-            await controller.createOrder(date, userID, products);
+            let {orderNumber, date, userID, products} = request.body;
+            await controller.createOrder(orderNumber, date, userID, products);
             
             response.send({message:"order sent"});
 
@@ -59,7 +59,7 @@ router
             response.status(500).send(e.message);
         }
     })
-    .get('/completedorders', async (request, response) => {
+    .get('/completedOrders', async (request, response) => {
         try {
 
             const products = await controller.getcompletedOrders();

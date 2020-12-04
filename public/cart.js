@@ -1,11 +1,4 @@
 
-
-// for (let i=0; i < addToCartButtons.length; i++) {
-//     addToCartButtons[i].addEventListener('click', () => {
-//         cartNumbers();
-//     })
-// }
-
 function cartNumbers() {
     let productNumbers = sessionStorage.getItem('cartNumbers');
     productNumbers = parseInt(productNumbers);
@@ -20,14 +13,6 @@ function cartNumbers() {
 
 }
 
-/* function onLoadCartNumbers(){
-    let productNumbers = localStorage.getItem('cartNumbers')
-
-    if (productNumbers) {
-        document.getElementById('cartAmount').textContent = productNumbers;
-    }
-} */
-
 function generatecartHTML(price,title,imgsrc,_productID,amount)
 {
     let theprice=parseFloat(price);
@@ -38,7 +23,7 @@ function generatecartHTML(price,title,imgsrc,_productID,amount)
                 <img id = "productImage"src="${imgsrc}" alt="..." class="img-responsive"/>
             </div>
             <div class="col-lg-10">
-                <h4 class="nomargin" id = "productName">${title}</h4>
+                <h4 class="nomargin" id = "productName" >${title}</h4>
             </div>
                 <p class = "productID" style="display: none;">${_productID}</p> 
         </div>
@@ -148,6 +133,8 @@ function generatecartItems()
     let cart= document.getElementsByClassName('cartbody')[0];
    
         let cartItems=JSON.parse(sessionStorage.getItem('cartitems'));
+        if(cartItems)
+        {
         for(let i=0;i<cartItems.length;i++)
         {
             // generating html
@@ -168,7 +155,7 @@ function generatecartItems()
         }
 
     calculateTotal();
-   
+    }
 }
 
 async function get(url) {
@@ -187,6 +174,26 @@ async function post(url, objekt) {
         throw new Error(respons.status);
     return await respons.json();
 }
+
+// funktion der giver sommer og vinter tid til datoen på ordren
+function dst() {
+    Date.prototype.stdTimezoneOffset = function () {
+        var jan = new Date(this.getFullYear(), 0, 1);
+        var jul = new Date(this.getFullYear(), 6, 1);
+        return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+    }
+    
+    Date.prototype.isDstObserved = function () {
+        return this.getTimezoneOffset() < this.stdTimezoneOffset();
+    }
+    
+    var today = new Date();
+    if (today.isDstObserved()) { 
+        alert ("Daylight saving time!");
+    }
+
+    return today;
+}
 //giver alert efter checkout
 let checkout = document.getElementById('checkout')
 
@@ -194,20 +201,25 @@ let checkout = document.getElementById('checkout')
             let userID=sessionStorage.getItem('UserID');
             if(userID!=null)     
             { 
-                // Sætter dato til ordre, uden tidspunkt
-            let date = new Date().toLocaleDateString();
-           
+            let date = (dst().toDateString() + ", " + dst().toTimeString());
             let items = document.getElementsByClassName('items');
             let arr=[];
+            // produkter
             for(item of items)
             {
                 let id= parseInt(item.getElementsByClassName('productID')[0].innerHTML);
                 let amount= parseInt(item.getElementsByClassName('form-control text-center')[0].value);
-                arr.push({id,amount});
+                let productName=(item.getElementsByClassName('nomargin')[0].innerHTML);
+                arr.push({id,amount,productName});
             }
-           
+
+            let orderNumber = await get('/orders');
+            if(orderNumber.length>0)
+                orderNumber = parseInt(orderNumber[orderNumber.length-1].orderNumber)+1;
+            else
+                orderNumber=1;
             await post('/orders',{
-                date,userID,"products":arr
+                orderNumber,date,userID,"products":arr
             });
             sessionStorage.removeItem('cartitems');
             sessionStorage.removeItem('cartNumbers');
@@ -216,21 +228,5 @@ let checkout = document.getElementById('checkout')
         else alert("du er ikke logget ind ...");
         })
 
-        
-
-
-
-// onLoadCartNumbers();
-
-// checkout();
-
 
 generatecartItems();
-// set cartamount on load
-// function updateCartNumber()
-// {
-//     let cart=sessionStorage.getItem('cartNumbers');
-//     cart= cart>0?cart:"";
-//     document.getElementById('cartAmount').textContent=cart;
-// }
-// updateCartNumber(); 
