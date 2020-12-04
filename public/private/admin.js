@@ -60,7 +60,7 @@ async function postProduct() {
     let category= document.getElementById("Katogori").value;
     let id = await get('/products');
     id=parseInt(id[id.length-1]._productID)+1;
-    let img = document.images.src("../img.product/");
+    let img = document.images.src("../img/product/");
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
     if(productName && pris && beskrivelse && category && id)
         
@@ -79,10 +79,10 @@ document.getElementById('delete').addEventListener('click',async function()
     let item = document.getElementById('selector').value;
 
     arr = item.split(" id:");
-    if(confirm(`Er du sikker på at du vil slette ${arr[0]}?`)){
+    if(confirm(`Er du sikker på at du vil slette ${arr[0]} fra databasen?`)){
 
         let data=parseInt(arr[1]);
-        txt = `Du har slettet ${arr[0]}`;
+        txt = `Du har slettet ${arr[0]} fra databasen`;
         await DELETE(`/products/${data}`,{data});
         alert(txt);
         location.reload();
@@ -94,7 +94,7 @@ document.getElementById('delete').addEventListener('click',async function()
 })
   document.getElementById('addButton').addEventListener('click',function(){postProduct();})
 
-function generateOrderHTML(order,productID,amount)
+function generateOrderHTML(order,productNames,amount)
 {
 
     let toreturn =` 
@@ -111,7 +111,7 @@ function generateOrderHTML(order,productID,amount)
     <td>
         <div class="row">
             <div class="col-lg-10">
-                <h4 class="nomargin" id = "productName">${productID}</h4>
+                <h4 class="nomargin" id = "productName">${productNames}</h4>
             </div>
         </div>
     </td>
@@ -184,14 +184,15 @@ function generateCompletedOrderHTML(order,productNames,amount)
 {/* <td> class = "amount">${order.products}</td>
 <td> class = "customer">${order.userID}</td> */}
 
-async function moveTocompletedOrders(orderID)
+async function moveTocompletedOrders(orderID,orderNumber)
 {
-    if(confirm(`er du sikker på at du vil flytte ${orderNumber} til færdige ordre?`))
+    if(confirm(`Er du sikker på at du vil flytte ordrenummer ${orderNumber} til færdige ordre?`))
     {
         move(`/orders/${orderID}`);
         alert("Ordre er noteret færdig");
-        
+        location.reload();
     }
+
 }
 async function orders()
 {
@@ -213,7 +214,7 @@ async function orders()
         div.innerHTML= generateOrderHTML(orders[i],productNames,productAmount);
         orderItems.appendChild(div);
         div.getElementsByClassName('btn btn-success')[0].addEventListener('click',async function(event){
-            moveTocompletedOrders(orders[i]._id);
+            moveTocompletedOrders(orders[i]._id,orders[i].orderNumber);
         });
     }
     // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
@@ -228,16 +229,16 @@ async function completedOrders()
         let div = document.createElement('div');
         div.className="col-lg-12 pl-3 pt-3";
        
-        let productIDs=[];
+        let productNames=[];
         let productAmount=[];
         for(product of order.products)
         {
             
-            productIDs.push(product.id);
+            productNames.push(product.productName);
             productAmount.push(product.amount);
 
         }
-        div.innerHTML= generateCompletedOrderHTML(orderNumber,order,productIDs,productAmount);
+        div.innerHTML= generateCompletedOrderHTML(order,productNames,productAmount);
         orderItems.appendChild(div);
         
     }

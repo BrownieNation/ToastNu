@@ -214,8 +214,9 @@ let checkout = document.getElementById('checkout')
             }
 
             let orderNumber = await get('/orders');
-            if(orderNumber.length>0)
-                orderNumber = parseInt(orderNumber[orderNumber.length-1].orderNumber)+1;
+            let completedOrders = await get('/completedOrders');
+            if((orderNumber.length+completedOrders.length)>0 )
+                orderNumber = parseInt(completedOrders.length+orderNumber.length) +1;
             else
                 orderNumber=1;
             await post('/orders',{
