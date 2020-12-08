@@ -226,6 +226,16 @@ let checkout = document.getElementById('checkout')
             });
             sessionStorage.removeItem('cartitems');
             sessionStorage.removeItem('cartNumbers');
+            date= dst();
+            if(date.getHours()<10 && date.getMinutes()<30)
+                alert("Du kan hente din bestiliing i 10-pausen");
+            else if(date.getHours()<12 && date.getMinutes()<30)
+                alert("Du kan hente din bestiliing i 12-pausen");
+            else
+                alert("Du kan hente din bestiliing i morgen i 10-pausen");
+
+
+            
             location.reload();
         }
         else 

@@ -25,10 +25,11 @@ async function addproducts()
 
 function cutcards()
 {
-   let cutcard= document.getElementsByClassName("selectorKlip")[0];
-   console.log(cutcard)
-   let priceCutcard=document.getElementById("prisKlippeKort"); 
+   let cutcard= document.getElementById("selectorKlip");
+   let priceCutcard=document.getElementsByClassName("prisKlippeKort")[0]; 
    console.log(priceCutcard);
+   
+   
    for(let i=10;i<31;i+=10)
    {
        let option = document.createElement('option');
@@ -40,7 +41,7 @@ function cutcards()
    {
        let price=sessionStorage.getItem('price');
        if(price)
-        priceCutcard.textContent=parseInt(cutcard.value)*price;
+            priceCutcard.value=parseInt(cutcard.value)*parseInt(price);
    })
    
 }
