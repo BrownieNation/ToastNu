@@ -8,7 +8,7 @@ router
     //post
     //products
     .post('/products', async (request, response) => {
-       
+    
         try {
             let {id,productName,beskrivelse,pris,img,category} = request.body
             await controller.createProduct(id,productName,beskrivelse,pris,img,category);
@@ -36,12 +36,12 @@ router
             response.status(400).send(e.message)
         }
     })
+    
 
     .delete('/products/:productID', async (request, response) => {
         try {
             
             let productID= request.params.productID;
-            console.log(productID);
             controller.deleteProduct(productID);
             response.send({message: 'Product deleted'});
         } catch (e) {

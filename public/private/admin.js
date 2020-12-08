@@ -52,15 +52,14 @@ async function generateProducts()
 
 }
 async function postProduct() {
-    // const controller = require('../controller/controller');
 
     let productName= document.getElementById("ProductName").value;
-    let pris = document.getElementById("ProductPris").value;
-    let beskrivelse = document.getElementById("ProductBeskrivelse").value;
-    let category= document.getElementById("Katogori").value;
+    let pris = document.getElementById("ProductPrice").value;
+    let beskrivelse = document.getElementById("ProductDescription").value;
+    let category= document.getElementById("Category").value;
     let id = await get('/products');
     id=parseInt(id[id.length-1]._productID)+1;
-    let img = document.images.src("../img/product/");
+    let img = document.getElementById('imgFileInput').value;
     console.log(productName + " " + pris + " " + beskrivelse + " " +id);
     if(productName && pris && beskrivelse && category && id)
         
@@ -70,12 +69,9 @@ async function postProduct() {
     alert("Du har tilføjet " + productName + " til databasen!");
     location.reload();
 }
-
-generateProducts();
-
-
 document.getElementById('delete').addEventListener('click',async function()
 {
+    if(sessionStorage.getItem('isAdmin')){
     let item = document.getElementById('selector').value;
 
     arr = item.split(" id:");
@@ -91,8 +87,9 @@ document.getElementById('delete').addEventListener('click',async function()
         txt = `Du har annulleret handlingen. ${arr[0]} vil ikke blive slettet!`;
         alert(txt);
     }
+}
 })
-  document.getElementById('addButton').addEventListener('click',function(){postProduct();})
+  document.getElementById('addButton').addEventListener('click',function(){ if(sessionStorage.getItem('isAdmin')) postProduct();})
 
 function generateOrderHTML(order,productNames,amount)
 {
@@ -217,8 +214,7 @@ async function orders()
             moveTocompletedOrders(orders[i]._id,orders[i].orderNumber);
         });
     }
-    // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
-}
+    }
 async function completedOrders()
 {
     let orderItems=document.getElementById('completedOrders');
@@ -242,8 +238,28 @@ async function completedOrders()
         orderItems.appendChild(div);
         
     }
-    // document.getElementsByClassName('btn btn-success').addEventListener('click',async function(){moveTocompletedOrders(orderID)});
-}
-orders();
-completedOrders();
+   }
+
+
+
+
+
+// check if logged in
+
+
+
+    
+        if(sessionStorage.getItem('isAdmin'))
+        {
+            generateProducts();
+            orders();
+            completedOrders();
+        }
+         else
+         {
+            //redirect to home page
+            alert("du er ikke logget ind som admin ..")
+            window.location=('../index.html'); 
+         }
+
 

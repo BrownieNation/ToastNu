@@ -12,11 +12,13 @@ async function validateLogin() {
                 if (user._userID == userName && user.password == password) {
                         alert("Logind Godkendt!");
                         sessionStorage.setItem('UserID', user._userID);
+                        if(user.isAdmin)
+                                sessionStorage.setItem('isAdmin',user.isAdmin);
                         if (user.isAdmin == false) {
                                 location.reload();
                         } else if (user.isAdmin == true) {
                                 window.location = "./private/admin.html";
-                        }
+                        } 
                         return true;
                 }
         }

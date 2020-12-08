@@ -219,12 +219,17 @@ let checkout = document.getElementById('checkout')
                 orderNumber = parseInt(completedOrders.length+orderNumber.length) +1;
             else
                 orderNumber=1;
+            if(arr.length>0)
+            {
             await post('/orders',{
                 orderNumber,date,userID,"products":arr
             });
             sessionStorage.removeItem('cartitems');
             sessionStorage.removeItem('cartNumbers');
             location.reload();
+        }
+        else 
+        alert("din kurv er tom");
         }
         else alert("du er ikke logget ind ...");
         })

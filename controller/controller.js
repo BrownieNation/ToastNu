@@ -7,7 +7,8 @@ const Order = require('../model/orderSchema');
 const CompletedOrder = require('../model/completedOrderSchema');
 const OrderItem = require("../model/orderItemSchema");
 const bcrypt = require('bcryptjs');
-const completedOrderSchema = require('../model/completedOrderSchema');
+
+// const fs= require('fs');
 
 
 
@@ -27,7 +28,7 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 
 exports.createUser =  async function (_userID, name, password, phoneNumber, isAdmin) {
     // const hashedPassword = await bcrypt.hash(password,8)
-    
+   
     return User.create({
         _userID,
         name, 
