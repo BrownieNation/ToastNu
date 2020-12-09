@@ -107,7 +107,7 @@ async function generateItems(products)
         <p style="display: none;" class="productID">${product._productID}</p> 
         <div class="card-footer">
             <button class="btn btn-primary shop-item-button"
-            type="button">ADD TO CART</button>
+            type="button">Føj til Kurv</button>
         </div>
     </div>`;
         row.appendChild(newitem);
