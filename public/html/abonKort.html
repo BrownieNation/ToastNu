@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
-    
+    <script type = "text/javascript" src="../index.js"></script>
     <script type = "text/javascript" src="../login.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -48,11 +48,12 @@
                             </div>
                         </div>
                         <div class="col">
-                            <label for="AntalKlip">Antal Klip:</label>
-                            <div class="dropdown-menu-abonKort" id=drop-menu-abonKort>
+                            <label for="drop-menu-abonKort">Antal Klip:</label>
+                            <div class="dropdown-menu-abonKort" id=drop-menu-abonKort></div>
                                 <p> <select id="selectorKlip"></select></p>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="row align-items-start">
                         <div class="col">
@@ -61,7 +62,8 @@
 
                         <div class="col">
                             <label for="prisKlippekort">Pris paa produkt:</label>
-                            <input type="text" id="prisKlippekort" class="prisKlippekort" name="prisKlippekort" disabled><br><br>
+                            <input type="text" id="prisKlippekort" class="prisKlippekort" name="prisKlippekort"><br><br>
+                            <button  id="btnAdd" class="AddtoCart">Tilføj til Kurv</button><br><br>
                             
                         </div>
                     </div>
@@ -70,48 +72,7 @@
         </div>
     </div>
 
-    <div class="col-sm-offset-3">
-        <div class="panel panel-primary" id="panel2">
-            <div class="panel-heading">
-                <h3 class="panel-title">Abonoment</h3>
-            </div>
-            <div class="panel-body">
-                <div class="container">
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Produkter
-                                </button>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Kaffe</button>
-                                    <button class="dropdown-item" type="button">Dagens ret</button>
-                                    <button class="dropdown-item" type="button">Frugter</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="valgteProdukt">Valgte Produkt:</label>
-                            <input type="text" id="valgteProdukt" name="valgteProdukt" disabled><br><br>
-
-                        </div>
-                    </div>
-                    <div class="row align-items-start">
-                        <div class="col">
-
-                        </div>
-
-                        <div class="col">
-                            <label for="prisKlippekort">Pris paa produkt:</label>
-                            <input type="text" class="prisKlippekort" name="prisKlippekort" disabled><br><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Footer -->
     <footer class="py-4">

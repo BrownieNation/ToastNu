@@ -144,7 +144,7 @@ async function generateItems(products)
         toAdd.href="#" + categorylist[i];
         toAdd.addEventListener('click',function()
         {
-            window.scrollTo(0,categorylist[i+1]+i*85);
+            window.scrollTo(0,categorylist[i+1]+(i*(16*i)));
         });
         categories.appendChild(toAdd);
     }
@@ -159,10 +159,12 @@ function onLoadCartNumbers(){
     }
 }
 
+
 async function main()
 {
  
     let products = await get('/products');
+    products.sort((a, b) => b.productCategory.localeCompare(a.productCategory));
     generateItems(products);
     onLoadCartNumbers();
     
