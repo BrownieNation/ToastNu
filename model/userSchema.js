@@ -27,7 +27,10 @@ const userSchema = new mongoose.Schema({
     },
 
     isAdmin: {
-type: Boolean
+        type: Boolean
+    },
+    loggedIn: {
+        type: Boolean
     }
     // orders      : [{type: Number, ref: 'Order'}]
 

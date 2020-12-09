@@ -9,18 +9,27 @@ async function validateLogin() {
         let users = await get('/users');
 
         for (user of users) {
+                if(user.loggedIn==true)
+                {
+                        alert("Bruger allerede Logget ind");
+                        break;
+                }
                 if (user._userID == userName && user.password == password) {
                         alert("Logind Godkendt!");
                         sessionStorage.setItem('UserID', user._userID);
                         if(user.isAdmin)
+                        {
                                 sessionStorage.setItem('isAdmin',user.isAdmin);
-                        if (user.isAdmin == false) {
-                                location.reload();
-                        } else if (user.isAdmin == true) {
                                 window.location = "./private/admin.html";
+                        }
+                        else  {
+                                location.reload();
                         } 
+                        let loggedIn=true;
+                        await post(`/users/login/${user._userID}`,{loggedIn});
                         return true;
                 }
+        
         }
         alert("Forkert brugernavn eller password!");
         return false;
@@ -57,9 +66,10 @@ async function postUser() {
         let password = document.getElementById("password").value;
         let phoneNumber = parseInt(document.getElementById("phoneNumber").value);
         let isAdmin = false;
+        let loggedIn=false;
         
         await post('/users', {
-                _userID, name, password, phoneNumber, isAdmin
+                _userID, name, password, phoneNumber, isAdmin,loggedIn
         });
 
 }
@@ -82,7 +92,9 @@ function loginCheck() {
 loginCheck();
 
 
-function logud() {
+async function  logud() {
+        let loggedIn=false;
+        await post(`/users/login/${sessionStorage.getItem('UserID')}`,{loggedIn});
         sessionStorage.clear();
         window.location = "../index.html";
 }

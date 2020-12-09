@@ -26,7 +26,7 @@ mongoose.connect(config.databaseURI, { useNewUrlParser: true, useUnifiedTopology
 // ----------------------------------------------------------------------
 
 
-exports.createUser =  async function (_userID, name, password, phoneNumber, isAdmin) {
+exports.createUser =  async function (_userID, name, password, phoneNumber, isAdmin,loggedIn) {
     // const hashedPassword = await bcrypt.hash(password,8)
    
     return User.create({
@@ -34,7 +34,8 @@ exports.createUser =  async function (_userID, name, password, phoneNumber, isAd
         name, 
         password,
         phoneNumber,
-        isAdmin
+        isAdmin,
+        loggedIn
     }
     );
 }
@@ -56,6 +57,14 @@ exports.getUsers = function () {
 exports.deleteUser = async function (_userID) {
     return await User.deleteOne().where('_userID').eq(_userID).exec();
 };
+exports.userLogin= async function(_userID,val)
+{
+    return User.findOneAndUpdate({"_userID": _userID},{"loggedIn": val}).exec();
+};
+
+
+
+
 
 // ----------------------------------------------------------------------
 // CRUD

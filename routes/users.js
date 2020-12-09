@@ -13,8 +13,8 @@ const User = require('../model/userSchema')
         
         try {
            
-            let {_userID, name, password, phoneNumber, isAdmin} = request.body;
-            await controller.createUser(_userID, name, password, phoneNumber, isAdmin);
+            let {_userID, name, password, phoneNumber, isAdmin,loggedIn} = request.body;
+            await controller.createUser(_userID, name, password, phoneNumber, isAdmin,loggedIn);
             response.send({message:"User Saved"});
           
             
@@ -22,8 +22,14 @@ const User = require('../model/userSchema')
             response.status(500).send(e.message);
         }
     })
+    
 
+    .post('/users/login/:_userID', async (request, response) => {
+        let {loggedIn}= request.body;
+        await controller.userLogin(request.params._userID,loggedIn);
+        response.send({message:"User Updated"});
 
+    })
     .post('/users/login', async (request, response) => {
         try {
             const user = await User.findByCredentials(request.body._userID, request.body.password)
@@ -32,6 +38,7 @@ const User = require('../model/userSchema')
             response.status(400).send()
         }
     });
+
 
 
 
