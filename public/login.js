@@ -16,7 +16,7 @@ async function validateLogin() {
                 }
                 if (user._userID == userName && user.password == password) {
                         alert("Logind Godkendt!");
-                        sessionStorage.setItem('UserID', user._userID);
+                        localStorage.setItem('UserID', user._userID);
                         if(user.isAdmin)
                         {
                                 sessionStorage.setItem('isAdmin',user.isAdmin);
@@ -78,7 +78,7 @@ async function postUser() {
 
 function loginCheck() {
 
-        if (sessionStorage.getItem("UserID")) {
+        if (localStorage.getItem("UserID")) {
                 $.get("navbarIN.html", function (data) {
                         $("#nav-placeholder").replaceWith(data);
                 });
@@ -94,7 +94,7 @@ loginCheck();
 
 async function  logud() {
         let loggedIn=false;
-        await post(`/users/login/${sessionStorage.getItem('UserID')}`,{loggedIn});
-        sessionStorage.clear();
+        await post(`/users/login/${localStorage.getItem('UserID')}`,{loggedIn});
+        localStorage.clear();
         window.location = "../index.html";
 }
